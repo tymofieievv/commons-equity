@@ -1,8 +1,0 @@
-CREATE TABLE HISTORY
-(
-    ID                   SERIAL PRIMARY KEY,
-    REF_DATE             DATE             NOT NULL,
-    INSTRUMENT_ID        VARCHAR(255)     NOT NULL,
-    SECURITY_DESCRIPTION VARCHAR(255)     NOT NULL,
-    PRICE                DOUBLE PRECISION NOT NULL
-);
