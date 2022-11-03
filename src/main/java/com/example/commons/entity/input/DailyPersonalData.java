@@ -1,4 +1,4 @@
-package com.example.commons.entity;
+package com.example.commons.entity.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,13 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
+import java.util.Timer;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class IntradayPersonalData {
+public class DailyPersonalData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +29,6 @@ public class IntradayPersonalData {
     private String securityDescription;
     private LocalTime time;
     private Double price;
-    private int priceClose;
-    private int priceOpen;
-    private String priceLow;
-    private String priceHigh;
-    private int volume;
 
 /*
     public static DailyPersonalData buildFromDto(DailyPersonalDataDTO dailyPersonalDataDTO) {

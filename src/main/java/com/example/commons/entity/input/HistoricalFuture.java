@@ -1,4 +1,4 @@
-package com.example.commons.entity;
+package com.example.commons.entity.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

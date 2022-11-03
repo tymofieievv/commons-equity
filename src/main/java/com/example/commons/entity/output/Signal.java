@@ -1,4 +1,4 @@
-package com.example.commons.entity;
+package com.example.commons.entity.output;
 
 import com.example.commons.enumerated.Operations;
 import lombok.AllArgsConstructor;
