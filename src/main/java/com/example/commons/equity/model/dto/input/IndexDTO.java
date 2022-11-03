@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record IndexDTO(LocalDate refDate,
-                       LocalTime time, Double price,
+                       LocalTime time,
+                       Double price,
                        String instrumentId,
                        String securityDescription,
                        String underlying) {
