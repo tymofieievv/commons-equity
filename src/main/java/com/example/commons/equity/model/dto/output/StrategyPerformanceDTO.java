@@ -3,7 +3,7 @@ package com.example.commons.equity.model.dto.output;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public record StrategyPerformance(
+public record StrategyPerformanceDTO(
         Long idOrder,
         Long idSignal,
         LocalTime timestamp,
