@@ -1,6 +1,7 @@
 package com.example.commons.entity.output;
 
 import com.example.commons.enumerated.Operations;
+import com.example.commons.equity.model.dto.output.OrderDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,4 +35,12 @@ public class Order {
     private Operations operations;
     private int quantity;
     private int theoreticalPrice;
+
+    public static Order buildFromDto(OrderDTO orderDTO){
+
+        Order order = new Order();
+        //order.idSignal(orderDTO.idSignal);
+
+        return order;
+    }
 }

@@ -23,7 +23,7 @@ public class HistoricalIndex {
     private String refDate;
     private String instrumentId;
     private String securityDescription;
-    private LocalTime TIME;
-    private String PRICE;
+    private LocalTime time;
+    private Double price;
 
 }

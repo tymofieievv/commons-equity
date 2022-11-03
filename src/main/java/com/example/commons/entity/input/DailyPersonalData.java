@@ -41,6 +41,6 @@ public class DailyPersonalData {
         dailyPersonalData.setPrice(dailyPersonalDataDTO.getTime());
         return dailyPersonalData;
     }
- */
+*/
 
 }
