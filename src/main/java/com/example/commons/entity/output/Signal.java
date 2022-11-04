@@ -1,6 +1,6 @@
 package com.example.commons.entity.output;
 
-import com.example.commons.enumerated.Operations;
+import com.example.commons.enums.Operations;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

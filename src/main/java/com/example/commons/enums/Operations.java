@@ -1,4 +1,4 @@
-package com.example.commons.enumerated;
+package com.example.commons.enums;
 
 public enum Operations {
     B,
