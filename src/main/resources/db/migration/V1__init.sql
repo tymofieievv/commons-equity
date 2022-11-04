@@ -61,7 +61,6 @@ CREATE TABLE FUTURE_ANAGRAPHIC (
     , MATURITY    DATE         NOT NULL
 );
 
-
 CREATE TABLE POSITION (
       ID            SERIAL       PRIMARY KEY
     , REF_DATE      DATE         NOT NULL
