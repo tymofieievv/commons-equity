@@ -1,17 +1,16 @@
 package com.example.commons.equity.persistence.deserializers;
 
-import com.example.commons.equity.model.dto.input.IndexDTO;
 import com.example.commons.equity.model.dto.output.AlgorithmAndMetricDTO;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class AlgorithmAndMetricDTODeserializer implements JsonDeserializer<AlgorithmAndMetricDTO> {
     @Override
     public AlgorithmAndMetricDTO deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-        JsonElement time = ((JsonObject) jsonElement).get("TIME");
+        JsonElement time = ((JsonObject) jsonElement).get("Time");
         JsonElement price = ((JsonObject) jsonElement).get("Price");
         JsonElement buySell = ((JsonObject) jsonElement).get("BuySell");
         JsonElement position = ((JsonObject) jsonElement).get("Position");
@@ -42,7 +41,7 @@ public class AlgorithmAndMetricDTODeserializer implements JsonDeserializer<Algor
         JsonElement deltaPrezzo = ((JsonObject) jsonElement).get("Delta_prezzo");
 
         return new AlgorithmAndMetricDTO(
-                jsonDeserializationContext.deserialize(time, LocalDate.class),
+                jsonDeserializationContext.deserialize(time, LocalDateTime.class),
                 jsonDeserializationContext.deserialize(price, Double.class),
                 jsonDeserializationContext.deserialize(buySell, String.class),
                 jsonDeserializationContext.deserialize(position, Integer.class),
