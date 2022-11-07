@@ -4,7 +4,7 @@ import com.example.commons.equity.model.dto.input.PositionDTO;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PositionDTODeserializer implements JsonDeserializer<PositionDTO> {
     @Override
@@ -23,7 +23,7 @@ public class PositionDTODeserializer implements JsonDeserializer<PositionDTO> {
 
 
         return new PositionDTO(
-                jsonDeserializationContext.deserialize(refDate, LocalDate.class),
+                jsonDeserializationContext.deserialize(refDate, LocalDateTime.class),
                 jsonDeserializationContext.deserialize(portfolioId, String.class),
                 jsonDeserializationContext.deserialize(instrumentId, String.class),
                 jsonDeserializationContext.deserialize(family, String.class),

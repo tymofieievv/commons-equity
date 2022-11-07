@@ -25,8 +25,8 @@ public class DailyFutureDTODeserializer implements JsonDeserializer<DailyFutureD
                 jsonDeserializationContext.deserialize(ticker, String.class),
                 jsonDeserializationContext.deserialize(priceClose, Double.class),
                 jsonDeserializationContext.deserialize(priceLow, Double.class),
-                jsonDeserializationContext.deserialize(priceHigh, Double.class),
                 jsonDeserializationContext.deserialize(priceOpen, Double.class),
+                jsonDeserializationContext.deserialize(priceHigh, Double.class),
                 jsonDeserializationContext.deserialize(volume, Integer.class)
         );
     }
