@@ -1,8 +1,8 @@
 package com.example.commons.equity.model.dto.input;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public record PositionDTO(LocalDate refDate,
+public record PositionDTO(LocalDateTime refDate,
                           String portfolioId,
                           String instrumentId,
                           String family,
