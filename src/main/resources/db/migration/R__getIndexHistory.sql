@@ -1,15 +1,13 @@
 /**
-    function getIndexIntraday.
+    function getIndexHistory.
         input:
             time_frame          --> time window used to group index data
             instrument_id_input --> target instrument_id
         output:
-            table containing intraday index data with instrument_id <%instrument_id_input%>
+            table containing history index data with instrument_id <%instrument_id_input%>
             grouped according to a time window <%time_frame%>.
-
-        Note that if a time window contains LOCALTIME then it is ignored
 */
-CREATE OR REPLACE FUNCTION getIndexIntraday (time_frame integer, instrument_id_input varchar)
+CREATE OR REPLACE FUNCTION getIndexHistory (time_frame integer, instrument_id_input varchar)
     RETURNS TABLE (
           ref_date             DATE
         , instrument_id        VARCHAR(50)
@@ -21,7 +19,7 @@ AS $$
 BEGIN
     RETURN QUERY
 		WITH time_interval as (
-		    /*
+			/*
 		     * time_interval view contains a record for each time window from midnight to midnight.
 		     * The length of the time window is determined by input variable <%time_frame%>
 		     */
@@ -30,19 +28,20 @@ BEGIN
 				, ((n + time_frame) || ' minutes')::interval as end_time
 			from generate_series(0, (24*60), time_frame) n
 		)
-		, indexIntraday as (
+		, indexHistory as (
 			select *
 			from ref0_kafka_index i
-			where i.ref_date = CURRENT_DATE and i.instrument_id = instrument_id_input
+			where i.ref_date < CURRENT_DATE and i.instrument_id = instrument_id_input
 		)
 		, datasource as (
 			select
-				  t.start_time
+				  i.ref_date
+				, t.start_time
 				, t.end_time
 				, max(i.id) as max_id
-			from indexIntraday i left join time_interval t
+			from indexHistory i left join time_interval t
 				on i."time" > t.start_time and i."time" <= t.end_time
-			group by t.start_time, t.end_time
+			group by i.ref_date, t.start_time, t.end_time
 		)
 		select
 			  i.ref_date
@@ -50,9 +49,8 @@ BEGIN
 			, i.security_description
 			, d.end_time
 			, i.price
-		from indexIntraday i join datasource d on i.id = d.max_id
-		where d.end_time < (LOCALTIME + interval '1 hour') -- 1 hour is added to refer to CEST timezone
-		order by d.end_time
+		from indexHistory i join datasource d on i.id = d.max_id
+		order by i.ref_date, d.start_time
 	;
 END; $$
 
