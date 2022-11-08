@@ -13,7 +13,7 @@ public class OrderDTODeserializer implements JsonDeserializer<OrderDTO> {
         JsonElement tradeDate = ((JsonObject) jsonElement).get("TRADEDATE");
         JsonElement underlying = ((JsonObject) jsonElement).get("UNDERLYING");
         JsonElement idSignal = ((JsonObject) jsonElement).get("ID SIGNAL");
-        JsonElement idOrder = ((JsonObject) jsonElement).get("ID ORDER ");
+        JsonElement idOrder = ((JsonObject) jsonElement).get("ID ORDER");
         JsonElement tickerFuture = ((JsonObject) jsonElement).get("TICKER FUTURE");
         JsonElement status = ((JsonObject) jsonElement).get("STATUS");
         JsonElement buySell = ((JsonObject) jsonElement).get("BUY/SELL");

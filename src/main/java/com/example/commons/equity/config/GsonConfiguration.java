@@ -6,6 +6,7 @@ import com.example.commons.equity.model.dto.output.OrderDTO;
 import com.example.commons.equity.model.dto.output.SignalDTO;
 import com.example.commons.equity.model.dto.output.StrategyPerformanceDTO;
 import com.example.commons.equity.persistence.deserializers.*;
+import com.example.commons.equity.persistence.serializers.*;
 import com.google.gson.GsonBuilder;
 import org.springframework.boot.autoconfigure.gson.GsonBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +22,8 @@ public class GsonConfiguration {
     @Bean
     public GsonBuilderCustomizer typeAdapterRegistration() {
         return builder -> {
-            //TODO registerSerializers
             registerDeserializers(builder);
+            registerSerializers(builder);
         };
     }
 
@@ -41,5 +42,22 @@ public class GsonConfiguration {
         builder.registerTypeAdapter(OrderDTO.class, new OrderDTODeserializer());
         builder.registerTypeAdapter(SignalDTO.class, new SignalDTODeserializer());
         builder.registerTypeAdapter(StrategyPerformanceDTO.class, new StrategyPerformanceDTODeserializer());
+    }
+
+    private static void registerSerializers(GsonBuilder builder) {
+        builder.registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
+        builder.registerTypeAdapter(LocalTime.class, new LocalTimeSerializer());
+        builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+
+        builder.registerTypeAdapter(IndexDTO.class, new IndexDTOSerializer());
+        builder.registerTypeAdapter(DailyFutureDTO.class, new DailyFutureDTOSerializer());
+        builder.registerTypeAdapter(FutureDTO.class, new FutureDTOSerializer());
+        builder.registerTypeAdapter(PersonalDataFutureDTO.class, new PersonalDataFutureDTOSerializer());
+        builder.registerTypeAdapter(PositionDTO.class, new PositionDTOSerializer());
+
+        builder.registerTypeAdapter(AlgorithmAndMetricDTO.class, new AlgorithmAndMetricDTOSerializer());
+        builder.registerTypeAdapter(OrderDTO.class, new OrderDTOSerializer());
+        builder.registerTypeAdapter(SignalDTO.class, new SignalDTOSerializer());
+        builder.registerTypeAdapter(StrategyPerformanceDTO.class, new StrategyPerformanceDTOSerializer());
     }
 }
