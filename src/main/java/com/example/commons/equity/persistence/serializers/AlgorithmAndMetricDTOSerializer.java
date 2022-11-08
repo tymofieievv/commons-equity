@@ -16,6 +16,7 @@ public class AlgorithmAndMetricDTOSerializer implements JsonSerializer<Algorithm
         jsonObject.add("Time", jsonSerializationContext.serialize(algorithmAndMetricDTO.time(), LocalDateTime.class));
         jsonObject.add("Price", jsonSerializationContext.serialize(algorithmAndMetricDTO.price(),Double.class));
         jsonObject.add("BuySell", jsonSerializationContext.serialize(algorithmAndMetricDTO.buySell(),String.class));
+        jsonObject.add("Quantity", jsonSerializationContext.serialize(algorithmAndMetricDTO.quantity(),Integer.class));
         jsonObject.add("Position", jsonSerializationContext.serialize(algorithmAndMetricDTO.position(),Integer.class));
         jsonObject.add("avgPrice", jsonSerializationContext.serialize(algorithmAndMetricDTO.avgprice(),Double.class));
         jsonObject.add("posPL_tminus", jsonSerializationContext.serialize(algorithmAndMetricDTO.posplTminus(),Double.class));
@@ -40,8 +41,8 @@ public class AlgorithmAndMetricDTOSerializer implements JsonSerializer<Algorithm
         jsonObject.add("posInversion_noDD", jsonSerializationContext.serialize(algorithmAndMetricDTO.posinversionNodd(),Boolean.class));
         jsonObject.add("cumPL", jsonSerializationContext.serialize(algorithmAndMetricDTO.cumpl(),Double.class));
         jsonObject.add("dPL", jsonSerializationContext.serialize(algorithmAndMetricDTO.dpl(),Double.class));
-        jsonObject.add("Prezzo_eseguito", jsonSerializationContext.serialize(algorithmAndMetricDTO.prezzoEseguito(),Double.class));
-        jsonObject.add("Delta_prezzo", jsonSerializationContext.serialize(algorithmAndMetricDTO.deltaPrezzo(),Double.class));
+        jsonObject.add("Executed Price", jsonSerializationContext.serialize(algorithmAndMetricDTO.executedPrice(),Double.class));
+        jsonObject.add("Delta Price", jsonSerializationContext.serialize(algorithmAndMetricDTO.deltaPrice(),Double.class));
 
         return jsonObject;
     }

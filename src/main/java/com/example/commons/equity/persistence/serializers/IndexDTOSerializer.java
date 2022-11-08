@@ -19,7 +19,6 @@ public class IndexDTOSerializer implements JsonSerializer<IndexDTO> {
         jsonObject.add("PRICE", jsonSerializationContext.serialize(indexDTO.price(), Double.class));
         jsonObject.add("INSTRUMENT_ID", jsonSerializationContext.serialize(indexDTO.instrumentId(), String.class));
         jsonObject.add("SECURITY_DESCRIPTION", jsonSerializationContext.serialize(indexDTO.securityDescription(), String.class));
-        jsonObject.add("UNDERLYING", jsonSerializationContext.serialize(indexDTO.underlying(), String.class));
 
         return jsonObject;
     }

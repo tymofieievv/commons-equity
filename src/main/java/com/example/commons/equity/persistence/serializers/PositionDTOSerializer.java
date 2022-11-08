@@ -18,11 +18,12 @@ public class PositionDTOSerializer implements JsonSerializer<PositionDTO> {
         jsonObject.add("REF_DATE", jsonSerializationContext.serialize(positionDTO.refDate(), LocalDate.class));
         jsonObject.add("PORTFOLIO_ID", jsonSerializationContext.serialize(positionDTO.portfolioId(), String.class));
         jsonObject.add("INSTRUMENT_ID", jsonSerializationContext.serialize(positionDTO.instrumentId(), String.class));
+        jsonObject.add("POSITION_ID", jsonSerializationContext.serialize(positionDTO.positionId(), String.class));
         jsonObject.add("FAMILY", jsonSerializationContext.serialize(positionDTO.family(), String.class));
         jsonObject.add("GROUP", jsonSerializationContext.serialize(positionDTO.group(), String.class));
         jsonObject.add("TYPE", jsonSerializationContext.serialize(positionDTO.type(), String.class));
         jsonObject.add("CURRENCY", jsonSerializationContext.serialize(positionDTO.currency(), String.class));
-        jsonObject.add("QUANTITY", jsonSerializationContext.serialize(positionDTO.quantity(), Integer.class));
+        jsonObject.add("POSITION", jsonSerializationContext.serialize(positionDTO.position(), Integer.class));
         jsonObject.add("ENTITY", jsonSerializationContext.serialize(positionDTO.entity(), String.class));
         jsonObject.add("DIVISION", jsonSerializationContext.serialize(positionDTO.division(), String.class));
         jsonObject.add("MARKET_NAME", jsonSerializationContext.serialize(positionDTO.marketName(), String.class));
