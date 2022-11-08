@@ -1,5 +1,6 @@
 package com.example.commons.entity.input;
 
+import com.example.commons.equity.model.dto.input.IndexDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
@@ -16,14 +18,28 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class HistoricalIndex {
+public class Index {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String refDate;
+    private LocalDate refDate;
     private String instrumentId;
     private String securityDescription;
     private LocalTime time;
     private Double price;
+    String underlying;
+
+    public IndexDTO buildFromDto(Index index) {
+
+        IndexDTO indexDTO = new IndexDTO(
+                index.getRefDate(),
+                index.getTime(),
+                index.getPrice(),
+                index.getInstrumentId(),
+                index.getSecurityDescription(),
+                index.getUnderlying());
+
+        return indexDTO;
+    }
 
 }

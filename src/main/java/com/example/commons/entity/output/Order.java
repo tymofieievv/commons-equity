@@ -22,25 +22,40 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime timestamp;
-    private LocalDate tradedate;
+    private LocalDate tradeDate;
     private String underlying;
-    private String idSignal;
-    private String idOrder;
-    private int theoricalPosition;
-    private int position;
-    private int executedPrice;
-    private int deltaPrice;
+    private Long idSignal;
+    private Long idOrder;
+    private Integer theoreticalPosition;
+    private Integer position;
+    private Double executedPrice;
+    String status;
+    private Double deltaPrice;
     private String tickerFuture;
     @Enumerated(EnumType.STRING)
     private Operations operations;
-    private int quantity;
-    private int theoreticalPrice;
+    private Integer quantity;
+    private Double theoreticalPrice;
 
-    public static Order buildFromDto(OrderDTO orderDTO){
+    public OrderDTO buildFromDto(Order order){
 
-        Order order = new Order();
-        //order.idSignal(orderDTO.idSignal);
+        OrderDTO orderDTO = new OrderDTO(
+                order.getIdOrder(),
+                order.getIdSignal(),
+                order.getTimestamp(),
+                order.getTradeDate(),
+                order.getUnderlying(),
+                order.getTickerFuture(),
+                order.getStatus(),
+                order.getOperations().toString(),
+                order.getPosition(),
+                order.getTheoreticalPrice(),
+                order.getTheoreticalPosition(),
+                order.getExecutedPrice(),
+                order.getDeltaPrice()
+        );
 
-        return order;
+        return orderDTO;
     }
 }
+//UNISCI TABELLA E FINSICI I DTO
