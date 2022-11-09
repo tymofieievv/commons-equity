@@ -21,13 +21,13 @@ public class Signal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime timestamp;
+    private LocalDate timestamp;
     private LocalDate tradeDate;
     private String underlying;
     private Long idSignal;
-    private String ticketFuture;
+    private String tickerFuture;
     @Enumerated(EnumType.STRING)
-    private Operations operations;
+    private Operations buySell;
     private Integer quantity;
     private Double theoreticalPrice;
 
@@ -37,8 +37,8 @@ public class Signal {
                 this.getTimestamp(),
                 this.getTradeDate(),
                 this.getUnderlying(),
-                this.getTicketFuture(),
-                this.operations.name(),
+                this.getTickerFuture(),
+                this.buySell.name(),
                 this.getQuantity(),
                 this.getTheoreticalPrice()
         );

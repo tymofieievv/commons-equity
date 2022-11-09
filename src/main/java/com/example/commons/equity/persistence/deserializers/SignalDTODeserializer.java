@@ -22,7 +22,7 @@ public class SignalDTODeserializer implements JsonDeserializer<SignalDTO> {
 
         return new SignalDTO(
                 jsonDeserializationContext.deserialize(idSignal, Long.class),
-                jsonDeserializationContext.deserialize(timestamp, LocalDateTime.class),
+                jsonDeserializationContext.deserialize(timestamp, LocalDate.class),
                 jsonDeserializationContext.deserialize(tradeDate, LocalDate.class),
                 jsonDeserializationContext.deserialize(underlying, String.class),
                 jsonDeserializationContext.deserialize(tickerFuture, String.class),
