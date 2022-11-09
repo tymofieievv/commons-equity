@@ -27,19 +27,14 @@ public class Index {
     private String securityDescription;
     private LocalTime time;
     private Double price;
-    String underlying;
 
-    public IndexDTO buildFromDto(Index index) {
-
-        IndexDTO indexDTO = new IndexDTO(
-                index.getRefDate(),
-                index.getTime(),
-                index.getPrice(),
-                index.getInstrumentId(),
-                index.getSecurityDescription(),
-                index.getUnderlying());
-
-        return indexDTO;
+    public IndexDTO toDTO() {
+        return new IndexDTO(
+                this.getRefDate(),
+                this.getTime(),
+                this.getPrice(),
+                this.getInstrumentId(),
+                this.getSecurityDescription());
     }
 
 }
