@@ -1,6 +1,5 @@
 package com.example.commons.equity.persistence.deserializers;
 
-import com.example.commons.equity.model.dto.output.OrderDTO;
 import com.example.commons.equity.model.dto.output.StrategyPerformanceDTO;
 import com.google.gson.*;
 

@@ -35,24 +35,20 @@ public class Future {
     private Double priceHigh;
     private Integer volume;
 
-//    public Future buildFromDTO(FutureDTO futureDTO) {
-//        Future future = new Future();
-//
-//        future.setRefDate(futureDTO.refDate());
-//        future.setIsin(futureDTO.isin());
-//        future.setTicker(futureDTO.ticker());
-//        future.setUnderlyingId(futureDTO.underlyingId());
-//        future.setUnderlyingDescription(futureDTO.underlyingDescription());
-//        future.setPrice(futureDTO.price());
-//        future.setTime(futureDTO.time());
-//        future.setPriceClose(futureDTO.priceClose());
-//        future.setPriceOpen(futureDTO.priceOpen());
-//        future.setPriceClose(futureDTO.priceClose());
-//        future.setPriceLow(futureDTO.priceLow());
-//        future.setPriceHigh(futureDTO.priceHigh());
-//        future.setVolume(futureDTO.volume());
-//
-//        return future;
-//    }
+    public FutureDTO toDTO() {
+        return new FutureDTO(
+                this.getRefDate(),
+                this.getIsin(),
+                this.getTicker(),
+                this.getUnderlyingId(),
+                this.getUnderlyingDescription(),
+                this.getTime(),
+                this.getPriceClose(),
+                this.getPriceOpen(),
+                this.getPriceLow(),
+                this.getPriceHigh(),
+                this.getVolume()
+        );
+    }
 
 }

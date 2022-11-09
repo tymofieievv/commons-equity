@@ -45,8 +45,8 @@ class AlgorithmAndMetricDTOTest {
                     "posInversion_noDD": "TRUE",
                     "cumPL": "0",
                     "dPL": "0",
-                    "Prezzo_eseguito": "2865",
-                    "Delta_prezzo": "-2.1100000000001273"
+                    "Executed Price": "2865",
+                    "Delta Price": "-2.1100000000001273"
                     },
                     {
                     "Time": "16/09/2013 00:00",
@@ -76,8 +76,8 @@ class AlgorithmAndMetricDTOTest {
                     "posInversion_noDD": "FALSE",
                     "cumPL": "-743.30999999999312",
                     "dPL": "-743.30999999999312",
-                    "Prezzo_eseguito": "2896",
-                    "Delta_prezzo": "1.3600000000001273"
+                    "Executed Price": "2896",
+                    "Delta Price": "1.3600000000001273"
                     },
                     {
                     "Time": "17/09/2013 00:00",
@@ -107,8 +107,8 @@ class AlgorithmAndMetricDTOTest {
                     "posInversion_noDD": "FALSE",
                     "cumPL": "-651.05999999999176",
                     "dPL": "92.250000000001364",
-                    "Prezzo_eseguito": "2890.95",
-                    "Delta_prezzo": "0"
+                    "Executed Price": "2890.95",
+                    "Delta Price": "0"
                     },
                     {
                     "Time": "18/09/2013 00:00",
@@ -138,8 +138,8 @@ class AlgorithmAndMetricDTOTest {
                     "posInversion_noDD": "FALSE",
                     "cumPL": "-651.05999999999176",
                     "dPL": "0",
-                    "Prezzo_eseguito": "2910",
-                    "Delta_prezzo": "1.0799999999999272"
+                    "Executed Price": "2910",
+                    "Delta Price": "1.0799999999999272"
                     },
                     {
                     "Time": "19/09/2013 00:00",
@@ -169,8 +169,8 @@ class AlgorithmAndMetricDTOTest {
                     "posInversion_noDD": "FALSE",
                     "cumPL": "-651.05999999999176",
                     "dPL": "0",
-                    "Prezzo_eseguito": "2934",
-                    "Delta_prezzo": "-2.1999999999998181"
+                    "Executed Price": "2934",
+                    "Delta Price": "-2.1999999999998181"
                     },
                     {
                     "Time": "20/09/2013 00:00",
@@ -200,8 +200,8 @@ class AlgorithmAndMetricDTOTest {
                     "posInversion_noDD": "FALSE",
                     "cumPL": "-651.05999999999176",
                     "dPL": "0",
-                    "Prezzo_eseguito": "2930.5",
-                    "Delta_prezzo": "3.3099999999999454"
+                    "Executed Price": "2930.5",
+                    "Delta Price": "3.3099999999999454"
                     },
                     {
                     "Time": "23/09/2013 00:00",
@@ -231,8 +231,8 @@ class AlgorithmAndMetricDTOTest {
                     "posInversion_noDD": "FALSE",
                     "cumPL": "-651.05999999999176",
                     "dPL": "0",
-                    "Prezzo_eseguito": "2907",
-                    "Delta_prezzo": "0.65000000000009095"
+                    "Executed Price": "2907",
+                    "Delta Price": "0.65000000000009095"
                     },
                     {
                     "Time": "24/09/2013 00:00",
@@ -262,8 +262,8 @@ class AlgorithmAndMetricDTOTest {
                     "posInversion_noDD": "FALSE",
                     "cumPL": "-651.05999999999176",
                     "dPL": "0",
-                    "Prezzo_eseguito": "2920.93",
-                    "Delta_prezzo": "-2"
+                    "Executed Price": "2920.93",
+                    "Delta Price": "-2"
                     }
                                 ]
                                 """;
@@ -630,27 +630,27 @@ class AlgorithmAndMetricDTOTest {
 
 
     @Test
-    void testPrezzoEseguito() {
-        Assertions.assertEquals(2865.0, algorithmAndMetricDTOs[0].prezzoEseguito());
-        Assertions.assertEquals(2896.0, algorithmAndMetricDTOs[1].prezzoEseguito());
-        Assertions.assertEquals(2890.95, algorithmAndMetricDTOs[2].prezzoEseguito());
-        Assertions.assertEquals(2910.0, algorithmAndMetricDTOs[3].prezzoEseguito());
-        Assertions.assertEquals(2934.0, algorithmAndMetricDTOs[4].prezzoEseguito());
-        Assertions.assertEquals(2930.5, algorithmAndMetricDTOs[5].prezzoEseguito());
-        Assertions.assertEquals(2907.0, algorithmAndMetricDTOs[6].prezzoEseguito());
-        Assertions.assertEquals(2920.93, algorithmAndMetricDTOs[7].prezzoEseguito());
+    void testExecutedPrice() {
+        Assertions.assertEquals(2865.0, algorithmAndMetricDTOs[0].executedPrice());
+        Assertions.assertEquals(2896.0, algorithmAndMetricDTOs[1].executedPrice());
+        Assertions.assertEquals(2890.95, algorithmAndMetricDTOs[2].executedPrice());
+        Assertions.assertEquals(2910.0, algorithmAndMetricDTOs[3].executedPrice());
+        Assertions.assertEquals(2934.0, algorithmAndMetricDTOs[4].executedPrice());
+        Assertions.assertEquals(2930.5, algorithmAndMetricDTOs[5].executedPrice());
+        Assertions.assertEquals(2907.0, algorithmAndMetricDTOs[6].executedPrice());
+        Assertions.assertEquals(2920.93, algorithmAndMetricDTOs[7].executedPrice());
     }
 
 
     @Test
-    void testDeltaPrezzo() {
-        Assertions.assertEquals(-2.1100000000001273, algorithmAndMetricDTOs[0].deltaPrezzo());
-        Assertions.assertEquals(1.3600000000001273, algorithmAndMetricDTOs[1].deltaPrezzo());
-        Assertions.assertEquals(0.0, algorithmAndMetricDTOs[2].deltaPrezzo());
-        Assertions.assertEquals(1.0799999999999272, algorithmAndMetricDTOs[3].deltaPrezzo());
-        Assertions.assertEquals(-2.199999999999818, algorithmAndMetricDTOs[4].deltaPrezzo());
-        Assertions.assertEquals(3.3099999999999454, algorithmAndMetricDTOs[5].deltaPrezzo());
-        Assertions.assertEquals(0.650000000000091, algorithmAndMetricDTOs[6].deltaPrezzo());
-        Assertions.assertEquals(-2.0, algorithmAndMetricDTOs[7].deltaPrezzo());
+    void testDeltaPrice() {
+        Assertions.assertEquals(-2.1100000000001273, algorithmAndMetricDTOs[0].deltaPrice());
+        Assertions.assertEquals(1.3600000000001273, algorithmAndMetricDTOs[1].deltaPrice());
+        Assertions.assertEquals(0.0, algorithmAndMetricDTOs[2].deltaPrice());
+        Assertions.assertEquals(1.0799999999999272, algorithmAndMetricDTOs[3].deltaPrice());
+        Assertions.assertEquals(-2.199999999999818, algorithmAndMetricDTOs[4].deltaPrice());
+        Assertions.assertEquals(3.3099999999999454, algorithmAndMetricDTOs[5].deltaPrice());
+        Assertions.assertEquals(0.650000000000091, algorithmAndMetricDTOs[6].deltaPrice());
+        Assertions.assertEquals(-2.0, algorithmAndMetricDTOs[7].deltaPrice());
     }
 }

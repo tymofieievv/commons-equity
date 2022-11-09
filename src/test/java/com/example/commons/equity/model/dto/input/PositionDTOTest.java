@@ -24,7 +24,7 @@ class PositionDTOTest {
                     "GROUP": "Options",
                     "TYPE": "Call",
                     "CURRENCY": "USD",
-                    "QUANTITY": "0",
+                    "POSITION": "0",
                     "ENTITY": "INTESA SANPAOLO SPA - MILANO",
                     "DIVISION": "CIB",
                     "MARKET_NAME": "Reuters Elektron"
@@ -37,7 +37,7 @@ class PositionDTOTest {
                     "GROUP": "Futures",
                     "TYPE": "Financial Futures",
                     "CURRENCY": "EUR",
-                    "QUANTITY": "-170",
+                    "POSITION": "-170",
                     "ENTITY": "INTESA SANPAOLO SPA - MILANO",
                     "DIVISION": "CIB",
                     "MARKET_NAME": "Eurex NTA"
@@ -50,7 +50,7 @@ class PositionDTOTest {
                     "GROUP": "Futures",
                     "TYPE": "Financial Futures",
                     "CURRENCY": "USD",
-                    "QUANTITY": "0",
+                    "POSITION": "0",
                     "ENTITY": "INTESA SANPAOLO SPA - MILANO",
                     "DIVISION": "CIB",
                     "MARKET_NAME": "FFastFill"
@@ -63,7 +63,7 @@ class PositionDTOTest {
                     "GROUP": "Equities",
                     "TYPE": "Common/Ordinary shares",
                     "CURRENCY": "USD",
-                    "QUANTITY": "300",
+                    "POSITION": "300",
                     "ENTITY": "INTESA SANPAOLO SPA - MILANO",
                     "DIVISION": "CIB",
                     "MARKET_NAME": "Virtu"
@@ -76,7 +76,7 @@ class PositionDTOTest {
                     "GROUP": "Options",
                     "TYPE": "Put",
                     "CURRENCY": "EUR",
-                    "QUANTITY": "0",
+                    "POSITION": "0",
                     "ENTITY": "INTESA SANPAOLO SPA - MILANO",
                     "DIVISION": "CIB",
                     "MARKET_NAME": "Borsa Italiana IDEM"
@@ -89,7 +89,7 @@ class PositionDTOTest {
                     "GROUP": "Collective investment vehicles",
                     "TYPE": "ETF",
                     "CURRENCY": "USD",
-                    "QUANTITY": "-2238",
+                    "POSITION": "-2238",
                     "ENTITY": "INTESA SANPAOLO SPA - MILANO",
                     "DIVISION": "CIB",
                     "MARKET_NAME": "Virtu"
@@ -185,13 +185,13 @@ class PositionDTOTest {
 
 
     @Test
-    void testQuantity() {
-        Assertions.assertEquals(0, positionDTOs[0].quantity());
-        Assertions.assertEquals(-170, positionDTOs[1].quantity());
-        Assertions.assertEquals(0, positionDTOs[2].quantity());
-        Assertions.assertEquals(300, positionDTOs[3].quantity());
-        Assertions.assertEquals(0, positionDTOs[4].quantity());
-        Assertions.assertEquals(-2238, positionDTOs[5].quantity());
+    void testPOSITION() {
+        Assertions.assertEquals(0, positionDTOs[0].position());
+        Assertions.assertEquals(-170, positionDTOs[1].position());
+        Assertions.assertEquals(0, positionDTOs[2].position());
+        Assertions.assertEquals(300, positionDTOs[3].position());
+        Assertions.assertEquals(0, positionDTOs[4].position());
+        Assertions.assertEquals(-2238, positionDTOs[5].position());
     }
 
 

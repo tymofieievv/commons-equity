@@ -29,8 +29,8 @@ public class OrderDTOSerializer implements JsonSerializer<OrderDTO> {
         jsonObject.add("THEORETICAL POSITION",jsonSerializationContext.serialize(orderDTO.theoreticalPosition(),Integer.class));
         jsonObject.add("LIVE POSITION",jsonSerializationContext.serialize(orderDTO.livePosition(),Integer.class));
         jsonObject.add("THEORETICAL PRICE",jsonSerializationContext.serialize(orderDTO.theoreticalPrice(),Double.class));
-        jsonObject.add("PREZZO EFFETTIVO",jsonSerializationContext.serialize(orderDTO.prezzoEseguito(),Double.class));
-        jsonObject.add("DELTA PREZZO",jsonSerializationContext.serialize(orderDTO.deltaPrezzo(),Double.class));
+        jsonObject.add("PREZZO EFFETTIVO",jsonSerializationContext.serialize(orderDTO.executedPrice(),Double.class));
+        jsonObject.add("DELTA PREZZO",jsonSerializationContext.serialize(orderDTO.deltaPrice(),Double.class));
 
         return jsonObject;
     }

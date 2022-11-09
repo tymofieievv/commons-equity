@@ -1,5 +1,6 @@
 package com.example.commons.equity.model.entity.output;
 
+import com.example.commons.equity.model.dto.output.OrderDTO;
 import com.example.commons.equity.model.enums.Operations;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity(name="VIS10_API_ORDER")
+@Entity(name = "VIS10_API_ORDER")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -33,31 +34,31 @@ public class Order {
     private Double deltaPrice;
     private String tickerFuture;
     @Enumerated(EnumType.STRING)
-    private Operations operations;
+    private Operations buysell;
     private Integer quantity;
     private Integer livePosition;
     private Double theoreticalPrice;
 
-//
-//    public OrderDTO buildFromDto(Order order){
-//
-//        OrderDTO orderDTO = new OrderDTO(
-//                order.getIdOrder(),
-//                order.getIdSignal(),
-//                order.getTimestamp(),
-//                order.getTradeDate(),
-//                order.getUnderlying(),
-//                order.getTickerFuture(),
-//                order.getStatus(),
-//                order.getOperations().toString(),
-//                order.getPosition(),
-//                order.getTheoreticalPrice(),
-//                order.getTheoreticalPosition(),
-//                order.getExecutedPrice(),
-//                order.getDeltaPrice()
-//        );
-//
-//        return orderDTO;
-//    }
+
+    public OrderDTO toDto() {
+        return new OrderDTO(
+                this.getIdOrder(),
+                this.getIdSignal(),
+                this.getTimestamp(),
+                this.getTradeDate(),
+                this.getUnderlying(),
+                this.getPortfolioId(),
+                this.getTickerFuture(),
+                this.getStatus(),
+                this.getBuysell().name(),
+                this.getTheoreticalQuantity(),
+                this.getQuantity(),
+                this.getTheoreticalPosition(),
+                this.getLivePosition(),
+                this.getTheoreticalPrice(),
+                this.getExecutedPrice(),
+                this.getDeltaPrice()
+        );
+    }
 
 }
