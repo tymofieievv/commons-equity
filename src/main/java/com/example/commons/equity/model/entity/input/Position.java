@@ -10,9 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-@Entity(name="SSL0_IXP_POSITION")
+@Entity(name = "SSL0_IXP_POSITION")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,7 +21,7 @@ public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate refDate;
+    private LocalDateTime refDate;
     private String portfolioId;
     private String instrumentId;
     private String positionId;
@@ -34,21 +34,22 @@ public class Position {
     private String division;
     private String marketName;
 
-//    public Position buildFromDTO(PositionDTO positionDTO){
-//        Position position = new Position();
-//        position.setRefDate(positionDTO.refDate());
-//        position.setPortfolioId(positionDTO.portfolioId());
-//        position.setInstrumentId(positionDTO.instrumentId());
-//        position.setFamily(positionDTO.family());
-//        position.setGroup(positionDTO.group());
-//        position.setType(positionDTO.type());
-//        position.setCurrency(positionDTO.currency());
-//        position.setQuantity(positionDTO.quantity());
-//        position.setEntity(positionDTO.entity());
-//        position.setDivision(positionDTO.division());
-//        position.setMarketName(positionDTO.marketName());
-//
-//
-//        return position;
-//    }
+    public PositionDTO toDTO() {
+        return new PositionDTO(
+                this.getRefDate(),
+                this.getPortfolioId(),
+                this.getInstrumentId(),
+                this.getPositionId(),
+                this.getFamily(),
+                this.getGroup(),
+                this.getType(),
+                this.getCurrency(),
+                this.getPosition(),
+                this.getEntity(),
+                this.getDivision(),
+                this.getMarketName()
+        );
+    }
+
+
 }
