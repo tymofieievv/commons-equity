@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity
+@Entity(name="REF0_KAFKA_INDEX")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -27,19 +27,19 @@ public class Index {
     private String securityDescription;
     private LocalTime time;
     private Double price;
-    String underlying;
+    private String underlying;
 
-    public IndexDTO buildFromDto(Index index) {
-
-        IndexDTO indexDTO = new IndexDTO(
-                index.getRefDate(),
-                index.getTime(),
-                index.getPrice(),
-                index.getInstrumentId(),
-                index.getSecurityDescription(),
-                index.getUnderlying());
-
-        return indexDTO;
-    }
+//    public IndexDTO buildFromDto(Index index) {
+//
+//        IndexDTO indexDTO = new IndexDTO(
+//                index.getRefDate(),
+//                index.getTime(),
+//                index.getPrice(),
+//                index.getInstrumentId(),
+//                index.getSecurityDescription(),
+//                index.getUnderlying());
+//
+//        return indexDTO;
+//    }
 
 }

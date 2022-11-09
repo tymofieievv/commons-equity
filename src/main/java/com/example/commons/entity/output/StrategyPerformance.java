@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
-@Entity
+@Entity(name="VIS10_API_STRATEGY_PERFORMANCE")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -28,17 +28,17 @@ public class StrategyPerformance {
     private Double maxdrawdown;
     private Double pL;
 
-    private StrategyPerformance buildFromDTO(StrategyPerformanceDTO strategyPerformanceDTO){
-
-        StrategyPerformance strategyPerformance = new StrategyPerformance();
-
-        strategyPerformance.setTimestamp(strategyPerformanceDTO.timestamp());
-        strategyPerformance.setTradeDate(strategyPerformanceDTO.tradeDate());
-        strategyPerformance.setSharp(strategyPerformanceDTO.sharp());
-        strategyPerformance.setSortino(strategyPerformanceDTO.sortino());
-        strategyPerformance.setMaxdrawdown(strategyPerformanceDTO.maxdrawdown());
-        strategyPerformance.setPL(strategyPerformanceDTO.pL());
-
-        return strategyPerformance;
-    }
+//    private StrategyPerformance buildFromDTO(StrategyPerformanceDTO strategyPerformanceDTO){
+//
+//        StrategyPerformance strategyPerformance = new StrategyPerformance();
+//
+//        strategyPerformance.setTimestamp(strategyPerformanceDTO.timestamp());
+//        strategyPerformance.setTradeDate(strategyPerformanceDTO.tradeDate());
+//        strategyPerformance.setSharp(strategyPerformanceDTO.sharp());
+//        strategyPerformance.setSortino(strategyPerformanceDTO.sortino());
+//        strategyPerformance.setMaxdrawdown(strategyPerformanceDTO.maxdrawdown());
+//        strategyPerformance.setPL(strategyPerformanceDTO.pL());
+//
+//        return strategyPerformance;
+//    }
 }

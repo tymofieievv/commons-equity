@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity
+@Entity(name = "REF0_KAFKA_FUTURE")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -29,31 +29,30 @@ public class Future {
     private LocalTime time;
     private String underlyingId;
     private String underlyingDescription;
-    private double price;
     private Double priceClose;
     private Double priceOpen;
     private Double priceLow;
     private Double priceHigh;
     private Integer volume;
 
-    public Future buildFromDTO(FutureDTO futureDTO) {
-        Future future = new Future();
-
-        future.setRefDate(futureDTO.refDate());
-        future.setIsin(futureDTO.isin());
-        future.setTicker(futureDTO.ticker());
-        future.setUnderlyingId(futureDTO.underlyingId());
-        future.setUnderlyingDescription(futureDTO.underlyingDescription());
-        future.setPrice(futureDTO.price());
-        future.setTime(futureDTO.time());
-        future.setPriceClose(futureDTO.priceClose());
-        future.setPriceOpen(futureDTO.priceOpen());
-        future.setPriceClose(futureDTO.priceClose());
-        future.setPriceLow(futureDTO.priceLow());
-        future.setPriceHigh(futureDTO.priceHigh());
-        future.setVolume(futureDTO.volume());
-
-        return future;
-    }
+//    public Future buildFromDTO(FutureDTO futureDTO) {
+//        Future future = new Future();
+//
+//        future.setRefDate(futureDTO.refDate());
+//        future.setIsin(futureDTO.isin());
+//        future.setTicker(futureDTO.ticker());
+//        future.setUnderlyingId(futureDTO.underlyingId());
+//        future.setUnderlyingDescription(futureDTO.underlyingDescription());
+//        future.setPrice(futureDTO.price());
+//        future.setTime(futureDTO.time());
+//        future.setPriceClose(futureDTO.priceClose());
+//        future.setPriceOpen(futureDTO.priceOpen());
+//        future.setPriceClose(futureDTO.priceClose());
+//        future.setPriceLow(futureDTO.priceLow());
+//        future.setPriceHigh(futureDTO.priceHigh());
+//        future.setVolume(futureDTO.volume());
+//
+//        return future;
+//    }
 
 }
