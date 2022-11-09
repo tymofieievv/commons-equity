@@ -169,18 +169,4 @@ class IndexDTOTest {
         Assertions.assertEquals("ESTX 50 PR INDEX", historyIndexDTOs[4].securityDescription());
     }
 
-
-    @Test
-    void testUnderlying() {
-        Assertions.assertEquals("EU0009658145", realtimeIndexDTOs[0].underlying());
-        Assertions.assertEquals("EU0009658145", realtimeIndexDTOs[1].underlying());
-        Assertions.assertEquals("EU0009658145", realtimeIndexDTOs[2].underlying());
-        Assertions.assertEquals("EU0009658145", realtimeIndexDTOs[3].underlying());
-
-        Assertions.assertNull(historyIndexDTOs[0].underlying());
-        Assertions.assertNull(historyIndexDTOs[1].underlying());
-        Assertions.assertNull(historyIndexDTOs[2].underlying());
-        Assertions.assertNull(historyIndexDTOs[3].underlying());
-        Assertions.assertNull(historyIndexDTOs[4].underlying());
-    }
 }

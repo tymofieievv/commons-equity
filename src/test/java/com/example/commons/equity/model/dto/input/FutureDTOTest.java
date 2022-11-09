@@ -161,21 +161,6 @@ class FutureDTOTest {
         Assertions.assertNull(realtimeFutureDTOs[3].underlyingDescription());
     }
 
-
-    @Test
-    void testPrice() {
-        Assertions.assertEquals(3564.39, historyFutureDTOs[0].price());
-        Assertions.assertEquals(3547.85, historyFutureDTOs[1].price());
-        Assertions.assertEquals(3611.08, historyFutureDTOs[2].price());
-        Assertions.assertEquals(3622.42, historyFutureDTOs[3].price());
-
-        Assertions.assertEquals(3565.0, realtimeFutureDTOs[0].price());
-        Assertions.assertEquals(3566.0, realtimeFutureDTOs[1].price());
-        Assertions.assertEquals(3565.8, realtimeFutureDTOs[2].price());
-        Assertions.assertEquals(3564.0, realtimeFutureDTOs[3].price());
-    }
-
-
     @Test
     void testTime() {
         Assertions.assertNull(historyFutureDTOs[0].time());

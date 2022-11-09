@@ -1,6 +1,5 @@
 package com.example.commons.equity.persistence.deserializers;
 
-import com.example.commons.equity.model.dto.input.FutureDTO;
 import com.example.commons.equity.model.dto.input.IndexDTO;
 import com.google.gson.*;
 
