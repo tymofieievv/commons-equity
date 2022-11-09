@@ -34,7 +34,7 @@ public class Order {
     private Double deltaPrice;
     private String tickerFuture;
     @Enumerated(EnumType.STRING)
-    private Operations operations;
+    private Operations buysell;
     private Integer quantity;
     private Integer livePosition;
     private Double theoreticalPrice;
@@ -49,7 +49,7 @@ public class Order {
                 this.getPortfolioId(),
                 this.getTickerFuture(),
                 this.getStatus(),
-                this.getOperations().name(),
+                this.getBuysell().name(),
                 this.getTheoreticalQuantity(),
                 this.getQuantity(),
                 this.getTheoreticalPosition(),

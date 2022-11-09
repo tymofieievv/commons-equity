@@ -27,7 +27,6 @@ public class Index {
     private String securityDescription;
     private LocalTime time;
     private Double price;
-    private String underlying;
 
     public IndexDTO toDTO() {
         return new IndexDTO(
