@@ -37,25 +37,5 @@ public class Order {
     private Integer quantity;
     private Double theoreticalPrice;
 
-    public OrderDTO buildFromDto(Order order){
 
-        OrderDTO orderDTO = new OrderDTO(
-                order.getIdOrder(),
-                order.getIdSignal(),
-                order.getTimestamp(),
-                order.getTradeDate(),
-                order.getUnderlying(),
-                order.getTickerFuture(),
-                order.getStatus(),
-                order.getOperations().toString(),
-                order.getPosition(),
-                order.getTheoreticalPrice(),
-                order.getTheoreticalPosition(),
-                order.getExecutedPrice(),
-                order.getDeltaPrice()
-        );
-
-        return orderDTO;
-    }
 }
-//UNISCI TABELLA E FINSICI I DTO
