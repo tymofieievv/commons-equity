@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
-@Entity
+@Entity(name="SSL0_IXP_FUTURE_ANAGRAPHIC")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -28,16 +28,16 @@ public class PersonalDataFuture {
     private String currency;
     private LocalDate maturity;
 
-    public PersonalDataFuture buildFromDto(PersonalDataFutureDTO dailyPersonalDataDTO) {
-
-        PersonalDataFuture personalDataFuture = new PersonalDataFuture();
-        personalDataFuture.setIsin(dailyPersonalDataDTO.isin());
-        personalDataFuture.setDescription(dailyPersonalDataDTO.description());
-        personalDataFuture.setCurrency(dailyPersonalDataDTO.currency());
-        personalDataFuture.setMaturity(dailyPersonalDataDTO.maturity());
-        return personalDataFuture;
-
-    }
+//    public PersonalDataFuture buildFromDto(PersonalDataFutureDTO dailyPersonalDataDTO) {
+//
+//        PersonalDataFuture personalDataFuture = new PersonalDataFuture();
+//        personalDataFuture.setIsin(dailyPersonalDataDTO.isin());
+//        personalDataFuture.setDescription(dailyPersonalDataDTO.description());
+//        personalDataFuture.setCurrency(dailyPersonalDataDTO.currency());
+//        personalDataFuture.setMaturity(dailyPersonalDataDTO.maturity());
+//        return personalDataFuture;
+//
+//    }
 
 
 }

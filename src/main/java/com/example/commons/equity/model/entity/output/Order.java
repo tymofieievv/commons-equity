@@ -1,7 +1,6 @@
 package com.example.commons.equity.model.entity.output;
 
 import com.example.commons.equity.model.enums.Operations;
-import com.example.commons.equity.model.dto.output.OrderDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name="VIS10_API_ORDER")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -26,16 +25,39 @@ public class Order {
     private String underlying;
     private Long idSignal;
     private Long idOrder;
+    private String portfolioId;
     private Integer theoreticalPosition;
-    private Integer position;
+    private Integer theoreticalQuantity;
     private Double executedPrice;
-    String status;
+    private String status;
     private Double deltaPrice;
     private String tickerFuture;
     @Enumerated(EnumType.STRING)
     private Operations operations;
     private Integer quantity;
+    private Integer livePosition;
     private Double theoreticalPrice;
 
+//
+//    public OrderDTO buildFromDto(Order order){
+//
+//        OrderDTO orderDTO = new OrderDTO(
+//                order.getIdOrder(),
+//                order.getIdSignal(),
+//                order.getTimestamp(),
+//                order.getTradeDate(),
+//                order.getUnderlying(),
+//                order.getTickerFuture(),
+//                order.getStatus(),
+//                order.getOperations().toString(),
+//                order.getPosition(),
+//                order.getTheoreticalPrice(),
+//                order.getTheoreticalPosition(),
+//                order.getExecutedPrice(),
+//                order.getDeltaPrice()
+//        );
+//
+//        return orderDTO;
+//    }
 
 }
