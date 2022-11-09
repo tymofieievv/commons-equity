@@ -1,4 +1,4 @@
-package com.example.commons.entity.output;
+package com.example.commons.equity.model.entity.output;
 
 import com.example.commons.equity.model.dto.output.StrategyPerformanceDTO;
 import lombok.AllArgsConstructor;
