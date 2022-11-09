@@ -1,7 +1,6 @@
-package com.example.commons.entity.output;
+package com.example.commons.equity.model.entity.output;
 
-import com.example.commons.enums.Operations;
-import com.example.commons.equity.model.dto.output.SignalDTO;
+import com.example.commons.equity.model.enums.Operations;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

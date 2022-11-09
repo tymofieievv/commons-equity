@@ -1,4 +1,4 @@
-package com.example.commons.entity.input;
+package com.example.commons.equity.model.entity.input;
 
 import com.example.commons.equity.model.dto.input.FutureDTO;
 import lombok.AllArgsConstructor;
