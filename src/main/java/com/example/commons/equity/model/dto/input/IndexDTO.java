@@ -7,6 +7,5 @@ public record IndexDTO(LocalDate refDate,
                        LocalTime time,
                        Double price,
                        String instrumentId,
-                       String securityDescription,
-                       String underlying) {
+                       String securityDescription) {
 }

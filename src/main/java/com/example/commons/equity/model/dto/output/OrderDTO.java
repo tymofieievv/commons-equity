@@ -9,12 +9,15 @@ public record OrderDTO(
         LocalDateTime timestamp,
         LocalDate tradeDate,
         String underlying,
+        String portfolioId,
         String tickerFuture,
         String status,
         String buySell,
-        Integer position,
-        Double theoreticalPrice,
+        Integer theoreticalQuantity,
+        Integer quantity,
         Integer theoreticalPosition,
+        Integer livePosition,
+        Double theoreticalPrice,
         Double prezzoEseguito,
         Double deltaPrezzo
 ) {

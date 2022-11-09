@@ -7,6 +7,7 @@ public record AlgorithmAndMetricDTO
         (LocalDateTime time,
          Double price,
          String buySell,
+         Integer quantity,
          Integer position,
          Double avgprice,
          Double posplTminus,
@@ -19,7 +20,7 @@ public record AlgorithmAndMetricDTO
          Double drawdown,
          Double avgdd,
          Double stddd,
-         Double dddownlim,
+         Double ddownlim,
          Boolean ddpass,
          String buysellNodd,
          Integer positionNodd,
@@ -28,9 +29,9 @@ public record AlgorithmAndMetricDTO
          Double posplTplusNodd,
          Double consolidatedplNodd,
          Double totrunningplNodd,
-         Boolean posinverionsNodd,
+         Boolean posinversionNodd,
          Double cumpl,
          Double dpl,
-         Double prezzoEseguito,
-         Double deltaPrezzo) {
+         Double executedPrice,
+         Double deltaPrice) {
 }

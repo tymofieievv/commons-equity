@@ -23,8 +23,7 @@ public class IndexDTODeserializer implements JsonDeserializer<IndexDTO> {
                 jsonDeserializationContext.deserialize(time, LocalTime.class),
                 jsonDeserializationContext.deserialize(price, Double.class),
                 jsonDeserializationContext.deserialize(instrument_id, String.class),
-                jsonDeserializationContext.deserialize(securityDescription, String.class),
-                jsonDeserializationContext.deserialize(underlying, String.class)
+                jsonDeserializationContext.deserialize(securityDescription, String.class)
         );
     }
 }

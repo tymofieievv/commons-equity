@@ -11,7 +11,6 @@ public class FutureDTODeserializer implements JsonDeserializer<FutureDTO> {
     @Override
     public FutureDTO deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonElement refDate = ((JsonObject) jsonElement).get("REF_DATE");
-        JsonElement price = ((JsonObject) jsonElement).get("PRICE");
         JsonElement isin = ((JsonObject) jsonElement).get("ISIN");
         JsonElement ticker = ((JsonObject) jsonElement).get("TICKER");
         JsonElement underlyingId = ((JsonObject) jsonElement).get("UNDERLYING_ID");
@@ -29,7 +28,6 @@ public class FutureDTODeserializer implements JsonDeserializer<FutureDTO> {
                 jsonDeserializationContext.deserialize(ticker, String.class),
                 jsonDeserializationContext.deserialize(underlyingId, String.class),
                 jsonDeserializationContext.deserialize(underlyingDescription, String.class),
-                jsonDeserializationContext.deserialize(price, Double.class),
                 jsonDeserializationContext.deserialize(time, LocalTime.class),
                 jsonDeserializationContext.deserialize(priceClose, Double.class),
                 jsonDeserializationContext.deserialize(priceLow, Double.class),
