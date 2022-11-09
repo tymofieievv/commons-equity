@@ -27,7 +27,6 @@ public record DailyFutureDTO(LocalDate refDate,
         dailyFuture.setUnderlyingDescription(this.underlyingDescription);
         dailyFuture.setPriceHigh(this.priceHigh);
         dailyFuture.setPriceOpen(this.priceOpen);
-        dailyFuture.setPriceClose(this.priceLow);
         dailyFuture.setVolume(this.volume);
 
         return dailyFuture;
