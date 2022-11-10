@@ -11,10 +11,11 @@
 */
 CREATE OR REPLACE FUNCTION getIndexIntraday (time_frame integer, instrument_id_input varchar)
     RETURNS TABLE (
-          ref_date             DATE
+          id                   INTEGER
+        , ref_date             DATE
         , instrument_id        VARCHAR(50)
         , security_description VARCHAR(100)
-        , "time"               INTERVAL
+        , "time"               TIME
         , price                DOUBLE PRECISION
 )
 AS $$
@@ -45,10 +46,11 @@ BEGIN
 			group by t.start_time, t.end_time
 		)
 		select
-			  i.ref_date
+		      i.id
+			, i.ref_date
 			, i.instrument_id
 			, i.security_description
-			, d.end_time
+			, d.end_time::TIME
 			, i.price
 		from indexIntraday i join datasource d on i.id = d.max_id
 		where d.end_time < (LOCALTIME + interval '1 hour') -- 1 hour is added to refer to CEST timezone

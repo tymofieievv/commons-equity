@@ -9,7 +9,8 @@
 */
 CREATE OR REPLACE FUNCTION getIndexHistory (time_frame integer, instrument_id_input varchar)
     RETURNS TABLE (
-          ref_date             DATE
+          id                   INTEGER
+        , ref_date             DATE
         , instrument_id        VARCHAR(50)
         , security_description VARCHAR(100)
         , "time"               INTERVAL
@@ -44,10 +45,11 @@ BEGIN
 			group by i.ref_date, t.start_time, t.end_time
 		)
 		select
-			  i.ref_date
+		      i.id
+			, i.ref_date
 			, i.instrument_id
 			, i.security_description
-			, d.end_time
+			, d.end_time::TIME
 			, i.price
 		from indexHistory i join datasource d on i.id = d.max_id
 		order by i.ref_date, d.start_time
