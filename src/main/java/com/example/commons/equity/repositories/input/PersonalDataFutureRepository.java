@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 
-interface PersonalDataFutureRepository extends JpaRepository<PersonalDataFuture, Long> {
+public interface PersonalDataFutureRepository extends JpaRepository<PersonalDataFuture, Long> {
 
     Optional<PersonalDataFuture> findPersonalDataFutureByIsin(String isin);
 

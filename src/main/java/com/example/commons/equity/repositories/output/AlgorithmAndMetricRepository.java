@@ -4,6 +4,6 @@ import com.example.commons.equity.model.entity.output.AlgorithmAndMetric;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-interface AlgorithmAndMetricRepository extends JpaRepository<AlgorithmAndMetric, Long> {
+public interface AlgorithmAndMetricRepository extends JpaRepository<AlgorithmAndMetric, Long> {
 
 }

@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-interface FutureRepository extends JpaRepository<Future, Long> {
+public interface FutureRepository extends JpaRepository<Future, Long> {
 
     @Query(nativeQuery = true, value = "SELECT * from getFutureIntraday(:timeframe,:tickerInput)")
     List<Future> getIntradayFutureByTickerInput(@Param("timeframe") int timeframe, @Param("tickerInput") String tickerInput);

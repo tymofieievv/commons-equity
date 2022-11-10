@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 
-interface IndexRepository extends JpaRepository<Index, Long> {
+public interface IndexRepository extends JpaRepository<Index, Long> {
 
     @Query(nativeQuery = true, value = "SELECT * from getIndexIntraday(:timeframe,:instrumentId)")
     List<Index> getIntradayIndexByInstrumentId(@Param("timeframe") int timeframe, @Param("instrumentId") String instrumentId);
