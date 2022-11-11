@@ -1,5 +1,6 @@
 package com.example.commons.equity.model.dto.output;
 
+import com.example.commons.equity.model.enums.Operation;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -306,14 +307,14 @@ class AlgorithmAndMetricDTOTest {
 
     @Test
     void testBuySell() {
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[0].buySell());
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[1].buySell());
-        Assertions.assertEquals("N", algorithmAndMetricDTOs[2].buySell());
-        Assertions.assertEquals("N", algorithmAndMetricDTOs[3].buySell());
-        Assertions.assertEquals("N", algorithmAndMetricDTOs[4].buySell());
-        Assertions.assertEquals("N", algorithmAndMetricDTOs[5].buySell());
-        Assertions.assertEquals("N", algorithmAndMetricDTOs[6].buySell());
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[7].buySell());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[0].buySell());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[1].buySell());
+        Assertions.assertEquals(Operation.NEUTRAL, algorithmAndMetricDTOs[2].buySell());
+        Assertions.assertEquals(Operation.NEUTRAL, algorithmAndMetricDTOs[3].buySell());
+        Assertions.assertEquals(Operation.NEUTRAL, algorithmAndMetricDTOs[4].buySell());
+        Assertions.assertEquals(Operation.NEUTRAL, algorithmAndMetricDTOs[5].buySell());
+        Assertions.assertEquals(Operation.NEUTRAL, algorithmAndMetricDTOs[6].buySell());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[7].buySell());
     }
 
 
@@ -501,14 +502,14 @@ class AlgorithmAndMetricDTOTest {
 
     @Test
     void testBuysellNodd() {
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[0].buysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[1].buysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[2].buysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[3].buysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[4].buysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[5].buysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[6].buysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetricDTOs[7].buysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[0].buysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[1].buysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[2].buysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[3].buysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[4].buysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[5].buysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[6].buysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetricDTOs[7].buysellNodd());
     }
 
 

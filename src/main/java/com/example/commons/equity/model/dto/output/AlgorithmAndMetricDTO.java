@@ -54,6 +54,7 @@ public record AlgorithmAndMetricDTO
         algorithmAndMetric.setPosinversion(this.posinversion);
         algorithmAndMetric.setRollovertrade(this.rollovertrade);
         algorithmAndMetric.setRolloverdata(this.rolloverdata);
+        algorithmAndMetric.setDrawdown(this.drawdown);
         algorithmAndMetric.setAvgdd(this.avgdd);
         algorithmAndMetric.setStddd(this.stddd);
         algorithmAndMetric.setDdownlim(this.ddownlim);

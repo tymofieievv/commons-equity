@@ -137,6 +137,6 @@ class DailyFutureTest {
     void testVolume() {
         Assertions.assertEquals(936121, dailyFutures.get(0).getVolume());
         Assertions.assertEquals(939287, dailyFutures.get(1).getVolume());
-        Assertions.assertEquals(1061095,dailyFutures.get(2).getVolume());
+        Assertions.assertEquals(1061095, dailyFutures.get(2).getVolume());
     }
 }

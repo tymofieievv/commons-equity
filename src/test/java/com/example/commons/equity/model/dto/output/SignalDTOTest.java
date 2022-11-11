@@ -1,5 +1,6 @@
 package com.example.commons.equity.model.dto.output;
 
+import com.example.commons.equity.model.enums.Operation;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -127,11 +128,11 @@ class SignalDTOTest {
 
     @Test
     void testBuySell() {
-        Assertions.assertEquals("SELL", signalDTOs[0].buySell().toString());
-        Assertions.assertEquals("BUY", signalDTOs[1].buySell().toString());
-        Assertions.assertEquals("SELL", signalDTOs[2].buySell().toString());
-        Assertions.assertEquals("SELL", signalDTOs[3].buySell().toString());
-        Assertions.assertEquals("BUY", signalDTOs[4].buySell().toString());
+        Assertions.assertEquals(Operation.SELL, signalDTOs[0].buySell());
+        Assertions.assertEquals(Operation.BUY, signalDTOs[1].buySell());
+        Assertions.assertEquals(Operation.SELL, signalDTOs[2].buySell());
+        Assertions.assertEquals(Operation.SELL, signalDTOs[3].buySell());
+        Assertions.assertEquals(Operation.BUY, signalDTOs[4].buySell());
     }
 
 

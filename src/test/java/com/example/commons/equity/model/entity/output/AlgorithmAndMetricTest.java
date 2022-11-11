@@ -1,6 +1,7 @@
 package com.example.commons.equity.model.entity.output;
 
 import com.example.commons.equity.model.dto.output.AlgorithmAndMetricDTO;
+import com.example.commons.equity.model.enums.Operation;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -320,14 +321,14 @@ class AlgorithmAndMetricTest {
 
     @Test
     void testBuySell() {
-        Assertions.assertEquals("SELL", algorithmAndMetrics.get(0).getBuySell().toString());
-        Assertions.assertEquals("SELL", algorithmAndMetrics.get(1).getBuySell().toString());
-        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(2).getBuySell().toString());
-        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(3).getBuySell().toString());
-        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(4).getBuySell().toString());
-        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(5).getBuySell().toString());
-        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(6).getBuySell().toString());
-        Assertions.assertEquals("SELL", algorithmAndMetrics.get(7).getBuySell().toString());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(0).getBuySell());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(1).getBuySell());
+        Assertions.assertEquals(Operation.NEUTRAL, algorithmAndMetrics.get(2).getBuySell());
+        Assertions.assertEquals(Operation.NEUTRAL, algorithmAndMetrics.get(3).getBuySell());
+        Assertions.assertEquals(Operation.NEUTRAL, algorithmAndMetrics.get(4).getBuySell());
+        Assertions.assertEquals(Operation.NEUTRAL, algorithmAndMetrics.get(5).getBuySell());
+        Assertions.assertEquals(Operation.NEUTRAL, algorithmAndMetrics.get(6).getBuySell());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(7).getBuySell());
     }
 
     @Test
@@ -500,14 +501,14 @@ class AlgorithmAndMetricTest {
 
     @Test
     void testBuysellNodd() {
-        Assertions.assertEquals("S", algorithmAndMetrics.get(0).getBuysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetrics.get(1).getBuysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetrics.get(2).getBuysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetrics.get(3).getBuysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetrics.get(4).getBuysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetrics.get(5).getBuysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetrics.get(6).getBuysellNodd());
-        Assertions.assertEquals("S", algorithmAndMetrics.get(7).getBuysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(0).getBuysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(1).getBuysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(2).getBuysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(3).getBuysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(4).getBuysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(5).getBuysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(6).getBuysellNodd());
+        Assertions.assertEquals(Operation.SELL, algorithmAndMetrics.get(7).getBuysellNodd());
     }
 
     @Test
