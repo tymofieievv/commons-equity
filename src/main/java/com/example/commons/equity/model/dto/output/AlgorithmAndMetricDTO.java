@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public record AlgorithmAndMetricDTO
         (LocalDateTime time,
          Double price,
-         String buySell,
+         Operation buySell,
          Integer quantity,
          Integer position,
          Double avgprice,
@@ -25,7 +25,7 @@ public record AlgorithmAndMetricDTO
          Double stddd,
          Double ddownlim,
          Boolean ddpass,
-         String buysellNodd,
+         Operation buysellNodd,
          Integer positionNodd,
          Double avgpriceNodd,
          Double posplTminusNodd,
@@ -44,7 +44,7 @@ public record AlgorithmAndMetricDTO
 
         algorithmAndMetric.setTime(this.time);
         algorithmAndMetric.setPrice(this.price);
-        algorithmAndMetric.setBuySell(Operation.valueOf(this.buySell));
+        algorithmAndMetric.setBuySell(this.buySell);
         algorithmAndMetric.setPosition(this.position);
         algorithmAndMetric.setAvgPrice(this.avgprice);
         algorithmAndMetric.setPosplTminus(this.posplTminus);

@@ -320,14 +320,14 @@ class AlgorithmAndMetricTest {
 
     @Test
     void testBuySell() {
-        Assertions.assertEquals("SELL", algorithmAndMetrics.get(0).getBuySell());
-        Assertions.assertEquals("SELL", algorithmAndMetrics.get(1).getBuySell());
-        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(2).getBuySell());
-        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(3).getBuySell());
-        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(4).getBuySell());
-        Assertions.assertEquals("NETRAL", algorithmAndMetrics.get(5).getBuySell());
-        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(6).getBuySell());
-        Assertions.assertEquals("SELL", algorithmAndMetrics.get(7).getBuySell());
+        Assertions.assertEquals("SELL", algorithmAndMetrics.get(0).getBuySell().toString());
+        Assertions.assertEquals("SELL", algorithmAndMetrics.get(1).getBuySell().toString());
+        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(2).getBuySell().toString());
+        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(3).getBuySell().toString());
+        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(4).getBuySell().toString());
+        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(5).getBuySell().toString());
+        Assertions.assertEquals("NEUTRAL", algorithmAndMetrics.get(6).getBuySell().toString());
+        Assertions.assertEquals("SELL", algorithmAndMetrics.get(7).getBuySell().toString());
     }
 
     @Test

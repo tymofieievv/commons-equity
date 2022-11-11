@@ -40,7 +40,7 @@ public class AlgorithmAndMetric {
     private Double stddd;
     private Double ddownlim;
     private Boolean ddpass;
-    private String buysellNodd;
+    private Operation buysellNodd;
     private Integer positionNodd;
     private Double avgpriceNodd;
     private Double posplTminusNodd;
