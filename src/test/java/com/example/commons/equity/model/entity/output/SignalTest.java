@@ -4,6 +4,7 @@ import com.example.commons.equity.model.dto.output.SignalDTO;
 import com.google.gson.Gson;
 import java.lang.String;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ class SignalTest {
               """
               [
   {
-  "TIMESTAMP": "15/07/2022",
+  "TIMESTAMP": "15/07/2022 00:00",
   "TRADEDATE": "15/07/2022",
   "UNDERLYING": "EU0009658145",
   "TICKER FUTURE": "VGU2",
@@ -30,7 +31,7 @@ class SignalTest {
   "THEORETICAL PRICE": "3477.2"
   },
   {
-  "TIMESTAMP": "14/07/2022",
+  "TIMESTAMP": "14/07/2022 00:00",
   "TRADEDATE": "14/07/2022",
   "UNDERLYING": "EU0009658146",
   "TICKER FUTURE": "VGU2",
@@ -39,7 +40,7 @@ class SignalTest {
   "THEORETICAL PRICE": "3396.61"
   },
   {
-  "TIMESTAMP": "13/07/2022",
+  "TIMESTAMP": "13/07/2022 00:00",
   "TRADEDATE": "13/07/2022",
   "UNDERLYING": "EU0009658147",
   "TICKER FUTURE": "VGU2",
@@ -48,7 +49,7 @@ class SignalTest {
   "THEORETICAL PRICE": "3453.97"
   },
   {
-  "TIMESTAMP": "12/07/2022",
+  "TIMESTAMP": "12/07/2022 00:00",
   "TRADEDATE": "12/07/2022",
   "UNDERLYING": "EU0009658148",
   "TICKER FUTURE": "VGU2",
@@ -57,7 +58,7 @@ class SignalTest {
   "THEORETICAL PRICE": "3487.05"
   },
   {
-  "TIMESTAMP": "11/07/2022",
+  "TIMESTAMP": "11/07/2022 00:00",
   "TRADEDATE": "11/07/2022",
   "UNDERLYING": "EU0009658149",
   "TICKER FUTURE": "VGU2",
@@ -99,11 +100,11 @@ class SignalTest {
 
   @Test
   void testTradeDate() {
-    Assertions.assertEquals(LocalDate.of(2022,7,15), signals.get(0).getTradeDate());
-    Assertions.assertEquals(LocalDate.of(2022,7,14), signals.get(1).getTradeDate());
-    Assertions.assertEquals(LocalDate.of(2022,7,13), signals.get(2).getTradeDate());
-    Assertions.assertEquals(LocalDate.of(2022,7,12), signals.get(3).getTradeDate());
-    Assertions.assertEquals(LocalDate.of(2022,7,11), signals.get(4).getTradeDate());
+    Assertions.assertEquals(LocalDateTime.of(2022,7,15,00,00), signals.get(0).getTradeDate());
+    Assertions.assertEquals(LocalDateTime.of(2022,7,14,00,00), signals.get(1).getTradeDate());
+    Assertions.assertEquals(LocalDateTime.of(2022,7,13,00,00), signals.get(2).getTradeDate());
+    Assertions.assertEquals(LocalDateTime.of(2022,7,12,00,00), signals.get(3).getTradeDate());
+    Assertions.assertEquals(LocalDateTime.of(2022,7,11,00,00), signals.get(4).getTradeDate());
   }
 
   @Test

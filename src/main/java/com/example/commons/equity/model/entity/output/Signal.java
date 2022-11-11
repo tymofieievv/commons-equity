@@ -22,7 +22,7 @@ public class Signal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate timestamp;
-    private LocalDate tradeDate;
+    private LocalDateTime tradeDate;
     private String underlying;
     private Long idSignal;
     private String tickerFuture;

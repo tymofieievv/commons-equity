@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public record SignalDTO(
         Long signalId,
         LocalDate timestamp,
-        LocalDate tradeDate,
+        LocalDateTime tradeDate,
         String underlying,
         String tickerFuture,
         String buySell,
