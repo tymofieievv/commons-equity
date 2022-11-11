@@ -127,11 +127,11 @@ class SignalDTOTest {
 
     @Test
     void testBuySell() {
-        Assertions.assertEquals("S", signalDTOs[0].buySell());
-        Assertions.assertEquals("B", signalDTOs[1].buySell());
-        Assertions.assertEquals("S", signalDTOs[2].buySell());
-        Assertions.assertEquals("S", signalDTOs[3].buySell());
-        Assertions.assertEquals("B", signalDTOs[4].buySell());
+        Assertions.assertEquals("SELL", signalDTOs[0].buySell().toString());
+        Assertions.assertEquals("BUY", signalDTOs[1].buySell().toString());
+        Assertions.assertEquals("SELL", signalDTOs[2].buySell().toString());
+        Assertions.assertEquals("SELL", signalDTOs[3].buySell().toString());
+        Assertions.assertEquals("BUY", signalDTOs[4].buySell().toString());
     }
 
 

@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 
 public record SignalDTO(
         Long signalId,
-        LocalDate timestamp,
-        LocalDateTime tradeDate,
+        LocalDateTime timestamp,
+        LocalDate tradeDate,
         String underlying,
         String tickerFuture,
-        String buySell,
+        Operation buySell,
         Integer quantity,
         Double theoreticalPrice
 ) {
@@ -21,7 +21,7 @@ public record SignalDTO(
         Signal signal = new Signal();
 
         signal.setIdSignal(this.signalId());
-        signal.setBuySell(Operation.valueOf(this.buySell()));
+        signal.setBuySell(this.buySell());
         signal.setQuantity(this.quantity());
         signal.setTimestamp(this.timestamp());
         signal.setTickerFuture(this.tickerFuture());

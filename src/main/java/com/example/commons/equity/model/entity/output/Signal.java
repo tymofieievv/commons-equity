@@ -21,8 +21,8 @@ public class Signal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate timestamp;
-    private LocalDateTime tradeDate;
+    private LocalDateTime timestamp;
+    private LocalDate tradeDate;
     private String underlying;
     private Long idSignal;
     private String tickerFuture;
@@ -38,7 +38,7 @@ public class Signal {
                 this.getTradeDate(),
                 this.getUnderlying(),
                 this.getTickerFuture(),
-                this.buySell.name(),
+                this.buySell,
                 this.getQuantity(),
                 this.getTheoreticalPrice()
         );
