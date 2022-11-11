@@ -4,12 +4,12 @@
             time_frame          --> time window used to group index data
             instrument_id_input --> target instrument_id
         output:
-            table containing history future data with ticker <%ticker_input%>
+            table containing history future data with ticker <%isin_input%>
             grouped according to a time window <%time_frame%>.
 
         Note that if a time window contains LOCALTIME then it is ignored
 */
-CREATE OR REPLACE FUNCTION getFutureHistory (time_frame integer, ticker_input varchar)
+CREATE OR REPLACE FUNCTION getFutureHistory (time_frame integer, isin_input varchar)
     RETURNS TABLE (
           id                     INTEGER
         , ref_date               DATE
@@ -40,7 +40,7 @@ BEGIN
 		, futureHistory as (
 			select *
 			from ref0_kafka_future i
-			where i.ref_date < CURRENT_DATE and i.ticker = ticker_input
+			where i.ref_date < CURRENT_DATE and i.ticker = isin_input
 		)
 		, datasource as (
 			select

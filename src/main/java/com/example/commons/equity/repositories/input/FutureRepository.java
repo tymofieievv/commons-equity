@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface FutureRepository extends JpaRepository<Future, Long> {
 
-    @Query(nativeQuery = true, value = "SELECT * from getFutureIntraday(:timeframe,:tickerInput)")
-    List<Future> getIntradayFutureByTickerInput(@Param("timeframe") int timeframe, @Param("tickerInput") String tickerInput);
-    @Query(nativeQuery = true, value = "SELECT * from getFutureHistory(:timeframe,:tickerInput)")
-    List<Future> getHistoryFutureByTickerInput(@Param("timeframe") int timeframe, @Param("tickerInput") String tickerInput);
+    @Query(nativeQuery = true, value = "SELECT * from getFutureIntraday(:timeframe,:isinInput)")
+    List<Future> getIntradayFutureByIsinInput(@Param("timeframe") int timeframe, @Param("isinInput") String isinInput);
+    @Query(nativeQuery = true, value = "SELECT * from getFutureHistory(:timeframe,:isinInput)")
+    List<Future> getHistoryFutureByIsinInput(@Param("timeframe") int timeframe, @Param("isinInput") String isinInput);
 
 }
