@@ -1,7 +1,7 @@
 package com.example.commons.equity.model.entity.output;
 
 import com.example.commons.equity.model.dto.output.SignalDTO;
-import com.example.commons.equity.model.enums.Operations;
+import com.example.commons.equity.model.enums.Operation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +27,7 @@ public class Signal {
     private Long idSignal;
     private String tickerFuture;
     @Enumerated(EnumType.STRING)
-    private Operations buySell;
+    private Operation buySell;
     private Integer quantity;
     private Double theoreticalPrice;
 

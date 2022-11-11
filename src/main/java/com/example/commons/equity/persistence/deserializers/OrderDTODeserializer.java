@@ -1,6 +1,7 @@
 package com.example.commons.equity.persistence.deserializers;
 
 import com.example.commons.equity.model.dto.output.OrderDTO;
+import com.example.commons.equity.model.enums.Operation;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -35,7 +36,7 @@ public class OrderDTODeserializer implements JsonDeserializer<OrderDTO> {
                 jsonDeserializationContext.deserialize(portfolioId, String.class),
                 jsonDeserializationContext.deserialize(tickerFuture, String.class),
                 jsonDeserializationContext.deserialize(status, String.class),
-                jsonDeserializationContext.deserialize(buySell, String.class),
+                jsonDeserializationContext.deserialize(buySell, Operation.class),
                 jsonDeserializationContext.deserialize(theoreticalQuantity, Integer.class),
                 jsonDeserializationContext.deserialize(quantity, Integer.class),
                 jsonDeserializationContext.deserialize(theoreticalPosition, Integer.class),

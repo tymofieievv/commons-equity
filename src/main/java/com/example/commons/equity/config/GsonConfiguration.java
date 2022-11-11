@@ -5,6 +5,7 @@ import com.example.commons.equity.model.dto.output.AlgorithmAndMetricDTO;
 import com.example.commons.equity.model.dto.output.OrderDTO;
 import com.example.commons.equity.model.dto.output.SignalDTO;
 import com.example.commons.equity.model.dto.output.StrategyPerformanceDTO;
+import com.example.commons.equity.model.enums.Operation;
 import com.example.commons.equity.persistence.deserializers.*;
 import com.example.commons.equity.persistence.serializers.*;
 import com.google.gson.GsonBuilder;
@@ -31,6 +32,7 @@ public class GsonConfiguration {
         builder.registerTypeAdapter(LocalDate.class, new LocalDateDeserializer());
         builder.registerTypeAdapter(LocalTime.class, new LocalTimeDeserializer());
         builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
+        builder.registerTypeAdapter(Operation.class, new OperationDeserializer());
 
         builder.registerTypeAdapter(DailyFutureDTO.class, new DailyFutureDTODeserializer());
         builder.registerTypeAdapter(FutureDTO.class, new FutureDTODeserializer());

@@ -1,6 +1,7 @@
 package com.example.commons.equity.persistence.deserializers;
 
 import com.example.commons.equity.model.dto.output.SignalDTO;
+import com.example.commons.equity.model.enums.Operation;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -26,7 +27,7 @@ public class SignalDTODeserializer implements JsonDeserializer<SignalDTO> {
                 jsonDeserializationContext.deserialize(tradeDate, LocalDate.class),
                 jsonDeserializationContext.deserialize(underlying, String.class),
                 jsonDeserializationContext.deserialize(tickerFuture, String.class),
-                jsonDeserializationContext.deserialize(buySell, String.class),
+                jsonDeserializationContext.deserialize(buySell, Operation.class),
                 jsonDeserializationContext.deserialize(quantity, Integer.class),
                 jsonDeserializationContext.deserialize(theoreticalPrice, Double.class)
         );

@@ -1,7 +1,7 @@
 package com.example.commons.equity.model.entity.output;
 
 import com.example.commons.equity.model.dto.output.AlgorithmAndMetricDTO;
-import com.example.commons.equity.model.enums.Operations;
+import com.example.commons.equity.model.enums.Operation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ public class AlgorithmAndMetric {
     private Long id;
     private LocalDateTime time;
     private Double price;
-    private Operations buySell;
+    private Operation buySell;
     private Integer position;
     private Double avgPrice;
     private Double posplTminus;

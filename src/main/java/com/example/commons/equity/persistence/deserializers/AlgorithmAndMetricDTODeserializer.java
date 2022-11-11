@@ -1,6 +1,7 @@
 package com.example.commons.equity.persistence.deserializers;
 
 import com.example.commons.equity.model.dto.output.AlgorithmAndMetricDTO;
+import com.example.commons.equity.model.enums.Operation;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -44,7 +45,7 @@ public class AlgorithmAndMetricDTODeserializer implements JsonDeserializer<Algor
         return new AlgorithmAndMetricDTO(
                 jsonDeserializationContext.deserialize(time, LocalDateTime.class),
                 jsonDeserializationContext.deserialize(price, Double.class),
-                jsonDeserializationContext.deserialize(buySell, String.class),
+                jsonDeserializationContext.deserialize(buySell, Operation.class),
                 jsonDeserializationContext.deserialize(quantity, Integer.class),
                 jsonDeserializationContext.deserialize(position, Integer.class),
                 jsonDeserializationContext.deserialize(avgPrice, Double.class),
@@ -60,7 +61,7 @@ public class AlgorithmAndMetricDTODeserializer implements JsonDeserializer<Algor
                 jsonDeserializationContext.deserialize(stddd, Double.class),
                 jsonDeserializationContext.deserialize(ddownLim, Double.class),
                 jsonDeserializationContext.deserialize(ddPass, Boolean.class),
-                jsonDeserializationContext.deserialize(buySellNoDD, String.class),
+                jsonDeserializationContext.deserialize(buySellNoDD, Operation.class),
                 jsonDeserializationContext.deserialize(positionNoDD, Integer.class),
                 jsonDeserializationContext.deserialize(avgPriceNoDD, Double.class),
                 jsonDeserializationContext.deserialize(posPLTminusNoDD, Double.class),

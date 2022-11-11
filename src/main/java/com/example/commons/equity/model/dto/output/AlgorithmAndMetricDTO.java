@@ -1,7 +1,7 @@
 package com.example.commons.equity.model.dto.output;
 
 import com.example.commons.equity.model.entity.output.AlgorithmAndMetric;
-import com.example.commons.equity.model.enums.Operations;
+import com.example.commons.equity.model.enums.Operation;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,7 +44,7 @@ public record AlgorithmAndMetricDTO
 
         algorithmAndMetric.setTime(this.time);
         algorithmAndMetric.setPrice(this.price);
-        algorithmAndMetric.setBuySell(Operations.valueOf(this.buySell));
+        algorithmAndMetric.setBuySell(Operation.valueOf(this.buySell));
         algorithmAndMetric.setPosition(this.position);
         algorithmAndMetric.setAvgPrice(this.avgprice);
         algorithmAndMetric.setPosplTminus(this.posplTminus);

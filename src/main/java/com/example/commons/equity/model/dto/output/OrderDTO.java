@@ -1,7 +1,7 @@
 package com.example.commons.equity.model.dto.output;
 
 import com.example.commons.equity.model.entity.output.Order;
-import com.example.commons.equity.model.enums.Operations;
+import com.example.commons.equity.model.enums.Operation;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,7 +38,7 @@ public record OrderDTO(
         order.setTickerFuture(this.tickerFuture);
         order.setQuantity(this.quantity);
         order.setStatus(this.status);
-        order.setBuysell(Operations.valueOf(this.buySell));
+        order.setBuysell(Operation.valueOf(this.buySell));
         order.setLivePosition(this.livePosition);
         order.setTheoreticalPrice(this.theoreticalPrice);
         order.setTheoreticalQuantity(this.theoreticalQuantity);

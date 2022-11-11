@@ -1,7 +1,7 @@
 package com.example.commons.equity.model.entity.output;
 
 import com.example.commons.equity.model.dto.output.OrderDTO;
-import com.example.commons.equity.model.enums.Operations;
+import com.example.commons.equity.model.enums.Operation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +34,7 @@ public class Order {
     private Double deltaPrice;
     private String tickerFuture;
     @Enumerated(EnumType.STRING)
-    private Operations buysell;
+    private Operation buysell;
     private Integer quantity;
     private Integer livePosition;
     private Double theoreticalPrice;
