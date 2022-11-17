@@ -160,11 +160,11 @@ class OrderDTOTest {
 
     @Test
     void testPortfolioId() {
-        Assertions.assertEquals("3", orderDTOs[0].portfolioId());
-        Assertions.assertEquals("4", orderDTOs[1].portfolioId());
-        Assertions.assertEquals("5", orderDTOs[2].portfolioId());
-        Assertions.assertEquals("6", orderDTOs[3].portfolioId());
-        Assertions.assertEquals("7", orderDTOs[4].portfolioId());
+        Assertions.assertEquals(3, orderDTOs[0].portfolioId());
+        Assertions.assertEquals(4, orderDTOs[1].portfolioId());
+        Assertions.assertEquals(5, orderDTOs[2].portfolioId());
+        Assertions.assertEquals(6, orderDTOs[3].portfolioId());
+        Assertions.assertEquals(7, orderDTOs[4].portfolioId());
     }
 
 
@@ -183,7 +183,7 @@ class OrderDTOTest {
         Assertions.assertNull(orderDTOs[0].status());
         Assertions.assertNull(orderDTOs[1].status());
         Assertions.assertNull(orderDTOs[2].status());
-        Assertions.assertEquals("0", orderDTOs[3].status());
+        Assertions.assertEquals(0, orderDTOs[3].status());
         Assertions.assertNull(orderDTOs[4].status());
     }
 
