@@ -5,6 +5,7 @@ import com.example.commons.equity.model.enums.Operation;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class OrderDTODeserializer implements JsonDeserializer<OrderDTO> {
@@ -31,7 +32,7 @@ public class OrderDTODeserializer implements JsonDeserializer<OrderDTO> {
                 jsonDeserializationContext.deserialize(idOrder, Long.class),
                 jsonDeserializationContext.deserialize(idSignal, Long.class),
                 jsonDeserializationContext.deserialize(timestamp, LocalDateTime.class),
-                jsonDeserializationContext.deserialize(tradeDate, LocalDateTime.class),
+                jsonDeserializationContext.deserialize(tradeDate, LocalDate.class),
                 jsonDeserializationContext.deserialize(underlying, String.class),
                 jsonDeserializationContext.deserialize(portfolioId, String.class),
                 jsonDeserializationContext.deserialize(tickerFuture, String.class),

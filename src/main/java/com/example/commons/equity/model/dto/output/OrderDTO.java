@@ -15,14 +15,14 @@ public record OrderDTO(
         String portfolioId,
         String tickerFuture,
         String status,
-        String buySell,
+        Operation buySell,
         Integer theoreticalQuantity,
         Integer quantity,
         Integer theoreticalPosition,
         Integer livePosition,
         Double theoreticalPrice,
-        Double prezzoEseguito,
-        Double deltaPrezzo
+        Double executedPrice,
+        Double deltaPrice
 ) {
 
     public Order toEntity() {
@@ -38,13 +38,13 @@ public record OrderDTO(
         order.setTickerFuture(this.tickerFuture);
         order.setQuantity(this.quantity);
         order.setStatus(this.status);
-        order.setBuysell(Operation.valueOf(this.buySell));
+        order.setBuysell(this.buySell);
         order.setLivePosition(this.livePosition);
         order.setTheoreticalPrice(this.theoreticalPrice);
         order.setTheoreticalQuantity(this.theoreticalQuantity);
         order.setTheoreticalPosition(this.theoreticalPosition);
-        order.setExecutedPrice(this.prezzoEseguito);
-        order.setDeltaPrice(this.deltaPrezzo);
+        order.setExecutedPrice(this.deltaPrice);
+        order.setDeltaPrice(this.executedPrice);
 
         return order;
     }

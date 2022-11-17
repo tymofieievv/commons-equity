@@ -49,7 +49,7 @@ public class Order {
                 this.getPortfolioId(),
                 this.getTickerFuture(),
                 this.getStatus(),
-                this.getBuysell().name(),
+                this.getBuysell(),
                 this.getTheoreticalQuantity(),
                 this.getQuantity(),
                 this.getTheoreticalPosition(),
