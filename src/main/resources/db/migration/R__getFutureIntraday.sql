@@ -9,20 +9,16 @@
 
         Note that if a time window contains LOCALTIME then it is ignored
 */
-CREATE OR REPLACE FUNCTION getFutureIntraday (time_frame integer, isin_input varchar)
+CREATE OR REPLACE FUNCTION getFutureIntraday (time_frame integer, ric_input varchar)
     RETURNS TABLE (
-          id                     INTEGER
-        , ref_date               DATE
-        , isin                   VARCHAR(50)
-        , ticker                 VARCHAR(50)
-        , "time"                 INTERVAL
-        , underlying_id          VARCHAR(50)
-        , underlying_description VARCHAR(100)
-        , price_close            DOUBLE PRECISION
-        , price_open             DOUBLE PRECISION
-        , price_low              DOUBLE PRECISION
-        , price_high             DOUBLE PRECISION
-        , volume                 DOUBLE PRECISION
+          id          INTEGER
+        , "timestamp" TIMESTAMP
+        , ric         VARCHAR(20)
+        , price_close DOUBLE PRECISION
+        , price_open  DOUBLE PRECISION
+        , price_low   DOUBLE PRECISION
+        , price_high  DOUBLE PRECISION
+        , volume      DOUBLE PRECISION
 )
 AS $$
 BEGIN
@@ -40,11 +36,12 @@ BEGIN
 		, futureIntraday as (
 			select *
 			from ref0_kafka_future i
-			where i.ref_date = CURRENT_DATE and i.isin = isin_input
+			where i."timestamp"::date = CURRENT_DATE and i.ric = ric_input
 		)
 		, datasource as (
 			select
-				  t.start_time
+				  i."timestamp"::date as ref_date
+				, t.start_time
 				, t.end_time
 				, max(i.id)         as max_id -- for price_close
 				, min(i.id)         as min_id -- for price_open
@@ -52,17 +49,13 @@ BEGIN
                 , max(i.price_high) as max_price_high
                 , sum(i.volume)     as sum_volume
 			from futureIntraday i left join time_interval t
-				on i."time" > t.start_time and i."time" <= t.end_time
-			group by t.start_time, t.end_time
+				on i."timestamp"::time > t.start_time and i."timestamp"::time <= t.end_time
+			group by i."timestamp"::date, t.start_time, t.end_time
 		)
 		select
 		      f1.id
-            , f1.ref_date
-            , f1.isin
-            , f1.ticker
-            , d.end_time::TIME
-            , f1.underlying_id
-            , f1.underlying_description
+            , (d.ref_date || ' ' || d.end_time)::timestamp as "timestamp"
+            , f1.ric
 			, f2.price_close
 			, f1.price_open
 			, d.min_price_low  as price_low

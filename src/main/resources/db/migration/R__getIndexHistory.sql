@@ -9,12 +9,13 @@
 */
 CREATE OR REPLACE FUNCTION getIndexHistory (time_frame integer, instrument_id_input varchar)
     RETURNS TABLE (
-          id                   INTEGER
-        , ref_date             DATE
-        , instrument_id        VARCHAR(50)
-        , security_description VARCHAR(100)
-        , "time"               INTERVAL
-        , price                DOUBLE PRECISION
+          id            INTEGER
+        , "timestamp"   TIMESTAMP
+        , instrument_id VARCHAR(50)
+        , price_close   DOUBLE PRECISION
+        , price_open    DOUBLE PRECISION
+        , price_low     DOUBLE PRECISION
+        , price_high    DOUBLE PRECISION
 )
 AS $$
 BEGIN
@@ -32,27 +33,33 @@ BEGIN
 		, indexHistory as (
 			select *
 			from ref0_kafka_index i
-			where i.ref_date < CURRENT_DATE and i.instrument_id = instrument_id_input
+			where i."timestamp"::date < CURRENT_DATE and i.instrument_id = instrument_id_input
 		)
 		, datasource as (
 			select
-				  i.ref_date
-				, t.start_time
-				, t.end_time
-				, max(i.id) as max_id
+				  i."timestamp"::date as ref_date
+				, t.start_time::time
+				, t.end_time::time
+				, max(i.id)         as max_id -- for price_close
+				, min(i.id)         as min_id -- for price_open
+                , min(i.price_low)  as min_price_low
+                , max(i.price_high) as max_price_high
 			from indexHistory i left join time_interval t
-				on i."time" > t.start_time and i."time" <= t.end_time
-			group by i.ref_date, t.start_time, t.end_time
+				on i."timestamp"::time > t.start_time and i."timestamp"::time <= t.end_time
+			group by i."timestamp"::date, t.start_time, t.end_time
 		)
 		select
-		      i.id
-			, i.ref_date
-			, i.instrument_id
-			, i.security_description
-			, d.end_time::TIME
-			, i.price
-		from indexHistory i join datasource d on i.id = d.max_id
-		order by i.ref_date, d.start_time
+		      i1.id
+			, (d.ref_date || ' ' || d.end_time)::timestamp as "timestamp"
+			, i1.instrument_id
+			, i2.price_close
+			, i1.price_open
+			, d.min_price_low  as price_low
+			, d.max_price_high as price_high
+		from datasource d
+		    left join indexHistory i1 on i1.id = d.min_id
+		    left join indexHistory i2 on i2.id = d.max_id
+		order by d.ref_date, d.start_time
 	;
 END; $$
 
