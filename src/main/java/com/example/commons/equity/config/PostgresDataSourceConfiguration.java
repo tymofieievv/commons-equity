@@ -17,17 +17,7 @@ import java.util.Map;
 
 @Configuration
 public class PostgresDataSourceConfiguration {
-
-//    @Bean
-//    @Qualifier("postgresDataSource")
-//    public DataSource getDataSource() {
-//        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
-//        dataSourceBuilder.driverClassName("org.postgresql.Driver");
-//        dataSourceBuilder.url("jdbc:postgresql://localhost:5432/equity");
-//        dataSourceBuilder.username("postgres");
-//        dataSourceBuilder.password("123456");
-//        return dataSourceBuilder.build();
-//    }
+    
 
     @Bean
     @Primary
