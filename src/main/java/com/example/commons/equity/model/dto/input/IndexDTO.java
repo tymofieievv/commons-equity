@@ -9,7 +9,9 @@ public record IndexDTO(LocalDate refDate,
                        LocalTime time,
                        Double price,
                        String instrumentId,
-                       String securityDescription) {
+                       Double priceLow,
+                       Double priceHigh,
+                       Double priceClosed) {
     public Index toEntity() {
 
         Index index = new Index();
@@ -17,7 +19,9 @@ public record IndexDTO(LocalDate refDate,
         index.setTime(this.time);
         index.setPrice(this.price);
         index.setInstrumentId(this.instrumentId);
-        index.setSecurityDescription(this.securityDescription);
+        index.setPriceHigh(this.priceHigh);
+        index.setPriceLow(this.priceLow);
+        index.setPriceClosed(this.priceClosed);
 
         return index;
     }

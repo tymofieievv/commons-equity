@@ -7,6 +7,8 @@ import java.time.LocalDate;
 public record PersonalDataFutureDTO(
         String ticker,
         String isin,
+        String underlyingId,
+        String ric,
         String description,
         String currency,
         LocalDate maturity) {
@@ -15,6 +17,8 @@ public record PersonalDataFutureDTO(
         PersonalDataFuture personalDataFuture = new PersonalDataFuture();
 
         personalDataFuture.setIsin(this.isin);
+        personalDataFuture.setUnderlyingId(this.underlyingId);
+        personalDataFuture.setDescription(this.description);
         personalDataFuture.setTicker(this.ticker);
         personalDataFuture.setDescription(this.description);
         personalDataFuture.setCurrency(this.currency);

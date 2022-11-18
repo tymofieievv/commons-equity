@@ -24,11 +24,8 @@ public class Future {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate refDate;
-    private String isin;
-    private String ticker;
     private LocalTime time;
-    private String underlyingId;
-    private String underlyingDescription;
+    private String ric;
     private Double priceClose;
     private Double priceOpen;
     private Double priceLow;
@@ -38,10 +35,7 @@ public class Future {
     public FutureDTO toDTO() {
         return new FutureDTO(
                 this.getRefDate(),
-                this.getIsin(),
-                this.getTicker(),
-                this.getUnderlyingId(),
-                this.getUnderlyingDescription(),
+                this.getRic(),
                 this.getTime(),
                 this.getPriceClose(),
                 this.getPriceOpen(),

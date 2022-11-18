@@ -23,6 +23,8 @@ public class PersonalDataFuture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String isin;
+    private String underlyingId;
+    private String ric;
     private String ticker;
     private String description;
     private String currency;
@@ -32,6 +34,8 @@ public class PersonalDataFuture {
         return new PersonalDataFutureDTO(
                 this.getTicker(),
                 this.getIsin(),
+                this.getUnderlyingId(),
+                this.getDescription(),
                 this.getDescription(),
                 this.getCurrency(),
                 this.getMaturity()

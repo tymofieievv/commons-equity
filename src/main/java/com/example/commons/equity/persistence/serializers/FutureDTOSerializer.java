@@ -16,11 +16,8 @@ public class FutureDTOSerializer implements JsonSerializer<FutureDTO> {
 
         JsonObject jsonObject = new JsonObject();
 
+        jsonObject.add("RIC", jsonSerializationContext.serialize(futureDTO.ric(),String.class));
         jsonObject.add("REF_DATE", jsonSerializationContext.serialize(futureDTO.refDate(), LocalDate.class));
-        jsonObject.add("ISIN", jsonSerializationContext.serialize(futureDTO.isin(), String.class));
-        jsonObject.add("TICKER", jsonSerializationContext.serialize(futureDTO.ticker(), String.class));
-        jsonObject.add("UNDERLYING_ID", jsonSerializationContext.serialize(futureDTO.underlyingId(), String.class));
-        jsonObject.add("UNDERLYING_DESCRIPTION", jsonSerializationContext.serialize(futureDTO.underlyingDescription(), String.class));
         jsonObject.add("TIME", jsonSerializationContext.serialize(futureDTO.time(), LocalTime.class));
         jsonObject.add("PRICE_CLOSE", jsonSerializationContext.serialize(futureDTO.priceClose(), Double.class));
         jsonObject.add("PRICE_LOW", jsonSerializationContext.serialize(futureDTO.priceLow(), Double.class));

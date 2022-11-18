@@ -23,11 +23,8 @@ public class DailyFuture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate refDate;
-    private String isin;
-    private String ticker;
+    private String ric;
     private Double priceClose;
-    private String underlyingId;
-    private String underlyingDescription;
     private Double priceLow;
     private Double priceOpen;
     private Double priceHigh;
@@ -35,11 +32,9 @@ public class DailyFuture {
 
     public DailyFutureDTO toDTO() {
         return new DailyFutureDTO(
+
                 this.getRefDate(),
-                this.getIsin(),
-                this.getTicker(),
-                this.getUnderlyingId(),
-                this.getUnderlyingDescription(),
+                this.getRic(),
                 this.getPriceClose(),
                 this.getPriceLow(),
                 this.getPriceOpen(),

@@ -18,33 +18,25 @@ class FutureDTOTest {
             """
                                 [
                     {
-                    "REF_DATE": "04/01/2021",
-                    "ISIN": "DE0009652388",
-                    "TICKER": "VGH21",
+                  
                     "UNDERLYING_ID": ".STOXX50E",
                     "UNDERLYING_DESCRIPTION": ".STOXX50E",
                     "PRICE": "3564.39"
                     },
                     {
-                    "REF_DATE": "05/01/2021",
-                    "ISIN": "DE0009652388",
-                    "TICKER": "VGH21",
+                   
                     "UNDERLYING_ID": ".STOXX50E",
                     "UNDERLYING_DESCRIPTION": ".STOXX50E",
                     "PRICE": "3547.85"
                     },
                     {
-                    "REF_DATE": "06/01/2021",
-                    "ISIN": "DE0009652388",
-                    "TICKER": "VGH21",
+                    
                     "UNDERLYING_ID": ".STOXX50E",
                     "UNDERLYING_DESCRIPTION": ".STOXX50E",
                     "PRICE": "3611.08"
                     },
                     {
-                    "REF_DATE": "07/01/2021",
-                    "ISIN": "DE0009652388",
-                    "TICKER": "VGH21",
+                    
                     "UNDERLYING_ID": ".STOXX50E",
                     "UNDERLYING_DESCRIPTION": ".STOXX50E",
                     "PRICE": "3622.42"
@@ -105,61 +97,18 @@ class FutureDTOTest {
         Assertions.assertEquals(LocalDate.of(2022, 10, 26), realtimeFutureDTOs[3].refDate());
     }
 
-
     @Test
-    void testIsin() {
-        Assertions.assertEquals("DE0009652388", historyFutureDTOs[0].isin());
-        Assertions.assertEquals("DE0009652388", historyFutureDTOs[1].isin());
-        Assertions.assertEquals("DE0009652388", historyFutureDTOs[2].isin());
-        Assertions.assertEquals("DE0009652388", historyFutureDTOs[3].isin());
-
-        Assertions.assertNull(realtimeFutureDTOs[0].isin());
-        Assertions.assertNull(realtimeFutureDTOs[1].isin());
-        Assertions.assertNull(realtimeFutureDTOs[2].isin());
-        Assertions.assertNull(realtimeFutureDTOs[3].isin());
+    void testRic(){
+        Assertions.assertNull(historyFutureDTOs[0].ric());
+        Assertions.assertNull(historyFutureDTOs[1].ric());
+        Assertions.assertNull(historyFutureDTOs[2].ric());
+        Assertions.assertNull(historyFutureDTOs[3].ric());
+        Assertions.assertNull(realtimeFutureDTOs[0].ric());
+        Assertions.assertNull(realtimeFutureDTOs[1].ric());
+        Assertions.assertNull(realtimeFutureDTOs[2].ric());
+        Assertions.assertNull(realtimeFutureDTOs[3].ric());
     }
 
-
-    @Test
-    void testTicker() {
-        Assertions.assertEquals("VGH21", historyFutureDTOs[0].ticker());
-        Assertions.assertEquals("VGH21", historyFutureDTOs[1].ticker());
-        Assertions.assertEquals("VGH21", historyFutureDTOs[2].ticker());
-        Assertions.assertEquals("VGH21", historyFutureDTOs[3].ticker());
-
-        Assertions.assertNull(realtimeFutureDTOs[0].ticker());
-        Assertions.assertNull(realtimeFutureDTOs[1].ticker());
-        Assertions.assertNull(realtimeFutureDTOs[2].ticker());
-        Assertions.assertNull(realtimeFutureDTOs[3].ticker());
-    }
-
-
-    @Test
-    void testUnderlyingId() {
-        Assertions.assertEquals(".STOXX50E", historyFutureDTOs[0].underlyingId());
-        Assertions.assertEquals(".STOXX50E", historyFutureDTOs[1].underlyingId());
-        Assertions.assertEquals(".STOXX50E", historyFutureDTOs[2].underlyingId());
-        Assertions.assertEquals(".STOXX50E", historyFutureDTOs[3].underlyingId());
-
-        Assertions.assertNull(realtimeFutureDTOs[0].underlyingId());
-        Assertions.assertNull(realtimeFutureDTOs[1].underlyingId());
-        Assertions.assertNull(realtimeFutureDTOs[2].underlyingId());
-        Assertions.assertNull(realtimeFutureDTOs[3].underlyingId());
-    }
-
-
-    @Test
-    void testUnderlyingDescription() {
-        Assertions.assertEquals(".STOXX50E", historyFutureDTOs[0].underlyingDescription());
-        Assertions.assertEquals(".STOXX50E", historyFutureDTOs[1].underlyingDescription());
-        Assertions.assertEquals(".STOXX50E", historyFutureDTOs[2].underlyingDescription());
-        Assertions.assertEquals(".STOXX50E", historyFutureDTOs[3].underlyingDescription());
-
-        Assertions.assertNull(realtimeFutureDTOs[0].underlyingDescription());
-        Assertions.assertNull(realtimeFutureDTOs[1].underlyingDescription());
-        Assertions.assertNull(realtimeFutureDTOs[2].underlyingDescription());
-        Assertions.assertNull(realtimeFutureDTOs[3].underlyingDescription());
-    }
 
     @Test
     void testTime() {
@@ -181,7 +130,6 @@ class FutureDTOTest {
         Assertions.assertNull(historyFutureDTOs[1].priceClose());
         Assertions.assertNull(historyFutureDTOs[2].priceClose());
         Assertions.assertNull(historyFutureDTOs[3].priceClose());
-
         Assertions.assertNull(realtimeFutureDTOs[0].priceClose());
         Assertions.assertNull(realtimeFutureDTOs[1].priceClose());
         Assertions.assertNull(realtimeFutureDTOs[2].priceClose());
@@ -195,7 +143,6 @@ class FutureDTOTest {
         Assertions.assertNull(historyFutureDTOs[1].priceOpen());
         Assertions.assertNull(historyFutureDTOs[2].priceOpen());
         Assertions.assertNull(historyFutureDTOs[3].priceOpen());
-
         Assertions.assertNull(realtimeFutureDTOs[0].priceOpen());
         Assertions.assertNull(realtimeFutureDTOs[1].priceOpen());
         Assertions.assertNull(realtimeFutureDTOs[2].priceOpen());

@@ -24,7 +24,9 @@ public class Index {
     private Long id;
     private LocalDate refDate;
     private String instrumentId;
-    private String securityDescription;
+    private Double priceHigh;
+    private Double priceLow;
+    private Double priceClosed;
     private LocalTime time;
     private Double price;
 
@@ -34,7 +36,9 @@ public class Index {
                 this.getTime(),
                 this.getPrice(),
                 this.getInstrumentId(),
-                this.getSecurityDescription()
+                this.getPriceLow(),
+                this.getPriceHigh(),
+                this.getPriceClosed()
         );
     }
 
