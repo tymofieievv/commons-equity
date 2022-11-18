@@ -39,6 +39,7 @@ public class Order {
     private Integer livePosition;
     private Double theoreticalPrice;
 
+
     public OrderDTO toDto() {
         return new OrderDTO(
                 this.getIdOrder(),
@@ -59,4 +60,5 @@ public class Order {
                 this.getDeltaPrice()
         );
     }
+
 }

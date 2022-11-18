@@ -4,14 +4,15 @@
             time_frame          --> time window used to group index data
             instrument_id_input --> target instrument_id
         output:
-            table containing intraday future data with ticker <%ticker_input%>
+            table containing intraday future data with isin <%isin_input%>
             grouped according to a time window <%time_frame%>.
 
         Note that if a time window contains LOCALTIME then it is ignored
 */
-CREATE OR REPLACE FUNCTION getFutureIntraday (time_frame integer, ticker_input varchar)
+CREATE OR REPLACE FUNCTION getFutureIntraday (time_frame integer, isin_input varchar)
     RETURNS TABLE (
-          ref_date               DATE
+          id                     INTEGER
+        , ref_date               DATE
         , isin                   VARCHAR(50)
         , ticker                 VARCHAR(50)
         , "time"                 INTERVAL
@@ -39,7 +40,7 @@ BEGIN
 		, futureIntraday as (
 			select *
 			from ref0_kafka_future i
-			where i.ref_date = CURRENT_DATE and i.ticker = ticker_input
+			where i.ref_date = CURRENT_DATE and i.isin = isin_input
 		)
 		, datasource as (
 			select
@@ -55,10 +56,11 @@ BEGIN
 			group by t.start_time, t.end_time
 		)
 		select
-              f1.ref_date
+		      f1.id
+            , f1.ref_date
             , f1.isin
             , f1.ticker
-            , d.end_time
+            , d.end_time::TIME
             , f1.underlying_id
             , f1.underlying_description
 			, f2.price_close
