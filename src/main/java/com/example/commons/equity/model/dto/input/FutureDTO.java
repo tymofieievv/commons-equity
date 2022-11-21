@@ -1,21 +1,31 @@
 package com.example.commons.equity.model.dto.input;
 
 import com.example.commons.equity.model.entity.input.Future;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public record FutureDTO(LocalDate refDate,
-                        String isin,
-                        String ticker,
-                        String underlyingId,
-                        String underlyingDescription,
-                        LocalTime time,
-                        Double priceClose,
-                        Double priceOpen,
-                        Double priceLow,
-                        Double priceHigh,
-                        Integer volume) {
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+public class FutureDTO {
+    private LocalDate refDate;
+    private String isin;
+    private String ticker;
+    private String underlyingId;
+    private String underlyingDescription;
+    private LocalTime time;
+    private Double priceClose;
+    private Double priceOpen;
+    private Double priceLow;
+    private Double priceHigh;
+    private Integer volume;
+
 
     public Future toEntity() {
         Future future = new Future();
