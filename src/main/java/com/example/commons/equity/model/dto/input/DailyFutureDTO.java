@@ -18,10 +18,8 @@ public record DailyFutureDTO(LocalDate refDate,
 
         dailyFuture.setRefDate(this.refDate);
         dailyFuture.setRic(this.ric);
-
         dailyFuture.setPriceClose(this.priceClose);
         dailyFuture.setPriceLow(this.priceLow);
-
         dailyFuture.setPriceHigh(this.priceHigh);
         dailyFuture.setPriceOpen(this.priceOpen);
         dailyFuture.setVolume(this.volume);

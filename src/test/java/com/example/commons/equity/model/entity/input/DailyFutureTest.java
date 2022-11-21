@@ -77,19 +77,6 @@ class DailyFutureTest {
         Assertions.assertEquals(LocalDate.of(2022, 10, 21), dailyFutures.get(2).getRefDate());
     }
 
-    @Test
-    void testIsin() {
-        Assertions.assertEquals("DE0009652388", dailyFutures.get(0).getIsin());
-        Assertions.assertEquals("DE0009652388", dailyFutures.get(1).getIsin());
-        Assertions.assertEquals("DE0009652388", dailyFutures.get(2).getIsin());
-    }
-
-    @Test
-    void testTicker() {
-        Assertions.assertEquals("VGZ2", dailyFutures.get(0).getTicker());
-        Assertions.assertEquals("VGZ2", dailyFutures.get(1).getTicker());
-        Assertions.assertEquals("VGZ2", dailyFutures.get(2).getTicker());
-    }
 
     @Test
     void testPriceClose() {
@@ -98,19 +85,6 @@ class DailyFutureTest {
         Assertions.assertEquals(3509.0, dailyFutures.get(2).getPriceClose());
     }
 
-    @Test
-    void testUnderlyingId() {
-        Assertions.assertNull(dailyFutures.get(0).getUnderlyingId());
-        Assertions.assertNull(dailyFutures.get(1).getUnderlyingId());
-        Assertions.assertNull(dailyFutures.get(2).getUnderlyingId());
-    }
-
-    @Test
-    void testUnderlyingDescription() {
-        Assertions.assertNull(dailyFutures.get(0).getUnderlyingDescription());
-        Assertions.assertNull(dailyFutures.get(1).getUnderlyingDescription());
-        Assertions.assertNull(dailyFutures.get(2).getUnderlyingDescription());
-    }
 
     @Test
     void testPriceLow() {

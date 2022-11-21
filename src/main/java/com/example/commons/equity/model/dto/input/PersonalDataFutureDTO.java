@@ -18,6 +18,7 @@ public record PersonalDataFutureDTO(
 
         personalDataFuture.setIsin(this.isin);
         personalDataFuture.setUnderlyingId(this.underlyingId);
+        personalDataFuture.setRic(this.ric);
         personalDataFuture.setDescription(this.description);
         personalDataFuture.setTicker(this.ticker);
         personalDataFuture.setDescription(this.description);

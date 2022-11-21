@@ -155,18 +155,6 @@ class IndexDTOTest {
     }
 
 
-    @Test
-    void testSecurityDescription() {
-        Assertions.assertNull(realtimeIndexDTOs[0].securityDescription());
-        Assertions.assertNull(realtimeIndexDTOs[1].securityDescription());
-        Assertions.assertNull(realtimeIndexDTOs[2].securityDescription());
-        Assertions.assertNull(realtimeIndexDTOs[3].securityDescription());
 
-        Assertions.assertEquals("ESTX 50 PR INDEX", historyIndexDTOs[0].securityDescription());
-        Assertions.assertEquals("ESTX 50 PR INDEX", historyIndexDTOs[1].securityDescription());
-        Assertions.assertEquals("ESTX 50 PR INDEX", historyIndexDTOs[2].securityDescription());
-        Assertions.assertEquals("ESTX 50 PR INDEX", historyIndexDTOs[3].securityDescription());
-        Assertions.assertEquals("ESTX 50 PR INDEX", historyIndexDTOs[4].securityDescription());
-    }
 
 }

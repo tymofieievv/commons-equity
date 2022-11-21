@@ -69,24 +69,6 @@ class DailyFutureDTOTest {
 
 
     @Test
-    void testIsin() {
-
-        Assertions.assertEquals("DE0009652388", dailyFutureDTOs[0].isin());
-        Assertions.assertEquals("DE0009652388", dailyFutureDTOs[1].isin());
-        Assertions.assertEquals("DE0009652388", dailyFutureDTOs[2].isin());
-    }
-
-
-    @Test
-    void testTicker() {
-
-        Assertions.assertEquals("VGZ2", dailyFutureDTOs[0].ticker());
-        Assertions.assertEquals("VGZ2", dailyFutureDTOs[1].ticker());
-        Assertions.assertEquals("VGZ2", dailyFutureDTOs[2].ticker());
-    }
-
-
-    @Test
     void testPriceClose() {
 
         Assertions.assertEquals(3584.59, dailyFutureDTOs[0].priceClose());

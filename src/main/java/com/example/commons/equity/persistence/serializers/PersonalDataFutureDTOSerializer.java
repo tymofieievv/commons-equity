@@ -14,6 +14,8 @@ public class PersonalDataFutureDTOSerializer implements JsonSerializer<PersonalD
 
         jsonObject.add("TICKER", jsonSerializationContext.serialize(personalDataFutureDTO.ticker(),String.class));
         jsonObject.add("ISIN", jsonSerializationContext.serialize(personalDataFutureDTO.isin(),String.class));
+        jsonObject.add("UNDERLYING_ID", jsonSerializationContext.serialize(personalDataFutureDTO.isin(),String.class));
+        jsonObject.add("RIC", jsonSerializationContext.serialize(personalDataFutureDTO.isin(),String.class));
         jsonObject.add("DESCRIPTION", jsonSerializationContext.serialize(personalDataFutureDTO.description(),String.class));
         jsonObject.add("CURRENCY", jsonSerializationContext.serialize(personalDataFutureDTO.currency(),String.class));
         jsonObject.add("MATURITY", jsonSerializationContext.serialize(personalDataFutureDTO.maturity(), LocalDate.class));

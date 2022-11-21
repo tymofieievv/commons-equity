@@ -11,10 +11,7 @@ public class DailyFutureDTODeserializer implements JsonDeserializer<DailyFutureD
     @Override
     public DailyFutureDTO deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonElement refDate = ((JsonObject) jsonElement).get("REF_DATE");
-        JsonElement isin = ((JsonObject) jsonElement).get("ISIN");
-        JsonElement ticker = ((JsonObject) jsonElement).get("TICKER");
-        JsonElement underlyingId = ((JsonObject) jsonElement).get("UNDERLYING_ID");
-        JsonElement underlyingDescription = ((JsonObject) jsonElement).get("UNDERLYING_DESCRIPTION");
+        JsonElement ric = ((JsonObject) jsonElement).get("RIC");
         JsonElement priceClose = ((JsonObject) jsonElement).get("PRICE_CLOSE");
         JsonElement priceLow = ((JsonObject) jsonElement).get("PRICE_LOW");
         JsonElement priceHigh = ((JsonObject) jsonElement).get("PRICE_HIGH");
@@ -23,10 +20,7 @@ public class DailyFutureDTODeserializer implements JsonDeserializer<DailyFutureD
 
         return new DailyFutureDTO(
                 jsonDeserializationContext.deserialize(refDate, LocalDate.class),
-                jsonDeserializationContext.deserialize(isin, String.class),
-                jsonDeserializationContext.deserialize(ticker, String.class),
-                jsonDeserializationContext.deserialize(underlyingId, String.class),
-                jsonDeserializationContext.deserialize(underlyingDescription, String.class),
+                jsonDeserializationContext.deserialize(ric, String.class),
                 jsonDeserializationContext.deserialize(priceClose, Double.class),
                 jsonDeserializationContext.deserialize(priceLow, Double.class),
                 jsonDeserializationContext.deserialize(priceOpen, Double.class),

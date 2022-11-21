@@ -12,9 +12,10 @@ public class IndexDTODeserializer implements JsonDeserializer<IndexDTO> {
     public IndexDTO deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonElement refDate = ((JsonObject) jsonElement).get("REF_DATE");
         JsonElement price = ((JsonObject) jsonElement).get("PRICE");
-        JsonElement underlying = ((JsonObject) jsonElement).get("UNDERLYING");
+        JsonElement priceLow = ((JsonObject) jsonElement).get("PRICE LOW");
+        JsonElement priceHigh = ((JsonObject) jsonElement).get("PRICE LOW");
+        JsonElement priceClosed = ((JsonObject) jsonElement).get("PRICE LOW");
         JsonElement instrument_id = ((JsonObject) jsonElement).get("INSTRUMENT_ID");
-        JsonElement securityDescription = ((JsonObject) jsonElement).get("SECURITY_DESCRIPTION");
         JsonElement time = ((JsonObject) jsonElement).get("TIME");
 
         return new IndexDTO(
@@ -22,7 +23,10 @@ public class IndexDTODeserializer implements JsonDeserializer<IndexDTO> {
                 jsonDeserializationContext.deserialize(time, LocalTime.class),
                 jsonDeserializationContext.deserialize(price, Double.class),
                 jsonDeserializationContext.deserialize(instrument_id, String.class),
-                jsonDeserializationContext.deserialize(securityDescription, String.class)
+                jsonDeserializationContext.deserialize(priceLow, String.class),
+                jsonDeserializationContext.deserialize(priceHigh, String.class),
+                jsonDeserializationContext.deserialize(priceClosed, String.class)
+
         );
     }
 }

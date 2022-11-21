@@ -127,14 +127,7 @@ class IndexTest {
         Assertions.assertEquals(".STOXX50E", indexsHistorical.get(4).getInstrumentId());
     }
 
-    @Test
-    void testSecurityDescriptionHistorical() {
-        Assertions.assertEquals("ESTX 50 PR INDEX", indexsHistorical.get(0).getSecurityDescription());
-        Assertions.assertEquals("ESTX 50 PR INDEX", indexsHistorical.get(1).getSecurityDescription());
-        Assertions.assertEquals("ESTX 50 PR INDEX", indexsHistorical.get(2).getSecurityDescription());
-        Assertions.assertEquals("ESTX 50 PR INDEX", indexsHistorical.get(3).getSecurityDescription());
-        Assertions.assertEquals("ESTX 50 PR INDEX", indexsHistorical.get(4).getSecurityDescription());
-    }
+
 
     @Test
     void testTimeHistorical() {
@@ -188,13 +181,6 @@ class IndexTest {
         Assertions.assertNull(indexs.get(3).getInstrumentId());
     }
 
-    @Test
-    void testSecurityDescription() {
-        Assertions.assertNull(indexs.get(0).getSecurityDescription());
-        Assertions.assertNull(indexs.get(1).getSecurityDescription());
-        Assertions.assertNull(indexs.get(2).getSecurityDescription());
-        Assertions.assertNull(indexs.get(3).getSecurityDescription());
-    }
 
     @Test
     void testTime() {

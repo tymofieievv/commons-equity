@@ -105,21 +105,7 @@ class FutureTest {
         Assertions.assertEquals(LocalDate.of(2022, 10, 26), futuresHistorical.get(3).getRefDate());
     }
 
-    @Test
-    void testIsinHistorical() {
-        Assertions.assertNull(futuresHistorical.get(0).getIsin());
-        Assertions.assertNull(futuresHistorical.get(1).getIsin());
-        Assertions.assertNull(futuresHistorical.get(2).getIsin());
-        Assertions.assertNull(futuresHistorical.get(3).getIsin());
-    }
 
-    @Test
-    void testTickerHistorical() {
-        Assertions.assertNull(futuresHistorical.get(0).getTicker());
-        Assertions.assertNull(futuresHistorical.get(1).getTicker());
-        Assertions.assertNull(futuresHistorical.get(2).getTicker());
-        Assertions.assertNull(futuresHistorical.get(3).getTicker());
-    }
 
     @Test
     void testTimeHistorical() {
@@ -129,21 +115,6 @@ class FutureTest {
         Assertions.assertEquals(LocalTime.of(11, 55, 45), futuresHistorical.get(3).getTime());
     }
 
-    @Test
-    void testUnderlyingIdHistorical() {
-        Assertions.assertNull(futuresHistorical.get(0).getUnderlyingId());
-        Assertions.assertNull(futuresHistorical.get(1).getUnderlyingId());
-        Assertions.assertNull(futuresHistorical.get(2).getUnderlyingId());
-        Assertions.assertNull(futuresHistorical.get(3).getUnderlyingId());
-    }
-
-    @Test
-    void testUnderlyingDescriptionHistorical() {
-        Assertions.assertNull(futuresHistorical.get(0).getUnderlyingDescription());
-        Assertions.assertNull(futuresHistorical.get(1).getUnderlyingDescription());
-        Assertions.assertNull(futuresHistorical.get(2).getUnderlyingDescription());
-        Assertions.assertNull(futuresHistorical.get(3).getUnderlyingDescription());
-    }
 
     @Test
     void testPriceCloseHistorical() {
@@ -211,21 +182,6 @@ class FutureTest {
         Assertions.assertEquals(LocalDate.of(2022, 10, 26), futures.get(3).getRefDate());
     }
 
-    @Test
-    void testIsin() {
-        Assertions.assertNull(futures.get(0).getIsin());
-        Assertions.assertNull(futures.get(1).getIsin());
-        Assertions.assertNull(futures.get(2).getIsin());
-        Assertions.assertNull(futures.get(3).getIsin());
-    }
-
-    @Test
-    void testTicker() {
-        Assertions.assertNull(futures.get(0).getTicker());
-        Assertions.assertNull(futures.get(1).getTicker());
-        Assertions.assertNull(futures.get(2).getTicker());
-        Assertions.assertNull(futures.get(3).getTicker());
-    }
 
     @Test
     void testTime() {
@@ -235,21 +191,7 @@ class FutureTest {
         Assertions.assertEquals(LocalTime.of(11, 55, 45), futures.get(3).getTime());
     }
 
-    @Test
-    void testUnderlyingId() {
-        Assertions.assertNull(futures.get(0).getUnderlyingId());
-        Assertions.assertNull(futures.get(1).getUnderlyingId());
-        Assertions.assertNull(futures.get(2).getUnderlyingId());
-        Assertions.assertNull(futures.get(3).getUnderlyingId());
-    }
 
-    @Test
-    void testUnderlyingDescription() {
-        Assertions.assertNull(futures.get(0).getUnderlyingDescription());
-        Assertions.assertNull(futures.get(1).getUnderlyingDescription());
-        Assertions.assertNull(futures.get(2).getUnderlyingDescription());
-        Assertions.assertNull(futures.get(3).getUnderlyingDescription());
-    }
 
     @Test
     void testPriceClose() {

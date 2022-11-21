@@ -5,7 +5,8 @@ import com.example.commons.equity.model.entity.input.Index;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public record IndexDTO(LocalDate refDate,
+public record IndexDTO(
+                       LocalDate refDate,
                        LocalTime time,
                        Double price,
                        String instrumentId,
