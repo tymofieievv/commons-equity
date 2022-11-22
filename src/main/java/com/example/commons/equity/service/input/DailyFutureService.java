@@ -18,11 +18,11 @@ public class DailyFutureService {
         this.dailyFutureRepository = dailyFutureRepository;
     }
 
-    public List<DailyFuture> findDailyFutureByIsin(String isin) {
-        if (StringUtils.isBlank(isin)) {
-            throw new IllegalArgumentException("Cannot found daily future, isin is blank.");
+    public List<DailyFuture> findDailyFutureByRic(String ric) {
+        if (StringUtils.isBlank(ric)) {
+            throw new IllegalArgumentException("Cannot found daily future, ric is blank.");
         } else {
-            return dailyFutureRepository.findDailyFutureByIsin(isin);
+            return dailyFutureRepository.findDailyFutureByRic(ric);
         }
     }
 

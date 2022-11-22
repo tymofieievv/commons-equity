@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface DailyFutureRepository extends JpaRepository<DailyFuture, Long> {
 
-    List<DailyFuture> findDailyFutureByIsin(String isin);
+    List<DailyFuture> findDailyFutureByRic(String ric);
 
 }

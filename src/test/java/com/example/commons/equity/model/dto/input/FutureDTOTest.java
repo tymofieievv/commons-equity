@@ -86,10 +86,6 @@ class FutureDTOTest {
 
     @Test
     void testRefDate() {
-        Assertions.assertEquals(LocalDate.of(2021, 1, 4), historyFutureDTOs[0].refDate());
-        Assertions.assertEquals(LocalDate.of(2021, 1, 5), historyFutureDTOs[1].refDate());
-        Assertions.assertEquals(LocalDate.of(2021, 1, 6), historyFutureDTOs[2].refDate());
-        Assertions.assertEquals(LocalDate.of(2021, 1, 7), historyFutureDTOs[3].refDate());
 
         Assertions.assertEquals(LocalDate.of(2022, 10, 26), realtimeFutureDTOs[0].refDate());
         Assertions.assertEquals(LocalDate.of(2022, 10, 26), realtimeFutureDTOs[1].refDate());

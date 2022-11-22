@@ -18,19 +18,19 @@ public class FutureService {
         this.futureRepository = futureRepository;
     }
 
-    public List<Future> getIntradayFutureByIsinInput(int timeframe, String isin) {
-        if (timeframe <= 0 && StringUtils.isBlank(isin)) {
-            throw new IllegalArgumentException("Cannot found future intraday with timeframe=" + timeframe + " and isin=" + isin);
+    public List<Future> getIntradayFutureByRicInput(int timeframe, String ric) {
+        if (timeframe <= 0 && StringUtils.isBlank(ric)) {
+            throw new IllegalArgumentException("Cannot found future intraday with timeframe=" + timeframe + " and ric=" + ric);
         } else {
-            return futureRepository.getIntradayFutureByIsinInput(timeframe, isin);
+            return futureRepository.getHistoryFutureByRicInput(timeframe, ric);
         }
     }
 
-    public List<Future> getHistoryFutureByIsinInput(int timeframe, String isin) {
-        if (timeframe <= 0 && StringUtils.isBlank(isin)) {
-            throw new IllegalArgumentException("Cannot found future intraday with timeframe=" + timeframe + " and isin=" + isin);
+    public List<Future> getHistoryFutureByRicInput(int timeframe, String ric) {
+        if (timeframe <= 0 && StringUtils.isBlank(ric)) {
+            throw new IllegalArgumentException("Cannot found future intraday with timeframe=" + timeframe + " and ric=" + ric);
         } else {
-            return futureRepository.getHistoryFutureByIsinInput(timeframe, isin);
+            return futureRepository.getHistoryFutureByRicInput(timeframe, ric);
         }
     }
 
