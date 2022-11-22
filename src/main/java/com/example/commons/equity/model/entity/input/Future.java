@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity(name = "REF0_KAFKA_FUTURE")
@@ -23,8 +24,7 @@ public class Future {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate refDate;
-    private LocalTime time;
+    private LocalDateTime timestamp;
     private String ric;
     private Double priceClose;
     private Double priceOpen;
@@ -34,9 +34,8 @@ public class Future {
 
     public FutureDTO toDTO() {
         return new FutureDTO(
-                this.getRefDate(),
                 this.getRic(),
-                this.getTime(),
+                this.getTimestamp(),
                 this.getPriceClose(),
                 this.getPriceOpen(),
                 this.getPriceLow(),

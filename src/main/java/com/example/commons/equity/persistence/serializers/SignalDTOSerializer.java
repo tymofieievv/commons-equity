@@ -16,14 +16,14 @@ public class SignalDTOSerializer implements JsonSerializer<SignalDTO> {
 
         JsonObject jsonObject = new JsonObject();
 
-        //jsonObject.add("ID SIGNAL",jsonSerializationContext.serialize(signalDTO.signalId(),Long.class));
-        jsonObject.add("TIMESTAMP",jsonSerializationContext.serialize(signalDTO.timestamp(), LocalDateTime.class));
-        jsonObject.add("TRADEDATE",jsonSerializationContext.serialize(signalDTO.tradeDate(), LocalDate.class));
-        jsonObject.add("UNDERLYING",jsonSerializationContext.serialize(signalDTO.underlying(),String.class));
-        jsonObject.add("TICKER FUTURE",jsonSerializationContext.serialize(signalDTO.tickerFuture(),String.class));
-        jsonObject.add("BUY/SELL",jsonSerializationContext.serialize(signalDTO.buySell(),String.class));
-        jsonObject.add("QUANTITY",jsonSerializationContext.serialize(signalDTO.quantity(),Integer.class));
-        jsonObject.add("THEORETICAL PRICE",jsonSerializationContext.serialize(signalDTO.theoreticalPrice(),Double.class));
+        //jsonObject.add("ID SIGNAL",jsonSerializationContext.serialize(signalDTO.getSignalId(),Long.class));
+        jsonObject.add("TIMESTAMP",jsonSerializationContext.serialize(signalDTO.getTimestamp(), LocalDateTime.class));
+        jsonObject.add("TRADEDATE",jsonSerializationContext.serialize(signalDTO.getTradeDate(), LocalDate.class));
+        jsonObject.add("UNDERLYING",jsonSerializationContext.serialize(signalDTO.getUnderlying(),String.class));
+        jsonObject.add("TICKER FUTURE",jsonSerializationContext.serialize(signalDTO.getTickerFuture(),String.class));
+        jsonObject.add("BUY/SELL",jsonSerializationContext.serialize(signalDTO.getBuySell(),String.class));
+        jsonObject.add("QUANTITY",jsonSerializationContext.serialize(signalDTO.getQuantity(),Integer.class));
+        jsonObject.add("THEORETICAL PRICE",jsonSerializationContext.serialize(signalDTO.getTheoreticalPrice(),Double.class));
 
         return jsonObject;
     }

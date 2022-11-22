@@ -8,6 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -15,43 +22,21 @@ import java.util.stream.Collectors;
 
 @SpringBootTest
 class PersonalDataFutureTest {
-    private static final String jsonString =
 
-            """
-                                [
-                    {
-                    "TICKER": "VGZ2",
-                    "ISIN": "DE0009652388",
-                    "DESCRIPTION": "EURO STOXX 50® Index Futures",
-                    "CURRENCY": "EUR",
-                    "MATURITY": "31/12/2023"
-                    },
-                    {
-                    "TICKER": "VGZ2",
-                    "ISIN": "FR0010424143",
-                    "DESCRIPTION": "Lyxor UCITS Stoxx 50 Daily Double Short (BXX)",
-                    "CURRENCY": "EUR",
-                    "MATURITY": "31/12/2023"
-                    },
-                    {
-                    "TICKER": "VGZ2",
-                    "ISIN": "IE0008471009",
-                    "DESCRIPTION": "Profilo iShares Core EURO STOXX 50 UCITS ETF EUR (Dist)",
-                    "CURRENCY": "EUR",
-                    "MATURITY": "31/12/2023"
-                    }
-                                ]
-                                """;
-    ;
-
+    private final BufferedReader bufferedReader;
     @Autowired
     private Gson gson;
 
     private List<PersonalDataFuture> personalDataFutures;
-
+    public PersonalDataFutureTest() throws URISyntaxException, IOException {
+        URL resource = PersonalDataFutureTest.class.getClassLoader().getResource("PersonalDataFuture.json");
+        assert resource != null;
+        File file = new File(resource.toURI());
+        this.bufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath())));
+    }
     @BeforeEach
     void init() {
-        personalDataFutures = Arrays.stream(gson.fromJson(jsonString, PersonalDataFutureDTO[].class)).sequential().map(PersonalDataFutureDTO::toEntity).collect(Collectors.toList());
+        personalDataFutures = Arrays.stream(gson.fromJson(bufferedReader, PersonalDataFutureDTO[].class)).sequential().map(PersonalDataFutureDTO::toEntity).collect(Collectors.toList());
     }
 
     @Test
@@ -77,7 +62,7 @@ class PersonalDataFutureTest {
 
     @Test
     void testDescription() {
-        Assertions.assertEquals("EURO STOXX 50® Index Futures", personalDataFutures.get(0).getDescription());
+        Assertions.assertEquals("EURO STOXX 50 Index Futures", personalDataFutures.get(0).getDescription());
         Assertions.assertEquals("Lyxor UCITS Stoxx 50 Daily Double Short (BXX)", personalDataFutures.get(1).getDescription());
         Assertions.assertEquals("Profilo iShares Core EURO STOXX 50 UCITS ETF EUR (Dist)", personalDataFutures.get(2).getDescription());
     }

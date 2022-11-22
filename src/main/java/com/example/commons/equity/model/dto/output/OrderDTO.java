@@ -2,31 +2,37 @@ package com.example.commons.equity.model.dto.output;
 
 import com.example.commons.equity.model.entity.output.Order;
 import com.example.commons.equity.model.enums.Operation;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public record OrderDTO(
-        Long idOrder,
-        Long idSignal,
-        LocalDateTime timestamp,
-        LocalDate tradeDate,
-        String underlying,
-        String portfolioId,
-        String tickerFuture,
-        String status,
-        Operation buySell,
-        Integer theoreticalQuantity,
-        Integer quantity,
-        Integer theoreticalPosition,
-        Integer livePosition,
-        Double theoreticalPrice,
-        Double executedPrice,
-        Double deltaPrice
-) {
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class OrderDTO {
+    private Long idOrder;
+    private Long idSignal;
+    private LocalDateTime timestamp;
+    private LocalDate tradeDate;
+    private String underlying;
+    private String portfolioId;
+    private String tickerFuture;
+    private String status;
+    private Operation buySell;
+    private Integer theoreticalQuantity;
+    private Integer quantity;
+    private Integer theoreticalPosition;
+    private Integer livePosition;
+    private Double theoreticalPrice;
+    private Double executedPrice;
+    private Double deltaPrice;
 
     public Order toEntity() {
-
         Order order = new Order();
 
         order.setIdOrder(this.idOrder);
@@ -38,7 +44,7 @@ public record OrderDTO(
         order.setTickerFuture(this.tickerFuture);
         order.setQuantity(this.quantity);
         order.setStatus(this.status);
-        order.setBuysell(this.buySell);
+        order.setOperation(this.buySell);
         order.setLivePosition(this.livePosition);
         order.setTheoreticalPrice(this.theoreticalPrice);
         order.setTheoreticalQuantity(this.theoreticalQuantity);

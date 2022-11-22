@@ -1,0 +1,23 @@
+[
+  {
+    "TICKER": "VGZ2",
+    "ISIN": "DE0009652388",
+    "DESCRIPTION": "EURO STOXX 50 Index Futures",
+    "CURRENCY": "EUR",
+    "MATURITY": "31/12/2023"
+  },
+  {
+    "TICKER": "VGZ2",
+    "ISIN": "FR0010424143",
+    "DESCRIPTION": "Lyxor UCITS Stoxx 50 Daily Double Short (BXX)",
+    "CURRENCY": "EUR",
+    "MATURITY": "31/12/2023"
+  },
+  {
+    "TICKER": "VGZ2",
+    "ISIN": "IE0008471009",
+    "DESCRIPTION": "Profilo iShares Core EURO STOXX 50 UCITS ETF EUR (Dist)",
+    "CURRENCY": "EUR",
+    "MATURITY": "31/12/2023"
+  }
+]

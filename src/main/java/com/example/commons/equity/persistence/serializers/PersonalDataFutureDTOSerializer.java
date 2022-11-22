@@ -12,13 +12,13 @@ public class PersonalDataFutureDTOSerializer implements JsonSerializer<PersonalD
 
         JsonObject jsonObject = new JsonObject();
 
-        jsonObject.add("TICKER", jsonSerializationContext.serialize(personalDataFutureDTO.ticker(),String.class));
-        jsonObject.add("ISIN", jsonSerializationContext.serialize(personalDataFutureDTO.isin(),String.class));
-        jsonObject.add("UNDERLYING_ID", jsonSerializationContext.serialize(personalDataFutureDTO.isin(),String.class));
-        jsonObject.add("RIC", jsonSerializationContext.serialize(personalDataFutureDTO.isin(),String.class));
-        jsonObject.add("DESCRIPTION", jsonSerializationContext.serialize(personalDataFutureDTO.description(),String.class));
-        jsonObject.add("CURRENCY", jsonSerializationContext.serialize(personalDataFutureDTO.currency(),String.class));
-        jsonObject.add("MATURITY", jsonSerializationContext.serialize(personalDataFutureDTO.maturity(), LocalDate.class));
+        jsonObject.add("TICKER", jsonSerializationContext.serialize(personalDataFutureDTO.getTicker(),String.class));
+        jsonObject.add("ISIN", jsonSerializationContext.serialize(personalDataFutureDTO.getIsin(),String.class));
+        jsonObject.add("UNDERLYING_ID", jsonSerializationContext.serialize(personalDataFutureDTO.getIsin(),String.class));
+        jsonObject.add("RIC", jsonSerializationContext.serialize(personalDataFutureDTO.getIsin(),String.class));
+        jsonObject.add("DESCRIPTION", jsonSerializationContext.serialize(personalDataFutureDTO.getDescription(),String.class));
+        jsonObject.add("CURRENCY", jsonSerializationContext.serialize(personalDataFutureDTO.getCurrency(),String.class));
+        jsonObject.add("MATURITY", jsonSerializationContext.serialize(personalDataFutureDTO.getMaturity(), LocalDate.class));
 
         return jsonObject;
     }

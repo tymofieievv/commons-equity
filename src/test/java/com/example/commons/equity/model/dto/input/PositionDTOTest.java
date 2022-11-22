@@ -7,223 +7,152 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 
 @SpringBootTest
 class PositionDTOTest {
 
-
-    private final String jsonString =
-            """
-                                [
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "RELATIVE09",
-                    "INSTRUMENT_ID": "C Jun3 65.0 C",
-                    "FAMILY": "Equities",
-                    "GROUP": "Options",
-                    "TYPE": "Call",
-                    "CURRENCY": "USD",
-                    "POSITION": "0",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "Reuters Elektron"
-                    },
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "ETF_DIR",
-                    "INSTRUMENT_ID": "FESX 202212",
-                    "FAMILY": "Equities",
-                    "GROUP": "Futures",
-                    "TYPE": "Financial Futures",
-                    "CURRENCY": "EUR",
-                    "POSITION": "-170",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "Eurex NTA"
-                    },
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "ETF_DIR",
-                    "INSTRUMENT_ID": "EMINI S&P DEC0",
-                    "FAMILY": "Equities",
-                    "GROUP": "Futures",
-                    "TYPE": "Financial Futures",
-                    "CURRENCY": "USD",
-                    "POSITION": "0",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "FFastFill"
-                    },
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "SYST_VOL",
-                    "INSTRUMENT_ID": "Roblox Corp RBLX",
-                    "FAMILY": "Equities",
-                    "GROUP": "Equities",
-                    "TYPE": "Common/Ordinary shares",
-                    "CURRENCY": "USD",
-                    "POSITION": "300",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "Virtu"
-                    },
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "EQ_SSVOL",
-                    "INSTRUMENT_ID": "STLA1X13.2169X",
-                    "FAMILY": "Equities",
-                    "GROUP": "Options",
-                    "TYPE": "Put",
-                    "CURRENCY": "EUR",
-                    "POSITION": "0",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "Borsa Italiana IDEM"
-                    },
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "LONG_ONLY",
-                    "INSTRUMENT_ID": "KWEB",
-                    "FAMILY": "Equities",
-                    "GROUP": "Collective investment vehicles",
-                    "TYPE": "ETF",
-                    "CURRENCY": "USD",
-                    "POSITION": "-2238",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "Virtu"
-                    }
-                                ]
-                                """;
-
-
+    private final BufferedReader bufferedReader;
     @Autowired
     private Gson gson;
     private PositionDTO[] positionDTOs;
 
+    public PositionDTOTest() throws URISyntaxException, IOException {
+        URL resource = PositionDTOTest.class.getClassLoader().getResource("Position.json");
+        assert resource != null;
+        File file = new File(resource.toURI());
+        this.bufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath())));
+    }
+
     @BeforeEach
     void init() {
-        positionDTOs = gson.fromJson(jsonString, PositionDTO[].class);
+        positionDTOs = gson.fromJson(bufferedReader, PositionDTO[].class);
     }
 
     @Test
     void testRefDate() {
-        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[0].refDate());
-        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[1].refDate());
-        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[2].refDate());
-        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[3].refDate());
-        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[4].refDate());
-        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[5].refDate());
+        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[0].getRefDate());
+        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[1].getRefDate());
+        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[2].getRefDate());
+        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[3].getRefDate());
+        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[4].getRefDate());
+        Assertions.assertEquals(LocalDateTime.of(2022, 9, 29, 0, 0), positionDTOs[5].getRefDate());
     }
 
 
     @Test
     void testPortfolioId() {
-        Assertions.assertEquals("RELATIVE09", positionDTOs[0].portfolioId());
-        Assertions.assertEquals("ETF_DIR", positionDTOs[1].portfolioId());
-        Assertions.assertEquals("ETF_DIR", positionDTOs[2].portfolioId());
-        Assertions.assertEquals("SYST_VOL", positionDTOs[3].portfolioId());
-        Assertions.assertEquals("EQ_SSVOL", positionDTOs[4].portfolioId());
-        Assertions.assertEquals("LONG_ONLY", positionDTOs[5].portfolioId());
+        Assertions.assertEquals("RELATIVE09", positionDTOs[0].getPortfolioId());
+        Assertions.assertEquals("ETF_DIR", positionDTOs[1].getPortfolioId());
+        Assertions.assertEquals("ETF_DIR", positionDTOs[2].getPortfolioId());
+        Assertions.assertEquals("SYST_VOL", positionDTOs[3].getPortfolioId());
+        Assertions.assertEquals("EQ_SSVOL", positionDTOs[4].getPortfolioId());
+        Assertions.assertEquals("LONG_ONLY", positionDTOs[5].getPortfolioId());
     }
 
 
     @Test
     void testInstrumentId() {
-        Assertions.assertEquals("C Jun3 65.0 C", positionDTOs[0].instrumentId());
-        Assertions.assertEquals("FESX 202212", positionDTOs[1].instrumentId());
-        Assertions.assertEquals("EMINI S&P DEC0", positionDTOs[2].instrumentId());
-        Assertions.assertEquals("Roblox Corp RBLX", positionDTOs[3].instrumentId());
-        Assertions.assertEquals("STLA1X13.2169X", positionDTOs[4].instrumentId());
-        Assertions.assertEquals("KWEB", positionDTOs[5].instrumentId());
+        Assertions.assertEquals("C Jun3 65.0 C", positionDTOs[0].getInstrumentId());
+        Assertions.assertEquals("FESX 202212", positionDTOs[1].getInstrumentId());
+        Assertions.assertEquals("EMINI S&P DEC0", positionDTOs[2].getInstrumentId());
+        Assertions.assertEquals("Roblox Corp RBLX", positionDTOs[3].getInstrumentId());
+        Assertions.assertEquals("STLA1X13.2169X", positionDTOs[4].getInstrumentId());
+        Assertions.assertEquals("KWEB", positionDTOs[5].getInstrumentId());
     }
 
 
     @Test
     void testFamily() {
-        Assertions.assertEquals("Equities", positionDTOs[0].family());
-        Assertions.assertEquals("Equities", positionDTOs[1].family());
-        Assertions.assertEquals("Equities", positionDTOs[2].family());
-        Assertions.assertEquals("Equities", positionDTOs[3].family());
-        Assertions.assertEquals("Equities", positionDTOs[4].family());
-        Assertions.assertEquals("Equities", positionDTOs[5].family());
+        Assertions.assertEquals("Equities", positionDTOs[0].getFamily());
+        Assertions.assertEquals("Equities", positionDTOs[1].getFamily());
+        Assertions.assertEquals("Equities", positionDTOs[2].getFamily());
+        Assertions.assertEquals("Equities", positionDTOs[3].getFamily());
+        Assertions.assertEquals("Equities", positionDTOs[4].getFamily());
+        Assertions.assertEquals("Equities", positionDTOs[5].getFamily());
     }
 
 
     @Test
     void testGroup() {
-        Assertions.assertEquals("Options", positionDTOs[0].group());
-        Assertions.assertEquals("Futures", positionDTOs[1].group());
-        Assertions.assertEquals("Futures", positionDTOs[2].group());
-        Assertions.assertEquals("Equities", positionDTOs[3].group());
-        Assertions.assertEquals("Options", positionDTOs[4].group());
-        Assertions.assertEquals("Collective investment vehicles", positionDTOs[5].group());
+        Assertions.assertEquals("Options", positionDTOs[0].getGroup());
+        Assertions.assertEquals("Futures", positionDTOs[1].getGroup());
+        Assertions.assertEquals("Futures", positionDTOs[2].getGroup());
+        Assertions.assertEquals("Equities", positionDTOs[3].getGroup());
+        Assertions.assertEquals("Options", positionDTOs[4].getGroup());
+        Assertions.assertEquals("Collective investment vehicles", positionDTOs[5].getGroup());
     }
 
 
     @Test
     void testType() {
-        Assertions.assertEquals("Call", positionDTOs[0].type());
-        Assertions.assertEquals("Financial Futures", positionDTOs[1].type());
-        Assertions.assertEquals("Financial Futures", positionDTOs[2].type());
-        Assertions.assertEquals("Common/Ordinary shares", positionDTOs[3].type());
-        Assertions.assertEquals("Put", positionDTOs[4].type());
-        Assertions.assertEquals("ETF", positionDTOs[5].type());
+        Assertions.assertEquals("Call", positionDTOs[0].getType());
+        Assertions.assertEquals("Financial Futures", positionDTOs[1].getType());
+        Assertions.assertEquals("Financial Futures", positionDTOs[2].getType());
+        Assertions.assertEquals("Common/Ordinary shares", positionDTOs[3].getType());
+        Assertions.assertEquals("Put", positionDTOs[4].getType());
+        Assertions.assertEquals("ETF", positionDTOs[5].getType());
     }
 
 
     @Test
     void testCurrency() {
-        Assertions.assertEquals("USD", positionDTOs[0].currency());
-        Assertions.assertEquals("EUR", positionDTOs[1].currency());
-        Assertions.assertEquals("USD", positionDTOs[2].currency());
-        Assertions.assertEquals("USD", positionDTOs[3].currency());
-        Assertions.assertEquals("EUR", positionDTOs[4].currency());
-        Assertions.assertEquals("USD", positionDTOs[5].currency());
+        Assertions.assertEquals("USD", positionDTOs[0].getCurrency());
+        Assertions.assertEquals("EUR", positionDTOs[1].getCurrency());
+        Assertions.assertEquals("USD", positionDTOs[2].getCurrency());
+        Assertions.assertEquals("USD", positionDTOs[3].getCurrency());
+        Assertions.assertEquals("EUR", positionDTOs[4].getCurrency());
+        Assertions.assertEquals("USD", positionDTOs[5].getCurrency());
     }
 
 
     @Test
     void testPOSITION() {
-        Assertions.assertEquals(0, positionDTOs[0].position());
-        Assertions.assertEquals(-170, positionDTOs[1].position());
-        Assertions.assertEquals(0, positionDTOs[2].position());
-        Assertions.assertEquals(300, positionDTOs[3].position());
-        Assertions.assertEquals(0, positionDTOs[4].position());
-        Assertions.assertEquals(-2238, positionDTOs[5].position());
+        Assertions.assertEquals(0, positionDTOs[0].getPosition());
+        Assertions.assertEquals(-170, positionDTOs[1].getPosition());
+        Assertions.assertEquals(0, positionDTOs[2].getPosition());
+        Assertions.assertEquals(300, positionDTOs[3].getPosition());
+        Assertions.assertEquals(0, positionDTOs[4].getPosition());
+        Assertions.assertEquals(-2238, positionDTOs[5].getPosition());
     }
 
 
     @Test
     void testEntity() {
-        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[0].entity());
-        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[1].entity());
-        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[2].entity());
-        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[3].entity());
-        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[4].entity());
-        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[5].entity());
+        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[0].getEntity());
+        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[1].getEntity());
+        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[2].getEntity());
+        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[3].getEntity());
+        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[4].getEntity());
+        Assertions.assertEquals("INTESA SANPAOLO SPA - MILANO", positionDTOs[5].getEntity());
     }
 
 
     @Test
     void testDivision() {
-        Assertions.assertEquals("CIB", positionDTOs[0].division());
-        Assertions.assertEquals("CIB", positionDTOs[1].division());
-        Assertions.assertEquals("CIB", positionDTOs[2].division());
-        Assertions.assertEquals("CIB", positionDTOs[3].division());
-        Assertions.assertEquals("CIB", positionDTOs[4].division());
-        Assertions.assertEquals("CIB", positionDTOs[5].division());
+        Assertions.assertEquals("CIB", positionDTOs[0].getDivision());
+        Assertions.assertEquals("CIB", positionDTOs[1].getDivision());
+        Assertions.assertEquals("CIB", positionDTOs[2].getDivision());
+        Assertions.assertEquals("CIB", positionDTOs[3].getDivision());
+        Assertions.assertEquals("CIB", positionDTOs[4].getDivision());
+        Assertions.assertEquals("CIB", positionDTOs[5].getDivision());
     }
 
 
     @Test
     void testMarketName() {
-        Assertions.assertEquals("Reuters Elektron", positionDTOs[0].marketName());
-        Assertions.assertEquals("Eurex NTA", positionDTOs[1].marketName());
-        Assertions.assertEquals("FFastFill", positionDTOs[2].marketName());
-        Assertions.assertEquals("Virtu", positionDTOs[3].marketName());
-        Assertions.assertEquals("Borsa Italiana IDEM", positionDTOs[4].marketName());
-        Assertions.assertEquals("Virtu", positionDTOs[5].marketName());
+        Assertions.assertEquals("Reuters Elektron", positionDTOs[0].getMarketName());
+        Assertions.assertEquals("Eurex NTA", positionDTOs[1].getMarketName());
+        Assertions.assertEquals("FFastFill", positionDTOs[2].getMarketName());
+        Assertions.assertEquals("Virtu", positionDTOs[3].getMarketName());
+        Assertions.assertEquals("Borsa Italiana IDEM", positionDTOs[4].getMarketName());
+        Assertions.assertEquals("Virtu", positionDTOs[5].getMarketName());
     }
 }

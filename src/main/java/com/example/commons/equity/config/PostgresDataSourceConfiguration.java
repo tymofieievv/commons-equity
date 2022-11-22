@@ -17,7 +17,6 @@ import java.util.Map;
 
 @Configuration
 public class PostgresDataSourceConfiguration {
-    
 
     @Bean
     @Primary

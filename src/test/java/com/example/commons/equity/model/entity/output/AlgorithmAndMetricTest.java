@@ -9,6 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -16,270 +23,22 @@ import java.util.stream.Collectors;
 
 @SpringBootTest
 class AlgorithmAndMetricTest {
-    private static final String jsonString =
 
-            """
-                                [
-                    {
-                    "Time": "13/09/2013 00:00",
-                    "Price": "2867.11",
-                    "BuySell": "S",
-                    "Position": "-27",
-                    "avgPrice": "2867.11",
-                    "posPL_tminus": "0",
-                    "posPL_tplus": "0",
-                    "consolidatedPL": "0",
-                    "totRunningPL": "0",
-                    "posInversion": "TRUE",
-                    "rollOverTrade": "FALSE",
-                    "rolloverData": null,
-                    "drawdown": "0",
-                    "avgdd": "0",
-                    "stddd": "0",
-                    "ddownLim": "0",
-                    "ddPass": "TRUE",
-                    "BuySell_noDD": "S",
-                    "Position_noDD": "-27",
-                    "avgPrice_noDD": "2867.11",
-                    "posPL_tminus_noDD": "0",
-                    "posPL_tplus_noDD": "0",
-                    "consolidatedPL_noDD": "0",
-                    "totRunningPL_noDD": "0",
-                    "posInversion_noDD": "TRUE",
-                    "cumPL": "0",
-                    "dPL": "0",
-                    "Prezzo_eseguito": "2865",
-                    "Delta_prezzo": "-2.1100000000001273"
-                    },
-                    {
-                    "Time": "16/09/2013 00:00",
-                    "Price": "2894.64",
-                    "BuySell": "S",
-                    "Position": "-25",
-                    "avgPrice": "2867.11",
-                    "posPL_tminus": "-743.30999999999312",
-                    "posPL_tplus": "-688.24999999999363",
-                    "consolidatedPL": "-55.059999999999491",
-                    "totRunningPL": "-743.30999999999312",
-                    "posInversion": "FALSE",
-                    "rollOverTrade": "FALSE",
-                    "rolloverData": null,
-                    "drawdown": "0",
-                    "avgdd": "0",
-                    "stddd": "0",
-                    "ddownLim": "0",
-                    "ddPass": "TRUE",
-                    "BuySell_noDD": "S",
-                    "Position_noDD": "-25",
-                    "avgPrice_noDD": "2867.11",
-                    "posPL_tminus_noDD": "-743.30999999999312",
-                    "posPL_tplus_noDD": "-688.24999999999363",
-                    "consolidatedPL_noDD": "-55.059999999999491",
-                    "totRunningPL_noDD": "-743.30999999999312",
-                    "posInversion_noDD": "FALSE",
-                    "cumPL": "-743.30999999999312",
-                    "dPL": "-743.30999999999312",
-                    "Prezzo_eseguito": "2896",
-                    "Delta_prezzo": "1.3600000000001273"
-                    },
-                    {
-                    "Time": "17/09/2013 00:00",
-                    "Price": "2890.95",
-                    "BuySell": "N",
-                    "Position": "0",
-                    "avgPrice": "2890.95",
-                    "posPL_tminus": "-595.99999999999227",
-                    "posPL_tplus": "0",
-                    "consolidatedPL": "-651.05999999999176",
-                    "totRunningPL": "-651.05999999999176",
-                    "posInversion": "TRUE",
-                    "rollOverTrade": "FALSE",
-                    "rolloverData": null,
-                    "drawdown": "743.30999999999312",
-                    "avgdd": "14.294423076922945",
-                    "stddd": "103.07855071404282",
-                    "ddownLim": "478.14790129011567",
-                    "ddPass": "FALSE",
-                    "BuySell_noDD": "S",
-                    "Position_noDD": "-24",
-                    "avgPrice_noDD": "2867.11",
-                    "posPL_tminus_noDD": "-595.99999999999227",
-                    "posPL_tplus_noDD": "-572.15999999999258",
-                    "consolidatedPL_noDD": "-78.899999999999181",
-                    "totRunningPL_noDD": "-651.05999999999176",
-                    "posInversion_noDD": "FALSE",
-                    "cumPL": "-651.05999999999176",
-                    "dPL": "92.250000000001364",
-                    "Prezzo_eseguito": "2890.95",
-                    "Delta_prezzo": "0"
-                    },
-                    {
-                    "Time": "18/09/2013 00:00",
-                    "Price": "2908.92",
-                    "BuySell": "N",
-                    "Position": "0",
-                    "avgPrice": "2890.95",
-                    "posPL_tminus": "0",
-                    "posPL_tplus": "0",
-                    "consolidatedPL": "-651.05999999999176",
-                    "totRunningPL": "-651.05999999999176",
-                    "posInversion": "FALSE",
-                    "rollOverTrade": "FALSE",
-                    "rolloverData": null,
-                    "drawdown": "651.05999999999176",
-                    "avgdd": "26.308867924528016",
-                    "stddd": "134.42931968510837",
-                    "ddownLim": "631.24080650751569",
-                    "ddPass": "FALSE",
-                    "BuySell_noDD": "S",
-                    "Position_noDD": "-90",
-                    "avgPrice_noDD": "2897.7706666666663",
-                    "posPL_tminus_noDD": "-1003.4399999999987",
-                    "posPL_tplus_noDD": "-1003.4400000000369",
-                    "consolidatedPL_noDD": "-78.899999999999181",
-                    "totRunningPL_noDD": "-1082.3400000000361",
-                    "posInversion_noDD": "FALSE",
-                    "cumPL": "-651.05999999999176",
-                    "dPL": "0",
-                    "Prezzo_eseguito": "2910",
-                    "Delta_prezzo": "1.0799999999999272"
-                    },
-                    {
-                    "Time": "19/09/2013 00:00",
-                    "Price": "2936.2",
-                    "BuySell": "N",
-                    "Position": "0",
-                    "avgPrice": "2890.95",
-                    "posPL_tminus": "0",
-                    "posPL_tplus": "0",
-                    "consolidatedPL": "-651.05999999999176",
-                    "totRunningPL": "-651.05999999999176",
-                    "posInversion": "FALSE",
-                    "rollOverTrade": "FALSE",
-                    "rolloverData": null,
-                    "drawdown": "1082.3400000000361",
-                    "avgdd": "45.865000000000386",
-                    "stddd": "195.91365306088653",
-                    "ddownLim": "927.4764387739898",
-                    "ddPass": "FALSE",
-                    "BuySell_noDD": "S",
-                    "Position_noDD": "-43",
-                    "avgPrice_noDD": "2897.7706666666663",
-                    "posPL_tminus_noDD": "-3458.640000000014",
-                    "posPL_tplus_noDD": "-1652.46133333334",
-                    "consolidatedPL_noDD": "-1885.0786666666731",
-                    "totRunningPL_noDD": "-3537.5400000000132",
-                    "posInversion_noDD": "FALSE",
-                    "cumPL": "-651.05999999999176",
-                    "dPL": "0",
-                    "Prezzo_eseguito": "2934",
-                    "Delta_prezzo": "-2.1999999999998181"
-                    },
-                    {
-                    "Time": "20/09/2013 00:00",
-                    "Price": "2927.19",
-                    "BuySell": "N",
-                    "Position": "0",
-                    "avgPrice": "2890.95",
-                    "posPL_tminus": "0",
-                    "posPL_tplus": "0",
-                    "consolidatedPL": "-651.05999999999176",
-                    "totRunningPL": "-651.05999999999176",
-                    "posInversion": "FALSE",
-                    "rollOverTrade": "FALSE",
-                    "rolloverData": null,
-                    "drawdown": "3537.5400000000132",
-                    "avgdd": "109.35000000000061",
-                    "stddd": "509.25471632573283",
-                    "ddownLim": "2400.9962234657987",
-                    "ddPass": "FALSE",
-                    "BuySell_noDD": "S",
-                    "Position_noDD": "-41",
-                    "avgPrice_noDD": "2897.7706666666663",
-                    "posPL_tminus_noDD": "-1265.0313333333502",
-                    "posPL_tplus_noDD": "-1206.1926666666827",
-                    "consolidatedPL_noDD": "-1943.9173333333406",
-                    "totRunningPL_noDD": "-3150.1100000000233",
-                    "posInversion_noDD": "FALSE",
-                    "cumPL": "-651.05999999999176",
-                    "dPL": "0",
-                    "Prezzo_eseguito": "2930.5",
-                    "Delta_prezzo": "3.3099999999999454"
-                    },
-                    {
-                    "Time": "23/09/2013 00:00",
-                    "Price": "2906.35",
-                    "BuySell": "N",
-                    "Position": "0",
-                    "avgPrice": "2890.95",
-                    "posPL_tminus": "0",
-                    "posPL_tplus": "0",
-                    "consolidatedPL": "-651.05999999999176",
-                    "totRunningPL": "-651.05999999999176",
-                    "posInversion": "FALSE",
-                    "rollOverTrade": "FALSE",
-                    "rolloverData": null,
-                    "drawdown": "3150.1100000000233",
-                    "avgdd": "163.64928571428672",
-                    "stddd": "647.87049843694854",
-                    "ddownLim": "3079.0665286805552",
-                    "ddPass": "FALSE",
-                    "BuySell_noDD": "S",
-                    "Position_noDD": "-41",
-                    "avgPrice_noDD": "2897.7706666666663",
-                    "posPL_tminus_noDD": "-351.75266666667676",
-                    "posPL_tplus_noDD": "-351.75266666667676",
-                    "consolidatedPL_noDD": "-1943.9173333333406",
-                    "totRunningPL_noDD": "-2295.6700000000174",
-                    "posInversion_noDD": "FALSE",
-                    "cumPL": "-651.05999999999176",
-                    "dPL": "0",
-                    "Prezzo_eseguito": "2907",
-                    "Delta_prezzo": "0.65000000000009095"
-                    },
-                    {
-                    "Time": "24/09/2013 00:00",
-                    "Price": "2922.93",
-                    "BuySell": "S",
-                    "Position": "-41",
-                    "avgPrice": "2922.93",
-                    "posPL_tminus": "0",
-                    "posPL_tplus": "0",
-                    "consolidatedPL": "-651.05999999999176",
-                    "totRunningPL": "-651.05999999999176",
-                    "posInversion": "TRUE",
-                    "rollOverTrade": "FALSE",
-                    "rolloverData": null,
-                    "drawdown": "2295.6700000000174",
-                    "avgdd": "201.05315789473815",
-                    "stddd": "701.41765307879882",
-                    "ddownLim": "3357.4325967493328",
-                    "ddPass": "TRUE",
-                    "BuySell_noDD": "S",
-                    "Position_noDD": "-41",
-                    "avgPrice_noDD": "2897.7706666666663",
-                    "posPL_tminus_noDD": "-1031.5326666666738",
-                    "posPL_tplus_noDD": "-1031.5326666666738",
-                    "consolidatedPL_noDD": "-1943.9173333333406",
-                    "totRunningPL_noDD": "-2975.4500000000144",
-                    "posInversion_noDD": "FALSE",
-                    "cumPL": "-651.05999999999176",
-                    "dPL": "0",
-                    "Prezzo_eseguito": "2920.93",
-                    "Delta_prezzo": "-2"
-                    }
-                                ]
-                                """;
-
-
+    private final BufferedReader bufferedReader;
     @Autowired
     private Gson gson;
-
     private List<AlgorithmAndMetric> algorithmAndMetrics;
+
+    public AlgorithmAndMetricTest() throws URISyntaxException, IOException {
+        URL resource = AlgorithmAndMetricTest.class.getClassLoader().getResource("AlgorithmAndMetric.json");
+        assert resource != null;
+        File file = new File(resource.toURI());
+        this.bufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath())));
+    }
 
     @BeforeEach
     void init() {
-        algorithmAndMetrics = Arrays.stream(gson.fromJson(jsonString, AlgorithmAndMetricDTO[].class)).sequential().map(AlgorithmAndMetricDTO::toEntity).collect(Collectors.toList());
+        algorithmAndMetrics = Arrays.stream(gson.fromJson(bufferedReader, AlgorithmAndMetricDTO[].class)).sequential().map(AlgorithmAndMetricDTO::toEntity).collect(Collectors.toList());
     }
 
     @Test
@@ -296,15 +55,14 @@ class AlgorithmAndMetricTest {
 
     @Test
     void testTime() {
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 00, 00), algorithmAndMetrics.get(0).getTime());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 16, 00, 00), algorithmAndMetrics.get(1).getTime());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 17, 00, 00), algorithmAndMetrics.get(2).getTime());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 18, 00, 00), algorithmAndMetrics.get(3).getTime());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 19, 00, 00), algorithmAndMetrics.get(4).getTime());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 20, 00, 00), algorithmAndMetrics.get(5).getTime());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 23, 00, 00), algorithmAndMetrics.get(6).getTime());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 24, 00, 00), algorithmAndMetrics.get(7).getTime());
-
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 0, 0), algorithmAndMetrics.get(0).getTime());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 16, 0, 0), algorithmAndMetrics.get(1).getTime());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 17, 0, 0), algorithmAndMetrics.get(2).getTime());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 18, 0, 0), algorithmAndMetrics.get(3).getTime());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 19, 0, 0), algorithmAndMetrics.get(4).getTime());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 20, 0, 0), algorithmAndMetrics.get(5).getTime());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 23, 0, 0), algorithmAndMetrics.get(6).getTime());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 24, 0, 0), algorithmAndMetrics.get(7).getTime());
     }
 
     @Test
@@ -621,25 +379,25 @@ class AlgorithmAndMetricTest {
 
     @Test
     void testExecutedPrice() {
-        Assertions.assertNull(algorithmAndMetrics.get(0).getExecutedPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(1).getExecutedPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(2).getExecutedPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(3).getExecutedPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(4).getExecutedPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(5).getExecutedPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(6).getExecutedPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(7).getExecutedPrice());
+        Assertions.assertEquals(2865, algorithmAndMetrics.get(0).getExecutedPrice());
+        Assertions.assertEquals(2896, algorithmAndMetrics.get(1).getExecutedPrice());
+        Assertions.assertEquals(2890.95, algorithmAndMetrics.get(2).getExecutedPrice());
+        Assertions.assertEquals(2910, algorithmAndMetrics.get(3).getExecutedPrice());
+        Assertions.assertEquals(2934, algorithmAndMetrics.get(4).getExecutedPrice());
+        Assertions.assertEquals(2930.5, algorithmAndMetrics.get(5).getExecutedPrice());
+        Assertions.assertEquals(2907, algorithmAndMetrics.get(6).getExecutedPrice());
+        Assertions.assertEquals(2920.93, algorithmAndMetrics.get(7).getExecutedPrice());
     }
 
     @Test
     void testDeltaPrice() {
-        Assertions.assertNull(algorithmAndMetrics.get(0).getDeltaPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(1).getDeltaPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(2).getDeltaPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(3).getDeltaPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(4).getDeltaPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(5).getDeltaPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(6).getDeltaPrice());
-        Assertions.assertNull(algorithmAndMetrics.get(7).getDeltaPrice());
+        Assertions.assertEquals(-2.1100000000001273, algorithmAndMetrics.get(0).getDeltaPrice());
+        Assertions.assertEquals(1.3600000000001273, algorithmAndMetrics.get(1).getDeltaPrice());
+        Assertions.assertEquals(0, algorithmAndMetrics.get(2).getDeltaPrice());
+        Assertions.assertEquals(1.0799999999999272, algorithmAndMetrics.get(3).getDeltaPrice());
+        Assertions.assertEquals(-2.1999999999998181, algorithmAndMetrics.get(4).getDeltaPrice());
+        Assertions.assertEquals(3.3099999999999454, algorithmAndMetrics.get(5).getDeltaPrice());
+        Assertions.assertEquals(0.65000000000009095, algorithmAndMetrics.get(6).getDeltaPrice());
+        Assertions.assertEquals(-2, algorithmAndMetrics.get(7).getDeltaPrice());
     }
 }

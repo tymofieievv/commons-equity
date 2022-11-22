@@ -7,8 +7,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import java.lang.reflect.Type;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class FutureDTOSerializer implements JsonSerializer<FutureDTO> {
     @Override
@@ -16,14 +15,13 @@ public class FutureDTOSerializer implements JsonSerializer<FutureDTO> {
 
         JsonObject jsonObject = new JsonObject();
 
-        jsonObject.add("RIC", jsonSerializationContext.serialize(futureDTO.ric(),String.class));
-        jsonObject.add("REF_DATE", jsonSerializationContext.serialize(futureDTO.refDate(), LocalDate.class));
-        jsonObject.add("TIME", jsonSerializationContext.serialize(futureDTO.time(), LocalTime.class));
-        jsonObject.add("PRICE_CLOSE", jsonSerializationContext.serialize(futureDTO.priceClose(), Double.class));
-        jsonObject.add("PRICE_LOW", jsonSerializationContext.serialize(futureDTO.priceLow(), Double.class));
-        jsonObject.add("PRICE_HIGH", jsonSerializationContext.serialize(futureDTO.priceOpen(), Double.class));
-        jsonObject.add("PRICE_OPEN", jsonSerializationContext.serialize(futureDTO.priceHigh(), Double.class));
-        jsonObject.add("VOLUME", jsonSerializationContext.serialize(futureDTO.volume(), Integer.class));
+        jsonObject.add("RIC", jsonSerializationContext.serialize(futureDTO.getRic(), String.class));
+        jsonObject.add("TIMESTAMP", jsonSerializationContext.serialize(futureDTO.getTimestamp(), LocalDateTime.class));
+        jsonObject.add("PRICE_CLOSE", jsonSerializationContext.serialize(futureDTO.getPriceClose(), Double.class));
+        jsonObject.add("PRICE_LOW", jsonSerializationContext.serialize(futureDTO.getPriceLow(), Double.class));
+        jsonObject.add("PRICE_HIGH", jsonSerializationContext.serialize(futureDTO.getPriceOpen(), Double.class));
+        jsonObject.add("PRICE_OPEN", jsonSerializationContext.serialize(futureDTO.getPriceHigh(), Double.class));
+        jsonObject.add("VOLUME", jsonSerializationContext.serialize(futureDTO.getVolume(), Integer.class));
 
         return jsonObject;
     }

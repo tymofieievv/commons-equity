@@ -15,12 +15,12 @@ public class StrategyPerformanceDTOSerializer implements JsonSerializer<Strategy
 
         JsonObject jsonObject = new JsonObject();
 
-        jsonObject.add("TIMESTAMP",jsonSerializationContext.serialize(strategyPerformanceDTO.timestamp(), LocalDateTime.class));
-        jsonObject.add("TRADE DATE",jsonSerializationContext.serialize(strategyPerformanceDTO.tradeDate(),LocalDateTime.class));
-        jsonObject.add("SHARP",jsonSerializationContext.serialize(strategyPerformanceDTO.sharp(),Double.class));
-        jsonObject.add("SORTINO",jsonSerializationContext.serialize(strategyPerformanceDTO.sortino(),Double.class));
-        jsonObject.add("MAXDRAWDOWN",jsonSerializationContext.serialize(strategyPerformanceDTO.maxdrawdown(),Double.class));
-        jsonObject.add("P&L",jsonSerializationContext.serialize(strategyPerformanceDTO.pL(),Double.class));
+        jsonObject.add("TIMESTAMP",jsonSerializationContext.serialize(strategyPerformanceDTO.getTimestamp(), LocalDateTime.class));
+        jsonObject.add("TRADE DATE",jsonSerializationContext.serialize(strategyPerformanceDTO.getTradeDate(),LocalDateTime.class));
+        jsonObject.add("SHARP",jsonSerializationContext.serialize(strategyPerformanceDTO.getSharp(),Double.class));
+        jsonObject.add("SORTINO",jsonSerializationContext.serialize(strategyPerformanceDTO.getSortino(),Double.class));
+        jsonObject.add("MAXDRAWDOWN",jsonSerializationContext.serialize(strategyPerformanceDTO.getMaxdrawdown(),Double.class));
+        jsonObject.add("P&L",jsonSerializationContext.serialize(strategyPerformanceDTO.getPL(),Double.class));
 
         return jsonObject;
     }

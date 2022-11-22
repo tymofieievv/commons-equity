@@ -2,41 +2,49 @@ package com.example.commons.equity.model.dto.output;
 
 import com.example.commons.equity.model.entity.output.AlgorithmAndMetric;
 import com.example.commons.equity.model.enums.Operation;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public record AlgorithmAndMetricDTO
-        (LocalDateTime time,
-         Double price,
-         Operation buySell,
-         Integer quantity,
-         Integer position,
-         Double avgprice,
-         Double posplTminus,
-         Double posplTplus,
-         Double consolidatedpl,
-         Double totrunningpl,
-         Boolean posinversion,
-         Boolean rollovertrade,
-         LocalDate rolloverdata,
-         Double drawdown,
-         Double avgdd,
-         Double stddd,
-         Double ddownlim,
-         Boolean ddpass,
-         Operation buysellNodd,
-         Integer positionNodd,
-         Double avgpriceNodd,
-         Double posplTminusNodd,
-         Double posplTplusNodd,
-         Double consolidatedplNodd,
-         Double totrunningplNodd,
-         Boolean posinversionNodd,
-         Double cumpl,
-         Double dpl,
-         Double executedPrice,
-         Double deltaPrice) {
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class AlgorithmAndMetricDTO {
+    private LocalDateTime time;
+    private Double price;
+    private Operation buySell;
+    private Integer quantity;
+    private Integer position;
+    private Double avgprice;
+    private Double posplTminus;
+    private Double posplTplus;
+    private Double consolidatedpl;
+    private Double totrunningpl;
+    private Boolean posinversion;
+    private Boolean rollovertrade;
+    private LocalDate rolloverdata;
+    private Double drawdown;
+    private Double avgdd;
+    private Double stddd;
+    private Double ddownlim;
+    private Boolean ddpass;
+    private Operation buysellNodd;
+    private Integer positionNodd;
+    private Double avgpriceNodd;
+    private Double posplTminusNodd;
+    private Double posplTplusNodd;
+    private Double consolidatedplNodd;
+    private Double totrunningplNodd;
+    private Boolean posinversionNodd;
+    private Double cumpl;
+    private Double dpl;
+    private Double executedPrice;
+    private Double deltaPrice;
 
     public AlgorithmAndMetric toEntity() {
 

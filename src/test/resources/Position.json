@@ -1,0 +1,80 @@
+[
+  {
+    "REF_DATE": "29/09/2022 00:00",
+    "PORTFOLIO_ID": "RELATIVE09",
+    "INSTRUMENT_ID": "C Jun3 65.0 C",
+    "FAMILY": "Equities",
+    "GROUP": "Options",
+    "TYPE": "Call",
+    "CURRENCY": "USD",
+    "POSITION": "0",
+    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
+    "DIVISION": "CIB",
+    "MARKET_NAME": "Reuters Elektron"
+  },
+  {
+    "REF_DATE": "29/09/2022 00:00",
+    "PORTFOLIO_ID": "ETF_DIR",
+    "INSTRUMENT_ID": "FESX 202212",
+    "FAMILY": "Equities",
+    "GROUP": "Futures",
+    "TYPE": "Financial Futures",
+    "CURRENCY": "EUR",
+    "POSITION": "-170",
+    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
+    "DIVISION": "CIB",
+    "MARKET_NAME": "Eurex NTA"
+  },
+  {
+    "REF_DATE": "29/09/2022 00:00",
+    "PORTFOLIO_ID": "ETF_DIR",
+    "INSTRUMENT_ID": "EMINI S&P DEC0",
+    "FAMILY": "Equities",
+    "GROUP": "Futures",
+    "TYPE": "Financial Futures",
+    "CURRENCY": "USD",
+    "POSITION": "0",
+    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
+    "DIVISION": "CIB",
+    "MARKET_NAME": "FFastFill"
+  },
+  {
+    "REF_DATE": "29/09/2022 00:00",
+    "PORTFOLIO_ID": "SYST_VOL",
+    "INSTRUMENT_ID": "Roblox Corp RBLX",
+    "FAMILY": "Equities",
+    "GROUP": "Equities",
+    "TYPE": "Common/Ordinary shares",
+    "CURRENCY": "USD",
+    "POSITION": "300",
+    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
+    "DIVISION": "CIB",
+    "MARKET_NAME": "Virtu"
+  },
+  {
+    "REF_DATE": "29/09/2022 00:00",
+    "PORTFOLIO_ID": "EQ_SSVOL",
+    "INSTRUMENT_ID": "STLA1X13.2169X",
+    "FAMILY": "Equities",
+    "GROUP": "Options",
+    "TYPE": "Put",
+    "CURRENCY": "EUR",
+    "POSITION": "0",
+    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
+    "DIVISION": "CIB",
+    "MARKET_NAME": "Borsa Italiana IDEM"
+  },
+  {
+    "REF_DATE": "29/09/2022 00:00",
+    "PORTFOLIO_ID": "LONG_ONLY",
+    "INSTRUMENT_ID": "KWEB",
+    "FAMILY": "Equities",
+    "GROUP": "Collective investment vehicles",
+    "TYPE": "ETF",
+    "CURRENCY": "USD",
+    "POSITION": "-2238",
+    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
+    "DIVISION": "CIB",
+    "MARKET_NAME": "Virtu"
+  }
+]

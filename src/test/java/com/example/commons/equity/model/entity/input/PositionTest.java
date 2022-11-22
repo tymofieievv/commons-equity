@@ -8,6 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -15,100 +22,22 @@ import java.util.stream.Collectors;
 
 @SpringBootTest
 class PositionTest {
-    private static final String jsonString =
 
-            """
-                                [
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "RELATIVE09",
-                    "INSTRUMENT_ID": "C Jun3 65.0 C",
-                    "FAMILY": "Equities",
-                    "GROUP": "Options",
-                    "TYPE": "Call",
-                    "CURRENCY": "USD",
-                    "POSITION": "0",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "Reuters Elektron"
-                    },
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "ETF_DIR",
-                    "INSTRUMENT_ID": "FESX 202212",
-                    "FAMILY": "Equities",
-                    "GROUP": "Futures",
-                    "TYPE": "Financial Futures",
-                    "CURRENCY": "EUR",
-                    "POSITION": "-170",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "Eurex NTA"
-                    },
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "ETF_DIR",
-                    "INSTRUMENT_ID": "EMINI S&P DEC0",
-                    "FAMILY": "Equities",
-                    "GROUP": "Futures",
-                    "TYPE": "Financial Futures",
-                    "CURRENCY": "USD",
-                    "POSITION": "0",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "FFastFill"
-                    },
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "SYST_VOL",
-                    "INSTRUMENT_ID": "Roblox Corp RBLX",
-                    "FAMILY": "Equities",
-                    "GROUP": "Equities",
-                    "TYPE": "Common/Ordinary shares",
-                    "CURRENCY": "USD",
-                    "POSITION": "300",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "Virtu"
-                    },
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "EQ_SSVOL",
-                    "INSTRUMENT_ID": "STLA1X13.2169X",
-                    "FAMILY": "Equities",
-                    "GROUP": "Options",
-                    "TYPE": "Put",
-                    "CURRENCY": "EUR",
-                    "POSITION": "0",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "Borsa Italiana IDEM"
-                    },
-                    {
-                    "REF_DATE": "29/09/2022 00:00",
-                    "PORTFOLIO_ID": "LONG_ONLY",
-                    "INSTRUMENT_ID": "KWEB",
-                    "FAMILY": "Equities",
-                    "GROUP": "Collective investment vehicles",
-                    "TYPE": "ETF",
-                    "CURRENCY": "USD",
-                    "POSITION": "-2238",
-                    "ENTITY": "INTESA SANPAOLO SPA - MILANO",
-                    "DIVISION": "CIB",
-                    "MARKET_NAME": "Virtu"
-                    }
-                                ]
-                                """;
-    ;
-
+    private final BufferedReader bufferedReader;
     @Autowired
     private Gson gson;
-
     private List<Position> positions;
+
+    public PositionTest() throws URISyntaxException, IOException {
+        URL resource = PositionTest.class.getClassLoader().getResource("Position.json");
+        assert resource != null;
+        File file = new File(resource.toURI());
+        this.bufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath())));
+    }
 
     @BeforeEach
     void init() {
-        positions = Arrays.stream(gson.fromJson(jsonString, PositionDTO[].class)).sequential().map(PositionDTO::toEntity).collect(Collectors.toList());
+        positions = Arrays.stream(gson.fromJson(bufferedReader, PositionDTO[].class)).sequential().map(PositionDTO::toEntity).collect(Collectors.toList());
     }
 
     @Test

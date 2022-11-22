@@ -18,14 +18,16 @@ public class PersonalDataService {
         this.personalDataFutureRepository = personalDataFutureRepository;
     }
 
-    public PersonalDataFuture findPersonalDataFutureByIsin(String isin) {
+    public PersonalDataFuture findPersonalDataFutureByIsin(String isin) throws IllegalArgumentException {
         if (StringUtils.isBlank(isin)) {
             throw new IllegalArgumentException("Cannot found personal data, isin is blank.");
         } else {
             Optional<PersonalDataFuture> personalDataFutureByIsin = personalDataFutureRepository.findPersonalDataFutureByIsin(isin);
-            return personalDataFutureByIsin.orElseThrow(() -> {
+            if (!personalDataFutureByIsin.isPresent()) {
                 throw new IllegalArgumentException("No personal data future was found with isin=" + isin);
-            });
+            } else {
+                return personalDataFutureByIsin.get();
+            }
         }
     }
 }

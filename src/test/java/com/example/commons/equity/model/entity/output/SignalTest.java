@@ -9,6 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -17,67 +24,22 @@ import java.util.stream.Collectors;
 
 @SpringBootTest
 class SignalTest {
-    private static final String jsonString =
 
-            """
-                                [
-                    {
-                    "TIMESTAMP": "15/07/2022 00:00",
-                    "TRADEDATE": "15/07/2022",
-                    "UNDERLYING": "EU0009658145",
-                    "TICKER FUTURE": "VGU2",
-                    "BUY/SELL": "S",
-                    "QUANTITY": "-25",
-                    "THEORETICAL PRICE": "3477.2"
-                    },
-                    {
-                    "TIMESTAMP": "14/07/2022 00:00",
-                    "TRADEDATE": "14/07/2022",
-                    "UNDERLYING": "EU0009658146",
-                    "TICKER FUTURE": "VGU2",
-                    "BUY/SELL": "B",
-                    "QUANTITY": "25",
-                    "THEORETICAL PRICE": "3396.61"
-                    },
-                    {
-                    "TIMESTAMP": "13/07/2022 00:00",
-                    "TRADEDATE": "13/07/2022",
-                    "UNDERLYING": "EU0009658147",
-                    "TICKER FUTURE": "VGU2",
-                    "BUY/SELL": "S",
-                    "QUANTITY": "-26",
-                    "THEORETICAL PRICE": "3453.97"
-                    },
-                    {
-                    "TIMESTAMP": "12/07/2022 00:00",
-                    "TRADEDATE": "12/07/2022",
-                    "UNDERLYING": "EU0009658148",
-                    "TICKER FUTURE": "VGU2",
-                    "BUY/SELL": "S",
-                    "QUANTITY": "-26",
-                    "THEORETICAL PRICE": "3487.05"
-                    },
-                    {
-                    "TIMESTAMP": "11/07/2022 00:00",
-                    "TRADEDATE": "11/07/2022",
-                    "UNDERLYING": "EU0009658149",
-                    "TICKER FUTURE": "VGU2",
-                    "BUY/SELL": "B",
-                    "QUANTITY": "25",
-                    "THEORETICAL PRICE": "3471.69"
-                    }
-                                ]
-                                """;
-    ;
-
+    private final BufferedReader bufferedReader;
     @Autowired
     private Gson gson;
-
     private List<Signal> signals;
+
+    public SignalTest() throws URISyntaxException, IOException {
+        URL resource = SignalTest.class.getClassLoader().getResource("Signal.json");
+        assert resource != null;
+        File file = new File(resource.toURI());
+        this.bufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath())));
+    }
 
     @BeforeEach
     void init() {
-        signals = Arrays.stream(gson.fromJson(jsonString, SignalDTO[].class)).sequential().map(SignalDTO::toEntity).collect(Collectors.toList());
+        signals = Arrays.stream(gson.fromJson(bufferedReader, SignalDTO[].class)).sequential().map(SignalDTO::toEntity).collect(Collectors.toList());
     }
 
     @Test

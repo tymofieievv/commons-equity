@@ -10,8 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity(name = "REF0_KAFKA_INDEX")
 @NoArgsConstructor
@@ -22,23 +21,21 @@ public class Index {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate refDate;
+    private LocalDateTime timestamp;
     private String instrumentId;
     private Double priceHigh;
     private Double priceLow;
-    private Double priceClosed;
-    private LocalTime time;
-    private Double price;
+    private Double priceClose;
+    private Double priceOpen;
 
     public IndexDTO toDTO() {
         return new IndexDTO(
-                this.getRefDate(),
-                this.getTime(),
-                this.getPrice(),
+                this.getTimestamp(),
+                this.getPriceOpen(),
                 this.getInstrumentId(),
                 this.getPriceLow(),
                 this.getPriceHigh(),
-                this.getPriceClosed()
+                this.getPriceClose()
         );
     }
 

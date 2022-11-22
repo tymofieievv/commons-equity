@@ -7,108 +7,79 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.time.LocalDate;
 
 @SpringBootTest
 class DailyFutureDTOTest {
 
-
-    private final String jsonString =
-            """
-                                [
-                    {
-                    "REF_DATE": "25/10/2022",
-                    "ISIN": "DE0009652388",
-                    "TICKER": "VGZ2",
-                    "PRICE_CLOSE": "3584.59",
-                    "PRICE_LOW": "3507",
-                    "PRICE_HIGH": "3590",
-                    "PRICE_OPEN": "3530",
-                    "VOLUME": "936121"
-                    },
-                    {
-                    "REF_DATE": "24/10/2022",
-                    "ISIN": "DE0009652388",
-                    "TICKER": "VGZ2",
-                    "PRICE_CLOSE": "3528",
-                    "PRICE_LOW": "3469",
-                    "PRICE_HIGH": "3551",
-                    "PRICE_OPEN": "3517",
-                    "VOLUME": "939287"
-                    },
-                    {
-                    "REF_DATE": "21/10/2022",
-                    "ISIN": "DE0009652388",
-                    "TICKER": "VGZ2",
-                    "PRICE_CLOSE": "3509",
-                    "PRICE_LOW": "3418",
-                    "PRICE_HIGH": "3510",
-                    "PRICE_OPEN": "3450",
-                    "VOLUME": "1061095"
-                    }
-                                ]
-                                """;
-
-
+    private final BufferedReader bufferedReader;
     @Autowired
     private Gson gson;
     private DailyFutureDTO[] dailyFutureDTOs;
 
+    public DailyFutureDTOTest() throws URISyntaxException, IOException {
+        URL resource = DailyFutureDTOTest.class.getClassLoader().getResource("DailyFuture.json");
+        assert resource != null;
+        File file = new File(resource.toURI());
+        this.bufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath())));
+    }
+
     @BeforeEach
     void init() {
-        dailyFutureDTOs = gson.fromJson(jsonString, DailyFutureDTO[].class);
+        dailyFutureDTOs = gson.fromJson(bufferedReader, DailyFutureDTO[].class);
     }
 
     @Test
     void testRefDate() {
-
-        Assertions.assertEquals(LocalDate.of(2022, 10, 25), dailyFutureDTOs[0].refDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 24), dailyFutureDTOs[1].refDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 21), dailyFutureDTOs[2].refDate());
+        Assertions.assertEquals(LocalDate.of(2022, 10, 25), dailyFutureDTOs[0].getRefDate());
+        Assertions.assertEquals(LocalDate.of(2022, 10, 24), dailyFutureDTOs[1].getRefDate());
+        Assertions.assertEquals(LocalDate.of(2022, 10, 21), dailyFutureDTOs[2].getRefDate());
     }
 
 
     @Test
     void testPriceClose() {
-
-        Assertions.assertEquals(3584.59, dailyFutureDTOs[0].priceClose());
-        Assertions.assertEquals(3528.0, dailyFutureDTOs[1].priceClose());
-        Assertions.assertEquals(3509.0, dailyFutureDTOs[2].priceClose());
+        Assertions.assertEquals(3584.59, dailyFutureDTOs[0].getPriceClose());
+        Assertions.assertEquals(3528.0, dailyFutureDTOs[1].getPriceClose());
+        Assertions.assertEquals(3509.0, dailyFutureDTOs[2].getPriceClose());
     }
 
 
     @Test
     void testPriceLow() {
-
-        Assertions.assertEquals(3507.0, dailyFutureDTOs[0].priceLow());
-        Assertions.assertEquals(3469.0, dailyFutureDTOs[1].priceLow());
-        Assertions.assertEquals(3418.0, dailyFutureDTOs[2].priceLow());
+        Assertions.assertEquals(3507.0, dailyFutureDTOs[0].getPriceLow());
+        Assertions.assertEquals(3469.0, dailyFutureDTOs[1].getPriceLow());
+        Assertions.assertEquals(3418.0, dailyFutureDTOs[2].getPriceLow());
     }
 
 
     @Test
     void testPriceOpen() {
-
-        Assertions.assertEquals(3530.0, dailyFutureDTOs[0].priceOpen());
-        Assertions.assertEquals(3517.0, dailyFutureDTOs[1].priceOpen());
-        Assertions.assertEquals(3450.0, dailyFutureDTOs[2].priceOpen());
+        Assertions.assertEquals(3530.0, dailyFutureDTOs[0].getPriceOpen());
+        Assertions.assertEquals(3517.0, dailyFutureDTOs[1].getPriceOpen());
+        Assertions.assertEquals(3450.0, dailyFutureDTOs[2].getPriceOpen());
     }
 
 
     @Test
     void testPriceHigh() {
-
-        Assertions.assertEquals(3590.0, dailyFutureDTOs[0].priceHigh());
-        Assertions.assertEquals(3551.0, dailyFutureDTOs[1].priceHigh());
-        Assertions.assertEquals(3510.0, dailyFutureDTOs[2].priceHigh());
+        Assertions.assertEquals(3590.0, dailyFutureDTOs[0].getPriceHigh());
+        Assertions.assertEquals(3551.0, dailyFutureDTOs[1].getPriceHigh());
+        Assertions.assertEquals(3510.0, dailyFutureDTOs[2].getPriceHigh());
     }
 
 
     @Test
     void testVolume() {
-
-        Assertions.assertEquals(936121, dailyFutureDTOs[0].volume());
-        Assertions.assertEquals(939287, dailyFutureDTOs[1].volume());
-        Assertions.assertEquals(1061095, dailyFutureDTOs[2].volume());
+        Assertions.assertEquals(936121, dailyFutureDTOs[0].getVolume());
+        Assertions.assertEquals(939287, dailyFutureDTOs[1].getVolume());
+        Assertions.assertEquals(1061095, dailyFutureDTOs[2].getVolume());
     }
 }

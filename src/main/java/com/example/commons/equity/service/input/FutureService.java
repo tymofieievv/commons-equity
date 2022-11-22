@@ -22,7 +22,7 @@ public class FutureService {
         if (timeframe <= 0 && StringUtils.isBlank(ric)) {
             throw new IllegalArgumentException("Cannot found future intraday with timeframe=" + timeframe + " and ric=" + ric);
         } else {
-            return futureRepository.getHistoryFutureByRicInput(timeframe, ric);
+            return futureRepository.getIntradayFutureByRicInput(timeframe, ric);
         }
     }
 

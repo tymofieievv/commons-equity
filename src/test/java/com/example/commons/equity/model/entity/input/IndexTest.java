@@ -8,193 +8,121 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @SpringBootTest
 class IndexTest {
-    private static final String jsonString =
 
-            """
-                                [
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": "EU0009658145",
-                    "TIME": "11.56.30",
-                    "PRICE": "3577.99"
-                    },
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": "EU0009658145",
-                    "TIME": "11.56.15",
-                    "PRICE": "3577.05"
-                    },
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": "EU0009658145",
-                    "TIME": "11.56.00",
-                    "PRICE": "3576.47"
-                    },
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": "EU0009658145",
-                    "TIME": "11.55.45",
-                    "PRICE": "3575.78"
-                    }
-                                ]
-                                """;
-    ;
-    private static final String jsonStringHistorical =
-
-            """
-                              [
-                    {
-                    "REF_DATE": "04/01/2021",
-                    "INSTRUMENT_ID": ".STOXX50E",
-                    "SECURITY_DESCRIPTION": "ESTX 50 PR INDEX",
-                    "TIME": "17.00.00",
-                    "PRICE": "3564.39"
-                    },
-                    {
-                    "REF_DATE": "05/01/2021",
-                    "INSTRUMENT_ID": ".STOXX50E",
-                    "SECURITY_DESCRIPTION": "ESTX 50 PR INDEX",
-                    "TIME": "12.05.03",
-                    "PRICE": "3547.85"
-                    },
-                    {
-                    "REF_DATE": "06/01/2021",
-                    "INSTRUMENT_ID": ".STOXX50E",
-                    "SECURITY_DESCRIPTION": "ESTX 50 PR INDEX",
-                    "TIME": "09.30.10",
-                    "PRICE": "3611.08"
-                    },
-                    {
-                    "REF_DATE": "07/01/2021",
-                    "INSTRUMENT_ID": ".STOXX50E",
-                    "SECURITY_DESCRIPTION": "ESTX 50 PR INDEX",
-                    "TIME": "13.45.00",
-                    "PRICE": "3622.42"
-                    },
-                    {
-                    "REF_DATE": "08/01/2021",
-                    "INSTRUMENT_ID": ".STOXX50E",
-                    "SECURITY_DESCRIPTION": "ESTX 50 PR INDEX",
-                    "TIME": "16.00.00",
-                    "PRICE": "3645.05"
-                    }
-                              ]
-                              """;
-    ;
-
+    private final BufferedReader historyIndexBufferedReader;
+    private final BufferedReader realtimeIndexBufferedReader;
     @Autowired
     private Gson gsonHistorical;
 
-    private List<Index> indexsHistorical;
+    private List<Index> indexesHistorical;
+
+    public IndexTest() throws URISyntaxException, IOException {
+        URL resourceIndexHistory = IndexTest.class.getClassLoader().getResource("IndexHistory.json");
+        URL resourceIndexRealtime = IndexTest.class.getClassLoader().getResource("IndexRealtime.json");
+
+        assert resourceIndexHistory != null;
+        File fileHistory = new File(resourceIndexHistory.toURI());
+        assert resourceIndexRealtime != null;
+        File fileRealtime = new File(resourceIndexRealtime.toURI());
+        this.historyIndexBufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(fileHistory.toPath())));
+        this.realtimeIndexBufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(fileRealtime.toPath())));
+    }
 
     @BeforeEach
     void initHistorical() {
-        indexsHistorical = Arrays.stream(gsonHistorical.fromJson(jsonStringHistorical, IndexDTO[].class)).sequential().map(IndexDTO::toEntity).collect(Collectors.toList());
+        indexesHistorical = Arrays.stream(gsonHistorical.fromJson(historyIndexBufferedReader, IndexDTO[].class)).sequential().map(IndexDTO::toEntity).collect(Collectors.toList());
     }
 
     @Test
     void testIdHistorical() {
-        Assertions.assertNull(indexsHistorical.get(0).getId());
-        Assertions.assertNull(indexsHistorical.get(1).getId());
-        Assertions.assertNull(indexsHistorical.get(2).getId());
-        Assertions.assertNull(indexsHistorical.get(3).getId());
-        Assertions.assertNull(indexsHistorical.get(4).getId());
+        Assertions.assertNull(indexesHistorical.get(0).getId());
+        Assertions.assertNull(indexesHistorical.get(1).getId());
+        Assertions.assertNull(indexesHistorical.get(2).getId());
+        Assertions.assertNull(indexesHistorical.get(3).getId());
+        Assertions.assertNull(indexesHistorical.get(4).getId());
     }
 
     @Test
-    void testRefDateHistorical() {
-        Assertions.assertEquals(LocalDate.of(2021, 1, 4), indexsHistorical.get(0).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2021, 1, 5), indexsHistorical.get(1).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2021, 1, 6), indexsHistorical.get(2).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2021, 1, 7), indexsHistorical.get(3).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2021, 1, 8), indexsHistorical.get(4).getRefDate());
+    void testTimestampHistorical() {
+
+        Assertions.assertEquals(LocalDateTime.of(2021, 1, 4, 17, 0, 0), indexesHistorical.get(0).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2021, 1, 5, 12, 5, 3), indexesHistorical.get(1).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2021, 1, 6, 9, 30, 30), indexesHistorical.get(2).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2021, 1, 7, 13, 45, 0), indexesHistorical.get(3).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2021, 1, 8, 16, 0, 0), indexesHistorical.get(4).getTimestamp());
     }
 
     @Test
     void testInstrumentIdHistorical() {
-        Assertions.assertEquals(".STOXX50E", indexsHistorical.get(0).getInstrumentId());
-        Assertions.assertEquals(".STOXX50E", indexsHistorical.get(1).getInstrumentId());
-        Assertions.assertEquals(".STOXX50E", indexsHistorical.get(2).getInstrumentId());
-        Assertions.assertEquals(".STOXX50E", indexsHistorical.get(3).getInstrumentId());
-        Assertions.assertEquals(".STOXX50E", indexsHistorical.get(4).getInstrumentId());
-    }
-
-
-
-    @Test
-    void testTimeHistorical() {
-        Assertions.assertEquals(LocalTime.of(17, 0, 0), indexsHistorical.get(0).getTime());
-        Assertions.assertEquals(LocalTime.of(12, 5, 3), indexsHistorical.get(1).getTime());
-        Assertions.assertEquals(LocalTime.of(9, 30, 10), indexsHistorical.get(2).getTime());
-        Assertions.assertEquals(LocalTime.of(13, 45, 0), indexsHistorical.get(3).getTime());
-        Assertions.assertEquals(LocalTime.of(16, 0, 0), indexsHistorical.get(4).getTime());
+        Assertions.assertEquals(".STOXX50E", indexesHistorical.get(0).getInstrumentId());
+        Assertions.assertEquals(".STOXX50E", indexesHistorical.get(1).getInstrumentId());
+        Assertions.assertEquals(".STOXX50E", indexesHistorical.get(2).getInstrumentId());
+        Assertions.assertEquals(".STOXX50E", indexesHistorical.get(3).getInstrumentId());
+        Assertions.assertEquals(".STOXX50E", indexesHistorical.get(4).getInstrumentId());
     }
 
     @Test
     void testPriceHistorical() {
-        Assertions.assertEquals(3564.39, indexsHistorical.get(0).getPrice());
-        Assertions.assertEquals(3547.85, indexsHistorical.get(1).getPrice());
-        Assertions.assertEquals(3611.08, indexsHistorical.get(2).getPrice());
-        Assertions.assertEquals(3622.42, indexsHistorical.get(3).getPrice());
-        Assertions.assertEquals(3645.05, indexsHistorical.get(4).getPrice());
+        Assertions.assertEquals(3564.39, indexesHistorical.get(0).getPriceOpen());
+        Assertions.assertEquals(3547.85, indexesHistorical.get(1).getPriceOpen());
+        Assertions.assertEquals(3611.08, indexesHistorical.get(2).getPriceOpen());
+        Assertions.assertEquals(3622.42, indexesHistorical.get(3).getPriceOpen());
+        Assertions.assertEquals(3645.05, indexesHistorical.get(4).getPriceOpen());
     }
 
     @Autowired
     private Gson gson;
 
-    private List<Index> indexs;
+    private List<Index> indexes;
 
     @BeforeEach
     void init() {
-        indexs = Arrays.stream(gson.fromJson(jsonString, IndexDTO[].class)).sequential().map(IndexDTO::toEntity).collect(Collectors.toList());
+        indexes = Arrays.stream(gson.fromJson(realtimeIndexBufferedReader, IndexDTO[].class)).sequential().map(IndexDTO::toEntity).collect(Collectors.toList());
     }
 
     @Test
     void testId() {
-        Assertions.assertNull(indexs.get(0).getId());
-        Assertions.assertNull(indexs.get(1).getId());
-        Assertions.assertNull(indexs.get(2).getId());
-        Assertions.assertNull(indexs.get(3).getId());
+        Assertions.assertNull(indexes.get(0).getId());
+        Assertions.assertNull(indexes.get(1).getId());
+        Assertions.assertNull(indexes.get(2).getId());
+        Assertions.assertNull(indexes.get(3).getId());
     }
 
     @Test
-    void testRefDate() {
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), indexs.get(0).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), indexs.get(1).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), indexs.get(2).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), indexs.get(3).getRefDate());
+    void testTimestamp() {
+        Assertions.assertEquals(LocalDateTime.of(2022, 10, 26, 11, 56, 30), indexes.get(0).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2022, 10, 26, 11, 56, 15), indexes.get(1).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2022, 10, 26, 11, 56, 0), indexes.get(2).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2022, 10, 26, 11, 55, 45), indexes.get(3).getTimestamp());
     }
 
     @Test
     void testInstrumentId() {
-        Assertions.assertNull(indexs.get(0).getInstrumentId());
-        Assertions.assertNull(indexs.get(1).getInstrumentId());
-        Assertions.assertNull(indexs.get(2).getInstrumentId());
-        Assertions.assertNull(indexs.get(3).getInstrumentId());
-    }
-
-
-    @Test
-    void testTime() {
-        Assertions.assertEquals(LocalTime.of(11, 56, 30), indexs.get(0).getTime());
-        Assertions.assertEquals(LocalTime.of(11, 56, 15), indexs.get(1).getTime());
-        Assertions.assertEquals(LocalTime.of(11, 56, 0), indexs.get(2).getTime());
-        Assertions.assertEquals(LocalTime.of(11, 55, 45), indexs.get(3).getTime());
+        Assertions.assertNull(indexes.get(0).getInstrumentId());
+        Assertions.assertNull(indexes.get(1).getInstrumentId());
+        Assertions.assertNull(indexes.get(2).getInstrumentId());
+        Assertions.assertNull(indexes.get(3).getInstrumentId());
     }
 
     @Test
     void testPrice() {
-        Assertions.assertEquals(3577.99, indexs.get(0).getPrice());
-        Assertions.assertEquals(3577.05, indexs.get(1).getPrice());
-        Assertions.assertEquals(3576.47, indexs.get(2).getPrice());
-        Assertions.assertEquals(3575.78, indexs.get(3).getPrice());
+        Assertions.assertEquals(3577.99, indexes.get(0).getPriceOpen());
+        Assertions.assertEquals(3577.05, indexes.get(1).getPriceOpen());
+        Assertions.assertEquals(3576.47, indexes.get(2).getPriceOpen());
+        Assertions.assertEquals(3575.78, indexes.get(3).getPriceOpen());
     }
 }

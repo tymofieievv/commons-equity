@@ -8,85 +8,40 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @SpringBootTest
 class FutureTest {
-    private static final String jsonString =
 
-            """
-                                [
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": ".STOXX50E",
-                    "TIME": "11.56.30",
-                    "PRICE": "3565"
-                    },
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": ".STOXX50E",
-                    "TIME": "11.56.15",
-                    "PRICE": "3566"
-                    },
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": ".STOXX50E",
-                    "TIME": "11.56.00",
-                    "PRICE": "3565.8"
-                    },
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": ".STOXX50E",
-                    "TIME": "11.55.45",
-                    "PRICE": "3564"
-                    }
-                                ]
-                                """;
-    ;
-    private static final String jsonStringHistorical =
-
-            """
-                              [
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": ".STOXX50E",
-                    "TIME": "11.56.30",
-                    "PRICE": "3565"
-                    },
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": ".STOXX50E",
-                    "TIME": "11.56.15",
-                    "PRICE": "3566"
-                    },
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": ".STOXX50E",
-                    "TIME": "11.56.00",
-                    "PRICE": "3565.8"
-                    },
-                    {
-                    "REF_DATE": "26/10/2022",
-                    "UNDERLYING": ".STOXX50E",
-                    "TIME": "11.55.45",
-                    "PRICE": "3564"
-                    }
-                              ]
-                              """;
-
-
-    @Autowired
-    private Gson gsonHistorical;
-
+    private final BufferedReader historyFutureBufferedReader;
+    private final BufferedReader realtimeFutureBufferedReader;
     private List<Future> futuresHistorical;
+
+    public FutureTest() throws URISyntaxException, IOException {
+        URL resourceFutureHistory = FutureTest.class.getClassLoader().getResource("FutureHistory.json");
+        URL resourceFutureRealtime = FutureTest.class.getClassLoader().getResource("FutureRealtime.json");
+
+        assert resourceFutureHistory != null;
+        File fileHistory = new File(resourceFutureHistory.toURI());
+        assert resourceFutureRealtime != null;
+        File fileRealtime = new File(resourceFutureRealtime.toURI());
+        this.historyFutureBufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(fileHistory.toPath())));
+        this.realtimeFutureBufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(fileRealtime.toPath())));
+    }
 
     @BeforeEach
     void initHistorical() {
-        futuresHistorical = Arrays.stream(gson.fromJson(jsonStringHistorical, FutureDTO[].class)).sequential().map(FutureDTO::toEntity).collect(Collectors.toList());
+        futuresHistorical = Arrays.stream(gson.fromJson(historyFutureBufferedReader, FutureDTO[].class)).sequential().map(FutureDTO::toEntity).collect(Collectors.toList());
     }
 
     @Test
@@ -98,21 +53,11 @@ class FutureTest {
     }
 
     @Test
-    void testRefDateHistorical() {
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), futuresHistorical.get(0).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), futuresHistorical.get(1).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), futuresHistorical.get(2).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), futuresHistorical.get(3).getRefDate());
-    }
-
-
-
-    @Test
-    void testTimeHistorical() {
-        Assertions.assertEquals(LocalTime.of(11, 56, 30), futuresHistorical.get(0).getTime());
-        Assertions.assertEquals(LocalTime.of(11, 56, 15), futuresHistorical.get(1).getTime());
-        Assertions.assertEquals(LocalTime.of(11, 56, 0), futuresHistorical.get(2).getTime());
-        Assertions.assertEquals(LocalTime.of(11, 55, 45), futuresHistorical.get(3).getTime());
+    void testTimestampHistorical() {
+        Assertions.assertNull(futuresHistorical.get(0).getTimestamp());
+        Assertions.assertNull(futuresHistorical.get(1).getTimestamp());
+        Assertions.assertNull(futuresHistorical.get(2).getTimestamp());
+        Assertions.assertNull(futuresHistorical.get(3).getTimestamp());
     }
 
 
@@ -163,7 +108,7 @@ class FutureTest {
 
     @BeforeEach
     void init() {
-        futures = Arrays.stream(gson.fromJson(jsonString, FutureDTO[].class)).sequential().map(FutureDTO::toEntity).collect(Collectors.toList());
+        futures = Arrays.stream(gson.fromJson(realtimeFutureBufferedReader, FutureDTO[].class)).sequential().map(FutureDTO::toEntity).collect(Collectors.toList());
     }
 
     @Test
@@ -175,22 +120,12 @@ class FutureTest {
     }
 
     @Test
-    void testRefDate() {
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), futures.get(0).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), futures.get(1).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), futures.get(2).getRefDate());
-        Assertions.assertEquals(LocalDate.of(2022, 10, 26), futures.get(3).getRefDate());
+    void testTimestamp() {
+        Assertions.assertEquals(LocalDateTime.of(2022, 10, 26, 11, 56, 30), futures.get(0).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2022, 10, 26, 11, 56, 15), futures.get(1).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2022, 10, 26, 11, 56, 0), futures.get(2).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2022, 10, 26, 11, 55, 45), futures.get(3).getTimestamp());
     }
-
-
-    @Test
-    void testTime() {
-        Assertions.assertEquals(LocalTime.of(11, 56, 30), futures.get(0).getTime());
-        Assertions.assertEquals(LocalTime.of(11, 56, 15), futures.get(1).getTime());
-        Assertions.assertEquals(LocalTime.of(11, 56, 0), futures.get(2).getTime());
-        Assertions.assertEquals(LocalTime.of(11, 55, 45), futures.get(3).getTime());
-    }
-
 
 
     @Test

@@ -1,0 +1,22 @@
+[
+  {
+    "TIMESTAMP": "26/10/2022 11.56.30",
+    "UNDERLYING": ".STOXX50E",
+    "PRICE": "3565"
+  },
+  {
+    "TIMESTAMP": "26/10/2022 11.56.15",
+    "UNDERLYING": ".STOXX50E",
+    "PRICE": "3566"
+  },
+  {
+    "TIMESTAMP": "26/10/2022 11.56.00",
+    "UNDERLYING": ".STOXX50E",
+    "PRICE": "3565.8"
+  },
+  {
+    "TIMESTAMP": "26/10/2022 11.55.45",
+    "UNDERLYING": ".STOXX50E",
+    "PRICE": "3564"
+  }
+]

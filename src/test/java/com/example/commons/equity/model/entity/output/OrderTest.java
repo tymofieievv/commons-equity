@@ -9,6 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -17,106 +24,22 @@ import java.util.stream.Collectors;
 
 @SpringBootTest
 class OrderTest {
-    private final String jsonString =
 
-            """
-                                [
-                    {
-                    "TIMESTAMP": "13/09/2013 00:00",
-                    "TRADEDATE": "13/09/2013",
-                    "UNDERLYING": "SXE5 Index",
-                    "ID SIGNAL": 1,
-                    "PORTFOLIO_ID": "3",
-                    "THEORETICAL POSITION": "21",
-                    "THEORETICAL_QUANTITY": "30",
-                    "EXECUTED PRICE": "30",
-                    "STATUS": null,
-                    "DELTA PRICE": "30",
-                    "TICKET FUTURE": null,
-                    "BUY/SELL": "B",
-                    "QUANTITY": "30",
-                    "LIVE POSITION": null,
-                    "THEORETICAL PRICE": "25.0"
-                    },
-                    {
-                    "TIMESTAMP": "13/09/2013 00:00",
-                    "TRADEDATE": "13/09/2013",
-                    "UNDERLYING": "SXE6 Future",
-                    "ID SIGNAL": "2",
-                    "PORTFOLIO_ID": "4",
-                    "THEORETICAL POSITION": "22",
-                    "THEORETICAL_QUANTITY": "20",
-                    "EXECUTED PRICE": "20",
-                    "STATUS": null,
-                    "DELTA PRICE": "30",
-                    "TICKET FUTURE": null,
-                    "BUY/SELL": "S",
-                    "QUANTITY": "20",
-                    "LIVE POSITION": null,
-                    "THEORETICAL PRICE": "35.0"
-                    },
-                    {
-                    "TIMESTAMP": "13/09/2013 00:00",
-                    "TRADEDATE": "13/09/2013",
-                    "UNDERLYING": "SXE6 Index",
-                    "ID SIGNAL": "1",
-                    "PORTFOLIO_ID": "5",
-                    "THEORETICAL POSITION": "35",
-                    "THEORETICAL_QUANTITY": "2",
-                    "EXECUTED PRICE": "2",
-                    "STATUS": null,
-                    "DELTA PRICE": "30",
-                    "TICKET FUTURE": null,
-                    "BUY/SELL": "N",
-                    "QUANTITY": "2",
-                    "LIVE POSITION": null,
-                    "THEORETICAL PRICE": "40.0"
-                    },
-                    {
-                    "TIMESTAMP": "13/09/2013 00:00",
-                    "TRADEDATE": "13/09/2013",
-                    "UNDERLYING": "SXE7 Index",
-                    "ID SIGNAL": "2",
-                    "PORTFOLIO_ID": "6",
-                    "THEORETICAL POSITION": "21",
-                    "THEORETICAL_QUANTITY": "50",
-                    "EXECUTED PRICE": null,
-                    "STATUS": "0",
-                    "DELTA PRICE": null,
-                    "TICKET FUTURE": null,
-                    "BUY/SELL": "S",
-                    "QUANTITY": "50",
-                    "LIVE POSITION": null,
-                    "THEORETICAL PRICE": "20.0"
-                    },
-                    {
-                    "TIMESTAMP": "13/09/2013 00:00",
-                    "TRADEDATE": "13/09/2013",
-                    "UNDERLYING": "SXE8 Index",
-                    "ID SIGNAL": "2",
-                    "PORTFOLIO_ID": "7",
-                    "THEORETICAL POSITION": "20",
-                    "THEORETICAL_QUANTITY": "1",
-                    "EXECUTED PRICE": "1",
-                    "STATUS": null,
-                    "DELTA PRICE": "30",
-                    "TICKET FUTURE": null,
-                    "BUY/SELL": "B",
-                    "QUANTITY": "1",
-                    "LIVE POSITION": null,
-                    "THEORETICAL PRICE": "30.0"
-                    }
-                                ]
-                                """;
-
+    private final BufferedReader bufferedReader;
     @Autowired
     private Gson gson;
-
     private List<Order> orders;
+
+    public OrderTest() throws URISyntaxException, IOException {
+        URL resource = OrderTest.class.getClassLoader().getResource("Order.json");
+        assert resource != null;
+        File file = new File(resource.toURI());
+        this.bufferedReader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath())));
+    }
 
     @BeforeEach
     void init() {
-        orders = Arrays.stream(gson.fromJson(jsonString, OrderDTO[].class)).sequential().map(OrderDTO::toEntity).collect(Collectors.toList());
+        orders = Arrays.stream(gson.fromJson(bufferedReader, OrderDTO[].class)).sequential().map(OrderDTO::toEntity).collect(Collectors.toList());
     }
 
     @Test
@@ -130,11 +53,11 @@ class OrderTest {
 
     @Test
     void testTimestamp() {
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 00, 00 ), orders.get(0).getTimestamp());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 00, 00 ), orders.get(1).getTimestamp());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 00, 00 ), orders.get(2).getTimestamp());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 00, 00 ), orders.get(3).getTimestamp());
-        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 00, 00 ), orders.get(4).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 0, 0), orders.get(0).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 0, 0), orders.get(1).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 0, 0), orders.get(2).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 0, 0), orders.get(3).getTimestamp());
+        Assertions.assertEquals(LocalDateTime.of(2013, 9, 13, 0, 0), orders.get(4).getTimestamp());
     }
 
     @Test
@@ -163,24 +86,24 @@ class OrderTest {
         Assertions.assertEquals(2, orders.get(3).getIdSignal());
         Assertions.assertEquals(2, orders.get(4).getIdSignal());
     }
-    
+
 
     @Test
     void testPortfolioId() {
-        Assertions.assertEquals("3",orders.get(0).getPortfolioId());
-        Assertions.assertEquals("4",orders.get(1).getPortfolioId());
-        Assertions.assertEquals("5",orders.get(2).getPortfolioId());
-        Assertions.assertEquals("6",orders.get(3).getPortfolioId());
-        Assertions.assertEquals("7",orders.get(4).getPortfolioId());
+        Assertions.assertEquals("3", orders.get(0).getPortfolioId());
+        Assertions.assertEquals("4", orders.get(1).getPortfolioId());
+        Assertions.assertEquals("5", orders.get(2).getPortfolioId());
+        Assertions.assertEquals("6", orders.get(3).getPortfolioId());
+        Assertions.assertEquals("7", orders.get(4).getPortfolioId());
     }
 
     @Test
     void testTheoreticalPosition() {
-        Assertions.assertEquals(21,orders.get(0).getTheoreticalPosition());
-        Assertions.assertEquals(22,orders.get(1).getTheoreticalPosition());
-        Assertions.assertEquals(35,orders.get(2).getTheoreticalPosition());
-        Assertions.assertEquals(21,orders.get(3).getTheoreticalPosition());
-        Assertions.assertEquals(20,orders.get(4).getTheoreticalPosition());
+        Assertions.assertEquals(21, orders.get(0).getTheoreticalPosition());
+        Assertions.assertEquals(22, orders.get(1).getTheoreticalPosition());
+        Assertions.assertEquals(35, orders.get(2).getTheoreticalPosition());
+        Assertions.assertEquals(21, orders.get(3).getTheoreticalPosition());
+        Assertions.assertEquals(20, orders.get(4).getTheoreticalPosition());
     }
 
     @Test
@@ -194,29 +117,29 @@ class OrderTest {
 
     @Test
     void testExecutedPrice() {
-        Assertions.assertEquals(30,orders.get(0).getExecutedPrice());
-        Assertions.assertEquals(30,orders.get(1).getExecutedPrice());
-        Assertions.assertEquals(30,orders.get(2).getExecutedPrice());
+        Assertions.assertEquals(30, orders.get(0).getExecutedPrice());
+        Assertions.assertEquals(30, orders.get(1).getExecutedPrice());
+        Assertions.assertEquals(30, orders.get(2).getExecutedPrice());
         Assertions.assertNull(orders.get(3).getExecutedPrice());
-        Assertions.assertEquals(30,orders.get(4).getExecutedPrice());
+        Assertions.assertEquals(30, orders.get(4).getExecutedPrice());
     }
 
     @Test
     void testStatus() {
-        Assertions.assertNull( orders.get(0).getStatus());
-        Assertions.assertNull( orders.get(1).getStatus());
-        Assertions.assertNull( orders.get(2).getStatus());
+        Assertions.assertNull(orders.get(0).getStatus());
+        Assertions.assertNull(orders.get(1).getStatus());
+        Assertions.assertNull(orders.get(2).getStatus());
         Assertions.assertEquals("0", orders.get(3).getStatus());
-        Assertions.assertNull( orders.get(4).getStatus());
+        Assertions.assertNull(orders.get(4).getStatus());
     }
 
     @Test
     void testDeltaPrice() {
-        Assertions.assertEquals(30.,orders.get(0).getDeltaPrice());
-        Assertions.assertEquals(20,orders.get(1).getDeltaPrice());
-        Assertions.assertEquals(2,orders.get(2).getDeltaPrice());
+        Assertions.assertEquals(30., orders.get(0).getDeltaPrice());
+        Assertions.assertEquals(20, orders.get(1).getDeltaPrice());
+        Assertions.assertEquals(2, orders.get(2).getDeltaPrice());
         Assertions.assertNull(orders.get(3).getDeltaPrice());
-        Assertions.assertEquals(1,orders.get(4).getDeltaPrice());
+        Assertions.assertEquals(1, orders.get(4).getDeltaPrice());
     }
 
     @Test
@@ -229,12 +152,12 @@ class OrderTest {
     }
 
     @Test
-    void testBuysell() {
-        Assertions.assertEquals(Operation.BUY, orders.get(0).getBuysell());
-        Assertions.assertEquals(Operation.SELL, orders.get(1).getBuysell());
-        Assertions.assertEquals(Operation.NEUTRAL, orders.get(2).getBuysell());
-        Assertions.assertEquals(Operation.SELL, orders.get(3).getBuysell());
-        Assertions.assertEquals(Operation.BUY, orders.get(4).getBuysell());
+    void testOperation() {
+        Assertions.assertEquals(Operation.BUY, orders.get(0).getOperation());
+        Assertions.assertEquals(Operation.SELL, orders.get(1).getOperation());
+        Assertions.assertEquals(Operation.NEUTRAL, orders.get(2).getOperation());
+        Assertions.assertEquals(Operation.SELL, orders.get(3).getOperation());
+        Assertions.assertEquals(Operation.BUY, orders.get(4).getOperation());
     }
 
     @Test

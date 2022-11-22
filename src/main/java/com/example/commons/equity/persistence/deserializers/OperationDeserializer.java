@@ -17,12 +17,21 @@ public class OperationDeserializer implements JsonDeserializer<Operation> {
         if (StringUtils.isBlank(jsonString)) {
             throw new IllegalArgumentException("Operation is Blank.");
         } else {
-            Operation operation = switch (jsonString) {
-                case "B" -> Operation.BUY;
-                case "S" -> Operation.SELL;
-                case "N" -> Operation.NEUTRAL;
-                default -> throw new IllegalArgumentException(String.format("Argument %s not valid.", jsonString));
-            };
+            Operation operation = null;
+            switch (jsonString) {
+                case "B":
+                    operation = Operation.BUY;
+                    break;
+                case "S":
+                    operation = Operation.SELL;
+                    break;
+                case "N":
+                    operation = Operation.NEUTRAL;
+                    break;
+                default:
+                    throw new IllegalArgumentException(String.format("Argument %s not valid.", jsonString));
+            }
+            ;
             return operation;
         }
 
